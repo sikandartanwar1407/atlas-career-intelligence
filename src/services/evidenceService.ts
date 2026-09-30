@@ -186,6 +186,100 @@ export class EvidenceApiService {
   }
 
   /**
+   * Triggers real GitHub REST API ingestion & analysis on FastAPI backend via POST /api/evidence/github
+   */
+  static async analyzeGitHub(
+    identifier: string,
+    token: string
+  ): Promise<{
+    success: boolean;
+    data?: {
+      analysis: RemoteGitHubAnalysis;
+      evidence: RemoteEvidenceItem[];
+    };
+    error?: string;
+  }> {
+    if (!token) {
+      return { success: false, error: 'Missing authentication token. Please sign in.' };
+    }
+    if (!identifier || !identifier.trim()) {
+      return { success: false, error: 'Please enter a valid GitHub username or public repository URL.' };
+    }
+
+    try {
+      const apiUrl = getApiUrl();
+      const response = await fetch(`${apiUrl}/api/evidence/github`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'github',
+          identifier: identifier.trim(),
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.detail || 'GitHub analysis failed.',
+        };
+      }
+
+      if (data.analysis && data.evidence) {
+        return { success: true, data: { analysis: data.analysis, evidence: data.evidence } };
+      }
+
+      return { success: true, data: { analysis: data, evidence: [] } };
+    } catch (err: any) {
+      console.warn('[EvidenceApiService] Error analyzing GitHub:', err);
+      return { success: false, error: err.message || 'Network error connecting to backend GitHub service.' };
+    }
+  }
+
+  /**
+   * Fetches latest stored GitHub analysis for the candidate via GET /api/evidence/github
+   */
+  static async fetchGitHubAnalysis(
+    token: string
+  ): Promise<{ success: boolean; data?: RemoteGitHubAnalysis | null; error?: string }> {
+    if (!token) {
+      return { success: false, error: 'Missing authentication token.' };
+    }
+
+    try {
+      const apiUrl = getApiUrl();
+      const response = await fetch(`${apiUrl}/api/evidence/github`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.status === 404) {
+        return { success: true, data: null };
+      }
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.detail || 'Failed to fetch GitHub analysis.',
+        };
+      }
+
+      return { success: true, data };
+    } catch (err: any) {
+      console.warn('[EvidenceApiService] Error fetching GitHub analysis:', err);
+      return { success: false, error: err.message || 'Network error fetching GitHub analysis.' };
+    }
+  }
+
+  /**
    * Stores GitHub analysis telemetry associated with candidate via POST /api/evidence/github
    */
   static async saveGitHubAnalysis(
@@ -233,3 +327,4 @@ export class EvidenceApiService {
     }
   }
 }
+

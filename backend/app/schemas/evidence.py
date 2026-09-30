@@ -98,3 +98,25 @@ class GitHubAnalysisCreateRequest(BaseModel):
     evidence_readiness_boost: Optional[int] = 0
     extracted_evidence_count: Optional[int] = 0
     raw_analysis_payload: Optional[Dict[str, Any]] = Field(default_factory=dict)
+
+
+class GitHubAnalysisIngestRequest(BaseModel):
+    source: Optional[Literal["github"]] = "github"
+    identifier: Optional[str] = None
+    # Optional fields for backward compatibility with telemetry creation
+    github_username: Optional[str] = None
+    github_user_data: Optional[Dict[str, Any]] = None
+    analyzed_repos_count: Optional[int] = 0
+    primary_languages: Optional[List[Any]] = None
+    detected_topics: Optional[List[str]] = None
+    demonstrated_skills_detected: Optional[List[str]] = None
+    evidence_readiness_boost: Optional[int] = 0
+    extracted_evidence_count: Optional[int] = 0
+    raw_analysis_payload: Optional[Dict[str, Any]] = None
+
+
+class GitHubAnalysisResponse(BaseModel):
+    success: bool = True
+    analysis: GitHubAnalysisSchema
+    evidence: List[EvidenceItemSchema] = Field(default_factory=list)
+
