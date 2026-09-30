@@ -1,21 +1,61 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { EmployerHeader } from '../components/EmployerHeader';
 import { Footer } from '../components/Footer';
 import { getOpportunityById, getEmployerMatches } from '../data/opportunities';
+import { EmployerCandidate } from '../types/opportunities';
+import { SupabaseAuthService } from '../services/supabaseAuth';
+import { EmployerApiService } from '../services/employerService';
 
 export const EmployerMatchesPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [sortBy, setSortBy] = useState<'match' | 'evidence' | 'skills'>('match');
   const [filterRole, setFilterRole] = useState<string>('all');
+  const [remoteCandidates, setRemoteCandidates] = useState<EmployerCandidate[] | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      EmployerApiService.getOpportunityMatches(id, token).then((res) => {
+        if (res.success && res.data && res.data.matches && res.data.matches.length > 0) {
+          const mapped: EmployerCandidate[] = res.data.matches.map((m) => ({
+            id: m.candidate_id,
+            name: m.full_name,
+            targetRole: m.target_role,
+            experienceLevel: m.experience_level,
+            overallMatch: m.overall_match,
+            keySkills: m.matched_skills.length > 0 ? m.matched_skills : m.demonstrated_skills,
+            evidenceCount: m.evidence_count,
+            primaryDevelopmentGap: m.skill_gaps[0]
+              ? `${m.skill_gaps[0].skill} (${m.skill_gaps[0].deficit}pt gap)`
+              : 'None detected',
+            demonstratedSkills: m.demonstrated_skills.map((s) => ({ skill: s, level: 75 })),
+            verifiedEvidence: [],
+            roadmapProgress: {
+              currentMilestone: 'Sprint 03: Verified Competency Milestones',
+              progressPercent: m.overall_match,
+              completedSprints: 3,
+              totalSprints: 5,
+            },
+            isDiscoverable: m.is_discoverable,
+          }));
+          setRemoteCandidates(mapped);
+        }
+      });
+    }
+  }, [id]);
 
   const opportunity = useMemo(() => {
     return id ? getOpportunityById(id) : undefined;
   }, [id]);
 
   const candidates = useMemo(() => {
+    if (remoteCandidates !== null && remoteCandidates.length > 0) {
+      return remoteCandidates;
+    }
     return id ? getEmployerMatches(id) : [];
-  }, [id]);
+  }, [id, remoteCandidates]);
 
   const displayedCandidates = useMemo(() => {
     let list = [...candidates];
