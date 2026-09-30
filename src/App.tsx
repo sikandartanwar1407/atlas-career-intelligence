@@ -29,6 +29,8 @@ import { EmployerMatchesPage } from './pages/EmployerMatchesPage';
 import { EmployerCandidatesPage } from './pages/EmployerCandidatesPage';
 import { CandidateProfileEmployerPage } from './pages/CandidateProfileEmployerPage';
 
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -49,6 +51,7 @@ export default function App() {
             {/* Public Entry & Account Selection */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/role-select" element={<RoleSelectPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
 
             {/* Candidate Journey */}
             <Route path="/onboarding" element={<OnboardingPage />} />
