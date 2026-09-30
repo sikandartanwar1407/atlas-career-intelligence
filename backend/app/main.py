@@ -9,6 +9,7 @@ from app.routers.roadmap import router as roadmap_router
 from app.routers.resources import router as resources_router
 from app.routers.evidence import router as evidence_router
 from app.routers.reassessment import router as reassessment_router
+from app.routers.visibility import router as visibility_router
 
 settings = get_settings()
 
@@ -36,6 +37,7 @@ app.include_router(roadmap_router, prefix="/api")
 app.include_router(resources_router, prefix="/api")
 app.include_router(evidence_router, prefix="/api")
 app.include_router(reassessment_router, prefix="/api")
+app.include_router(visibility_router, prefix="/api")
 
 
 @app.get("/", summary="Root Endpoint")

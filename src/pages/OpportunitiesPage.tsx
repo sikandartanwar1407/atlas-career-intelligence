@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAtlas } from '../context/AtlasContext';
 import { Header } from '../components/Header';
@@ -11,6 +11,8 @@ import {
   hasExpressedInterest,
 } from '../data/opportunities';
 import { CandidateVisibilitySettings } from '../types/opportunities';
+import { SupabaseAuthService } from '../services/supabaseAuth';
+import { VisibilityApiService } from '../services/visibilityService';
 
 export const OpportunitiesPage: React.FC = () => {
   const { state, hasProfile, careerReadiness, skillGaps } = useAtlas();
@@ -20,6 +22,19 @@ export const OpportunitiesPage: React.FC = () => {
   const [visibilitySavedToast, setVisibilitySavedToast] = useState(false);
   const [activeFilter, setActiveFilter] = useState<'all' | 'high' | 'remote' | 'target'>('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch persisted remote visibility settings on mount if authenticated
+  useEffect(() => {
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      VisibilityApiService.getVisibilitySettings(token).then((res) => {
+        if (res.success && res.data) {
+          setVisibility(res.data);
+          saveCandidateVisibility(res.data);
+        }
+      });
+    }
+  }, []);
 
   // Build candidate skills dictionary from state
   const candidateSkillsDict = useMemo(() => {
@@ -105,6 +120,11 @@ export const OpportunitiesPage: React.FC = () => {
     saveCandidateVisibility(updated);
     setVisibilitySavedToast(true);
     setTimeout(() => setVisibilitySavedToast(false), 2200);
+
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      VisibilityApiService.updateVisibilitySettings({ [key]: updated[key] }, token);
+    }
   };
 
   return (
