@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.routers.health import router as health_router
 from app.routers.profiles import router as profiles_router
+from app.routers.assessment import router as assessment_router
 
 settings = get_settings()
 
@@ -24,6 +25,7 @@ app.add_middleware(
 # API Routers (prefixed with /api)
 app.include_router(health_router, prefix="/api")
 app.include_router(profiles_router, prefix="/api")
+app.include_router(assessment_router, prefix="/api")
 
 
 @app.get("/", summary="Root Endpoint")

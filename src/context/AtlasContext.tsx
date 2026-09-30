@@ -20,6 +20,7 @@ import {
 } from '../services/scoringService';
 
 import { SupabaseAuthService } from '../services/supabaseAuth';
+import { AssessmentApiService } from '../services/assessmentService';
 
 export function loadInitialState(): AtlasAppState {
   const storedProfile = StorageService.getItem<UserProfile>(STORAGE_KEYS.PROFILE, EMPTY_PROFILE);
@@ -90,7 +91,7 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [state]);
 
-  // Hydrate profile from backend if user is authenticated with Supabase
+  // Hydrate profile and latest assessment from backend if user is authenticated with Supabase
   useEffect(() => {
     const token = SupabaseAuthService.getAccessToken();
     if (token) {
@@ -106,6 +107,32 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               );
             }
             return prev;
+          });
+
+          // Fetch latest assessment
+          AssessmentApiService.fetchLatestAssessment(token).then((assessRes) => {
+            if (assessRes.success && assessRes.data) {
+              const latest = assessRes.data;
+              const skillScores: Record<string, { baseline: number; demonstrated: number; threshold: number; gap: number }> = {};
+              for (const diag of latest.skill_diagnostics) {
+                skillScores[diag.skill_name] = {
+                  baseline: diag.baseline_score,
+                  demonstrated: diag.demonstrated_score,
+                  threshold: diag.role_threshold,
+                  gap: diag.gap,
+                };
+              }
+              setState((prev) => ({
+                ...prev,
+                assessmentCompleted: true,
+                assessmentResult: {
+                  overallDemonstrated: latest.overall_demonstrated,
+                  largestGapSkill: latest.largest_gap_skill,
+                  skillScores,
+                },
+                lastUpdated: latest.completed_at || new Date().toISOString(),
+              }));
+            }
           });
         }
       });

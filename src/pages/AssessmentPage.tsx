@@ -4,6 +4,8 @@ import { useAtlas } from '../context/AtlasContext';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { PageTransition, AnimatedProgressBar } from '../components/motion/Motion';
+import { SupabaseAuthService } from '../services/supabaseAuth';
+import { AssessmentApiService } from '../services/assessmentService';
 
 export const AssessmentPage: React.FC = () => {
   const navigate = useNavigate();
@@ -49,6 +51,22 @@ export const AssessmentPage: React.FC = () => {
       handleSelectQuestion(currentIndex + 1);
     } else {
       completeAssessment();
+      const token = SupabaseAuthService.getAccessToken();
+      if (token) {
+        const answers = {
+          ...state.assessmentAnswers,
+          ...(currentQ && selectedOption !== null ? { [currentQ.id]: selectedOption } : {}),
+        };
+        AssessmentApiService.submitAssessment(
+          roleDefinition.id,
+          answers,
+          questions,
+          state.selfRatings,
+          token
+        ).catch((err) => {
+          console.warn('[AssessmentPage] Background assessment submit failed:', err);
+        });
+      }
       navigate('/assessment/result');
     }
   };
