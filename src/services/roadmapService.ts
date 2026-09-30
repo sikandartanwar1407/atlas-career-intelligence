@@ -111,4 +111,43 @@ export class RoadmapApiService {
       return { success: false, error: err.message || 'Network error generating roadmap.' };
     }
   }
+
+  /**
+   * Updates completion status of a roadmap action via PATCH /api/roadmap/actions/{action_id}
+   */
+  static async updateRoadmapAction(
+    actionId: string,
+    isCompleted: boolean,
+    token: string
+  ): Promise<{ success: boolean; data?: RemoteRoadmapAction; error?: string }> {
+    if (!token) {
+      return { success: false, error: 'Missing authentication token.' };
+    }
+
+    try {
+      const apiUrl = getApiUrl();
+      const response = await fetch(`${apiUrl}/api/roadmap/actions/${actionId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ is_completed: isCompleted }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.detail || 'Failed to update roadmap action status.',
+        };
+      }
+
+      return { success: true, data };
+    } catch (err: any) {
+      console.warn('[RoadmapApiService] Error updating roadmap action:', err);
+      return { success: false, error: err.message || 'Network error updating roadmap action.' };
+    }
+  }
 }

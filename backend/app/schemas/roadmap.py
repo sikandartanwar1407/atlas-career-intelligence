@@ -18,6 +18,10 @@ class RoadmapActionItem(BaseModel):
     completed_at: Optional[datetime] = None
 
 
+class RoadmapActionUpdateRequest(BaseModel):
+    is_completed: Optional[bool] = None
+
+
 class RoadmapStepItem(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

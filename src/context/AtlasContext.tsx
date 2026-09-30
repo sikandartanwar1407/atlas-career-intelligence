@@ -22,6 +22,8 @@ import {
 import { SupabaseAuthService } from '../services/supabaseAuth';
 import { AssessmentApiService } from '../services/assessmentService';
 import { RoadmapApiService } from '../services/roadmapService';
+import { ResourceApiService } from '../services/resourceService';
+import { EvidenceApiService } from '../services/evidenceService';
 
 export function loadInitialState(): AtlasAppState {
   const storedProfile = StorageService.getItem<UserProfile>(STORAGE_KEYS.PROFILE, EMPTY_PROFILE);
@@ -162,6 +164,43 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               setState((prev) => ({
                 ...prev,
                 roadmapSteps: remoteSteps,
+              }));
+            }
+          });
+
+          // Fetch candidate resources
+          ResourceApiService.fetchResourceStatuses(token).then((resRes) => {
+            if (resRes.success && resRes.data && resRes.data.resources.length > 0) {
+              const resMap: Record<string, { started: boolean; completed: boolean }> = {};
+              for (const r of resRes.data.resources) {
+                resMap[r.resource_id] = { started: r.is_started, completed: r.is_completed };
+              }
+              setState((prev) => ({
+                ...prev,
+                resourceStatus: { ...prev.resourceStatus, ...resMap },
+              }));
+            }
+          });
+
+          // Fetch candidate evidence
+          EvidenceApiService.fetchEvidenceList(token).then((evRes) => {
+            if (evRes.success && evRes.data && evRes.data.items.length > 0) {
+              const remoteEvidence: EvidenceItem[] = evRes.data.items.map((e) => ({
+                id: e.id,
+                title: e.title,
+                skill: e.skill_name as SkillKey,
+                type: e.evidence_type,
+                description: e.description,
+                link: e.link,
+                date: e.date,
+                verificationStatus: e.verification_status,
+                metrics: e.metrics,
+                shaHash: e.sha_hash,
+                evaluatorFeedback: e.evaluator_feedback,
+              }));
+              setState((prev) => ({
+                ...prev,
+                evidence: remoteEvidence,
               }));
             }
           });
@@ -358,11 +397,20 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const toggleResourceStarted = useCallback((resourceId: string) => {
     setState((prev) => {
       const current = prev.resourceStatus[resourceId] || { started: false, completed: false };
+      const newStarted = !current.started;
+
+      const token = SupabaseAuthService.getAccessToken();
+      if (token) {
+        ResourceApiService.updateResourceStatus(resourceId, newStarted, token).catch((err) => {
+          console.warn('[AtlasContext] Error syncing resource status to backend:', err);
+        });
+      }
+
       return {
         ...prev,
         resourceStatus: {
           ...prev.resourceStatus,
-          [resourceId]: { ...current, started: !current.started }
+          [resourceId]: { ...current, started: newStarted }
         },
         lastUpdated: new Date().toISOString()
       };
@@ -371,10 +419,12 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const toggleRoadmapAction = useCallback((stepId: string, actionId: string) => {
     setState((prev) => {
+      let isNowCompleted = false;
       const updatedSteps = prev.roadmapSteps.map((step) => {
         if (step.id !== stepId) return step;
 
         const isCompleted = step.completedActionIds.includes(actionId);
+        isNowCompleted = !isCompleted;
         const newCompletedIds = isCompleted
           ? step.completedActionIds.filter((id) => id !== actionId)
           : [...step.completedActionIds, actionId];
@@ -387,6 +437,13 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           completed: allDone
         };
       });
+
+      const token = SupabaseAuthService.getAccessToken();
+      if (token) {
+        RoadmapApiService.updateRoadmapAction(actionId, isNowCompleted, token).catch((err) => {
+          console.warn('[AtlasContext] Error syncing roadmap action status to backend:', err);
+        });
+      }
 
       return {
         ...prev,
@@ -421,6 +478,20 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       id: `ev-${Date.now().toString(36)}`
     };
 
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      EvidenceApiService.createEvidence(item, token).then((res) => {
+        if (res.success && res.data) {
+          setState((prev) => ({
+            ...prev,
+            evidence: prev.evidence.map((e) => (e.id === newItem.id ? { ...e, id: res.data!.id } : e)),
+          }));
+        }
+      }).catch((err) => {
+        console.warn('[AtlasContext] Error creating evidence on backend:', err);
+      });
+    }
+
     setState((prev) => ({
       ...prev,
       evidence: [newItem, ...prev.evidence],
@@ -429,6 +500,13 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const updateEvidence = useCallback((updated: EvidenceItem) => {
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      EvidenceApiService.updateEvidence(updated.id, updated, token).catch((err) => {
+        console.warn('[AtlasContext] Error updating evidence on backend:', err);
+      });
+    }
+
     setState((prev) => ({
       ...prev,
       evidence: prev.evidence.map((e) => (e.id === updated.id ? updated : e)),

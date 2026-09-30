@@ -6,6 +6,8 @@ from app.routers.profiles import router as profiles_router
 from app.routers.assessment import router as assessment_router
 from app.routers.diagnosis import router as diagnosis_router
 from app.routers.roadmap import router as roadmap_router
+from app.routers.resources import router as resources_router
+from app.routers.evidence import router as evidence_router
 
 settings = get_settings()
 
@@ -30,6 +32,8 @@ app.include_router(profiles_router, prefix="/api")
 app.include_router(assessment_router, prefix="/api")
 app.include_router(diagnosis_router, prefix="/api")
 app.include_router(roadmap_router, prefix="/api")
+app.include_router(resources_router, prefix="/api")
+app.include_router(evidence_router, prefix="/api")
 
 
 @app.get("/", summary="Root Endpoint")

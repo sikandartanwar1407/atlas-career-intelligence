@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from fastapi import HTTPException, status
 from app.database import get_supabase_client
@@ -364,3 +365,129 @@ def get_candidate_roadmap(user_id: str) -> RoadmapResponse:
         total_allocated_hours=total_allocated,
         steps=roadmap_steps,
     )
+
+
+def update_roadmap_action(
+    user_id: str,
+    action_id: str,
+    is_completed: Optional[bool] = None,
+) -> RoadmapActionItem:
+    """Updates a candidate's roadmap action completion status.
+
+    Security: Strictly verifies that the roadmap action belongs to the authenticated candidate.
+    """
+    supabase = get_supabase_client()
+
+    # 1. Resolve candidate profile
+    try:
+        profile_res = (
+            supabase.table("candidate_profiles")
+            .select("id")
+            .eq("user_id", user_id)
+            .maybe_single()
+            .execute()
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error while resolving candidate profile.",
+        ) from exc
+
+    if not profile_res or not profile_res.data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Candidate profile not found.",
+        )
+
+    candidate_id = profile_res.data["id"]
+
+    # 2. Get all roadmap step IDs belonging to this candidate
+    try:
+        steps_res = (
+            supabase.table("candidate_roadmaps")
+            .select("id")
+            .eq("candidate_id", candidate_id)
+            .execute()
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error while resolving candidate roadmaps.",
+        ) from exc
+
+    if not steps_res or not steps_res.data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Roadmap action not found.",
+        )
+
+    candidate_step_ids = [str(r["id"]) for r in steps_res.data]
+
+    # 3. Find the action belonging to these step IDs
+    try:
+        actions_res = (
+            supabase.table("candidate_roadmap_actions")
+            .select("*")
+            .in_("roadmap_step_id", candidate_step_ids)
+            .execute()
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error while finding candidate action.",
+        ) from exc
+
+    matching_action = None
+    if actions_res and actions_res.data:
+        for a in actions_res.data:
+            if a["action_id"] == action_id or str(a.get("id")) == action_id:
+                matching_action = a
+                break
+
+    if not matching_action:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Roadmap action not found or does not belong to the candidate.",
+        )
+
+    # 4. Determine new completion state
+    current_status = matching_action.get("is_completed", False)
+    new_status = is_completed if is_completed is not None else not current_status
+    completed_at = datetime.now(timezone.utc).isoformat() if new_status else None
+
+    # 5. Update the action
+    try:
+        upd_res = (
+            supabase.table("candidate_roadmap_actions")
+            .update({"is_completed": new_status, "completed_at": completed_at})
+            .eq("id", matching_action["id"])
+            .execute()
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Database error while updating roadmap action.",
+        ) from exc
+
+    updated_row = (
+        upd_res.data[0]
+        if upd_res and upd_res.data
+        else {**matching_action, "is_completed": new_status, "completed_at": completed_at}
+    )
+
+    # 6. Check if all sibling actions in the step are complete, and update step is_completed accordingly
+    step_id = matching_action["roadmap_step_id"]
+    try:
+        sibling_res = (
+            supabase.table("candidate_roadmap_actions")
+            .select("is_completed")
+            .eq("roadmap_step_id", step_id)
+            .execute()
+        )
+        if sibling_res and sibling_res.data:
+            all_done = all(s.get("is_completed") for s in sibling_res.data)
+            supabase.table("candidate_roadmaps").update({"is_completed": all_done}).eq("id", step_id).execute()
+    except Exception as exc:
+        print(f"[RoadmapService] Warning syncing parent step completion: {exc}")
+
+    return RoadmapActionItem(**updated_row)
