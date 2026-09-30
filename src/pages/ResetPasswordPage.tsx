@@ -120,7 +120,7 @@ export const ResetPasswordPage: React.FC = () => {
           </span>
         </Link>
         <Link
-          to="/role-select"
+          to="/login"
           className="text-xs font-semibold uppercase tracking-wider text-[#424845] hover:text-[#0d1f18]"
         >
           Sign In →
@@ -160,7 +160,7 @@ export const ResetPasswordPage: React.FC = () => {
 
               <div className="pt-2">
                 <Link
-                  to="/role-select"
+                  to="/login"
                   className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs"
                 >
                   <span>Continue to Sign in</span>
@@ -258,7 +258,7 @@ export const ResetPasswordPage: React.FC = () => {
 
               <div className="pt-2 text-center">
                 <Link
-                  to="/role-select"
+                  to="/login"
                   className="text-xs text-[#737874] hover:text-[#0d1f18] underline font-medium"
                 >
                   Return to Sign in

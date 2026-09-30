@@ -6,6 +6,8 @@ import { Footer } from '../components/Footer';
 import { ExperienceLevel, CurrentYear, UserProfile } from '../types/atlas';
 import { ROLES_CATALOGUE, getRoleDefinition } from '../data/rolesData';
 import { PageTransition, AnimatedProgressBar } from '../components/motion/Motion';
+import { SupabaseAuthService } from '../services/supabaseAuth';
+import { ProfileService } from '../services/profileService';
 
 const EXPERIENCE_CARDS: { level: ExperienceLevel; label: string; desc: string; icon: string }[] = [
   {
@@ -58,7 +60,9 @@ export const OnboardingPage: React.FC = () => {
 
   // Form State
   const [fullName, setFullName] = useState(state.profile.fullName || '');
-  const [email, setEmail] = useState(state.profile.email || '');
+  const [email, setEmail] = useState(
+    state.profile.email || SupabaseAuthService.getSession()?.user?.email || ''
+  );
   const [college, setCollege] = useState(state.profile.college || '');
   const [degree, setDegree] = useState(state.profile.degree || '');
   const [year, setYear] = useState<CurrentYear>(state.profile.year || '3rd Year');
@@ -122,11 +126,15 @@ export const OnboardingPage: React.FC = () => {
     }
   };
 
-  const handleFinishOnboarding = () => {
+  const handleFinishOnboarding = async () => {
+    const sessionUserEmail = SupabaseAuthService.getSession()?.user?.email;
+    const finalEmail =
+      email.trim() || sessionUserEmail || `${fullName.trim().toLowerCase().replace(/\s+/g, '.')}@atlas.edu`;
+
     const newProfile: UserProfile = {
       id: state.profile.id || `usr-${Date.now().toString(36)}`,
       fullName: fullName.trim(),
-      email: email.trim(),
+      email: finalEmail,
       college: college.trim(),
       degree: degree.trim(),
       year,
@@ -137,6 +145,12 @@ export const OnboardingPage: React.FC = () => {
     };
 
     createProfile(newProfile, selfRatings, availability);
+
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      await ProfileService.saveRemoteProfile(newProfile, token, availability);
+    }
+
     navigate('/diagnosis');
   };
 

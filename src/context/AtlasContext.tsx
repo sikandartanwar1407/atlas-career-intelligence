@@ -19,6 +19,8 @@ import {
   scoreAssessmentAnswers
 } from '../services/scoringService';
 
+import { SupabaseAuthService } from '../services/supabaseAuth';
+
 export function loadInitialState(): AtlasAppState {
   const storedProfile = StorageService.getItem<UserProfile>(STORAGE_KEYS.PROFILE, EMPTY_PROFILE);
   const storedState = StorageService.getItem<AtlasAppState | null>(STORAGE_KEYS.APP_STATE, null);
@@ -88,6 +90,28 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [state]);
 
+  // Hydrate profile from backend if user is authenticated with Supabase
+  useEffect(() => {
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      ProfileService.fetchRemoteProfile(token).then((result) => {
+        if (result.success && result.profile && result.profile.hasCompletedSetup) {
+          setState((prev) => {
+            // Only update if current state was empty or matches the authenticated email
+            if (!prev.profile?.hasCompletedSetup || prev.profile.email === result.profile!.email) {
+              return ProfileService.createCalibratedStateForProfile(
+                result.profile!,
+                undefined,
+                prev.availability
+              );
+            }
+            return prev;
+          });
+        }
+      });
+    }
+  }, []);
+
   const hasProfile = Boolean(state.profile?.hasCompletedSetup && state.profile?.fullName);
 
   // Dynamically derive demonstrated scores from assessment result or self ratings
@@ -142,18 +166,40 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [skillGaps, roleDefinition]);
 
   // Actions
-  const createProfile = useCallback((profile: UserProfile, initialRatings?: Record<string, number>, availabilityHours: number = 10) => {
-    const newState = ProfileService.createCalibratedStateForProfile(
-      { ...profile, hasCompletedSetup: true },
-      initialRatings,
-      availabilityHours
-    );
-    setState(newState);
-  }, []);
+  const createProfile = useCallback(
+    (profile: UserProfile, initialRatings?: Record<string, number>, availabilityHours: number = 10) => {
+      const updatedProfile = { ...profile, hasCompletedSetup: true };
+      const newState = ProfileService.createCalibratedStateForProfile(
+        updatedProfile,
+        initialRatings,
+        availabilityHours
+      );
+      setState(newState);
+
+      // Persist to backend if authenticated
+      const token = SupabaseAuthService.getAccessToken();
+      if (token) {
+        ProfileService.saveRemoteProfile(updatedProfile, token, availabilityHours).catch((err) => {
+          console.warn('[AtlasContext] Remote profile sync failed:', err);
+        });
+      }
+    },
+    []
+  );
 
   const updateProfile = useCallback((updates: Partial<UserProfile>) => {
     setState((prev) => {
       const updatedProfile = { ...prev.profile, ...updates };
+
+      if (updatedProfile.hasCompletedSetup) {
+        const token = SupabaseAuthService.getAccessToken();
+        if (token) {
+          ProfileService.saveRemoteProfile(updatedProfile, token, prev.availability).catch((err) => {
+            console.warn('[AtlasContext] Remote profile update sync failed:', err);
+          });
+        }
+      }
+
       return {
         ...prev,
         profile: updatedProfile,

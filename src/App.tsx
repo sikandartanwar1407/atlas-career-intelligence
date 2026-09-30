@@ -30,6 +30,8 @@ import { EmployerCandidatesPage } from './pages/EmployerCandidatesPage';
 import { CandidateProfileEmployerPage } from './pages/CandidateProfileEmployerPage';
 
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
+import { LoginPage } from './pages/LoginPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -48,10 +50,12 @@ export default function App() {
         <AtlasProvider>
           <ScrollToTop />
           <Routes>
-            {/* Public Entry & Account Selection */}
+            {/* Public Entry & Authentication Flow */}
             <Route path="/" element={<LandingPage />} />
-            <Route path="/role-select" element={<RoleSelectPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/role-select" element={<RoleSelectPage />} />
 
             {/* Candidate Journey */}
             <Route path="/onboarding" element={<OnboardingPage />} />

@@ -18,7 +18,11 @@ export const PublicHeader: React.FC = () => {
   };
 
   const handleSignInAction = () => {
-    navigate('/role-select');
+    if (hasProfile) {
+      navigate('/diagnosis');
+    } else {
+      navigate('/login');
+    }
   };
 
   const handleLoadDemo = () => {
@@ -148,10 +152,13 @@ export const PublicHeader: React.FC = () => {
               </Link>
               <button
                 type="button"
-                onClick={handleSignInAction}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleSignInAction();
+                }}
                 className="text-left py-2 px-3 rounded text-sm font-semibold text-[#0d1f18] hover:bg-[#f6f3ed]"
               >
-                Sign in / Role Select →
+                {hasProfile ? 'Resume Workspace →' : 'Sign in to ATLAS →'}
               </button>
             </div>
 

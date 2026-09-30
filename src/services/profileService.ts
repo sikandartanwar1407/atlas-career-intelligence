@@ -27,6 +27,15 @@ export const EMPTY_PROFILE: UserProfile = {
   hasCompletedSetup: false
 };
 
+const DEFAULT_API_URL = 'http://localhost:8000';
+
+export function getApiUrl(): string {
+  return (
+    (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) ||
+    DEFAULT_API_URL
+  );
+}
+
 export class ProfileService {
   /**
    * Reads profile from storage or returns unconfigured empty profile
@@ -40,6 +49,109 @@ export class ProfileService {
    */
   static saveProfile(profile: UserProfile): void {
     StorageService.setItem(STORAGE_KEYS.PROFILE, profile);
+  }
+
+  /**
+   * Saves candidate profile remotely via POST /api/profile using authenticated Bearer token.
+   */
+  static async saveRemoteProfile(
+    profile: UserProfile,
+    token: string,
+    availabilityHours: number = 10
+  ): Promise<{ success: boolean; data?: any; error?: string }> {
+    if (!token) {
+      return { success: false, error: 'Missing authentication token.' };
+    }
+
+    try {
+      const apiUrl = getApiUrl();
+      const payload = {
+        full_name: profile.fullName,
+        email: profile.email,
+        college: profile.college,
+        degree: profile.degree,
+        year: profile.year,
+        experience_level: profile.experienceLevel,
+        target_role: profile.targetRole,
+        custom_role: profile.customRole || null,
+        availability_hours_per_week: availabilityHours,
+        has_completed_setup: profile.hasCompletedSetup ?? true,
+      };
+
+      const response = await fetch(`${apiUrl}/api/profile`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.detail || 'Failed to save candidate profile to backend.',
+        };
+      }
+
+      return { success: true, data };
+    } catch (err: any) {
+      console.warn('[ProfileService] Error saving remote profile:', err);
+      return { success: false, error: err.message || 'Network error connecting to backend API.' };
+    }
+  }
+
+  /**
+   * Fetches the candidate profile remotely via GET /api/profile using authenticated Bearer token.
+   */
+  static async fetchRemoteProfile(
+    token: string
+  ): Promise<{ success: boolean; profile?: UserProfile | null; error?: string }> {
+    if (!token) {
+      return { success: false, error: 'Missing authentication token.' };
+    }
+
+    try {
+      const apiUrl = getApiUrl();
+      const response = await fetch(`${apiUrl}/api/profile`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.status === 404) {
+        return { success: true, profile: null };
+      }
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.detail || 'Failed to fetch candidate profile from backend.',
+        };
+      }
+
+      const userProfile: UserProfile = {
+        id: data.id || `usr-${data.user_id}`,
+        fullName: data.full_name || '',
+        email: data.email || '',
+        college: data.college || '',
+        degree: data.degree || '',
+        year: data.year || '1st Year',
+        experienceLevel: data.experience_level || 'Student',
+        targetRole: data.target_role || '',
+        customRole: data.custom_role || undefined,
+        hasCompletedSetup: Boolean(data.has_completed_setup),
+      };
+
+      return { success: true, profile: userProfile };
+    } catch (err: any) {
+      console.warn('[ProfileService] Error fetching remote profile:', err);
+      return { success: false, error: err.message || 'Network error connecting to backend API.' };
+    }
   }
 
   /**
