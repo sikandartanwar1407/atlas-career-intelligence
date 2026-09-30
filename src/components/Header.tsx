@@ -101,6 +101,18 @@ export const Header: React.FC = () => {
 
         {/* Right: Readiness Indicator & User Profile Dropdown */}
         <div className="flex items-center gap-3 shrink-0">
+          {/* First-time Assessment Header CTA for Unassessed Candidates */}
+          {hasProfile && !state.assessmentCompleted && (
+            <Link
+              to="/assessment"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#6b4ea6] text-white hover:bg-[#583d8b] text-xs font-semibold shadow-xs transition-colors animate-pulse"
+              title="Take your 15-question competency assessment"
+            >
+              <span className="material-symbols-outlined text-[15px]">quiz</span>
+              <span>Start Assessment</span>
+            </Link>
+          )}
+
           {/* Readiness Indicator */}
           <Link
             to={hasProfile ? '/diagnosis' : '/onboarding'}
@@ -176,7 +188,7 @@ export const Header: React.FC = () => {
                     className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-[#0d1f18] hover:bg-[#f6f3ed] font-medium"
                   >
                     <span className="material-symbols-outlined text-[16px] text-[#737874]">assignment</span>
-                    <span>Retake Assessment</span>
+                    <span>{state.assessmentCompleted ? 'Retake Assessment' : 'Start Assessment'}</span>
                   </button>
 
                   <Link

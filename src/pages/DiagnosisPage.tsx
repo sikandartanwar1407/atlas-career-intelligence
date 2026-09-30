@@ -63,6 +63,33 @@ export const DiagnosisPage: React.FC = () => {
           </div>
         </section>
 
+        {/* First-Time Assessment Callout for Unassessed Candidates */}
+        {!state.assessmentCompleted && (
+          <section className="bg-[#f3edf7] border border-[#eaddff] rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-fade-in">
+            <div className="space-y-1 max-w-2xl">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#6b4ea6] animate-pulse"></span>
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[#6b4ea6] font-bold">
+                  Step 2 · Calibrated Assessment
+                </span>
+              </div>
+              <h2 className="font-serif text-lg sm:text-xl font-bold text-[#0d1f18]">
+                Take your assessment to unlock empirical scoring.
+              </h2>
+              <p className="text-xs sm:text-sm text-[#424845] leading-relaxed">
+                You are currently viewing estimated baseline ratings. Take your 15-question calibrated role assessment to empirically measure your capabilities and dynamically adapt your career roadmap.
+              </p>
+            </div>
+            <Link
+              to="/assessment"
+              className="px-6 py-3 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white font-serif text-sm font-bold shrink-0 flex items-center gap-2 shadow-xs transition-colors"
+            >
+              <span>Start Assessment</span>
+              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </Link>
+          </section>
+        )}
+
         {/* SECTION 2: Hero Command Strip (Composite Overview) */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Primary Gauge Card (8 cols) */}
@@ -152,13 +179,23 @@ export const DiagnosisPage: React.FC = () => {
                 <span>Continue your plan</span>
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
               </Link>
-              <Link
-                to="/assessment/result"
-                className="font-label-md text-label-md text-[#6b4ea6] hover:underline flex items-center gap-1 font-semibold"
-              >
-                View full assessment diagnosis
-                <span className="material-symbols-outlined text-[14px]">north_east</span>
-              </Link>
+              {state.assessmentCompleted ? (
+                <Link
+                  to="/assessment/result"
+                  className="font-label-md text-label-md text-[#6b4ea6] hover:underline flex items-center gap-1 font-semibold"
+                >
+                  View full assessment diagnosis
+                  <span className="material-symbols-outlined text-[14px]">north_east</span>
+                </Link>
+              ) : (
+                <Link
+                  to="/assessment"
+                  className="font-label-md text-label-md text-[#6b4ea6] hover:underline flex items-center gap-1 font-semibold"
+                >
+                  Start Assessment
+                  <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </Link>
+              )}
             </div>
           </div>
 

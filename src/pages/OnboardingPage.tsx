@@ -151,7 +151,11 @@ export const OnboardingPage: React.FC = () => {
       await ProfileService.saveRemoteProfile(newProfile, token, availability);
     }
 
-    navigate('/diagnosis');
+    if (!state.assessmentCompleted) {
+      navigate('/assessment');
+    } else {
+      navigate('/diagnosis');
+    }
   };
 
   const handleApplyDemo = () => {
@@ -653,14 +657,16 @@ export const OnboardingPage: React.FC = () => {
         {currentStep === 5 && (
           <div key="step-5" className="space-y-8 animate-fade-in-up">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#737874] block mb-1">
-                Calibration Complete
+              <span className="font-mono text-xs uppercase tracking-widest text-[#6b4ea6] font-bold block mb-1">
+                {state.assessmentCompleted ? 'Profile Updated' : 'Profile Configured · Assessment Ready'}
               </span>
               <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0d1f18]">
-                Your ATLAS profile is ready.
+                {state.assessmentCompleted ? 'Your ATLAS profile is updated.' : 'Your ATLAS profile is ready.'}
               </h1>
               <p className="text-[#424845] text-sm mt-2 max-w-2xl leading-relaxed">
-                Your career workspace has been configured around your profile, educational timeline, and target career goal.
+                {state.assessmentCompleted
+                  ? 'Your career workspace has been configured around your profile, educational timeline, and target career goal.'
+                  : 'Next Step: Take your calibrated 15-question competency assessment to empirically benchmark your demonstrated capabilities.'}
               </p>
             </div>
 
@@ -745,14 +751,14 @@ export const OnboardingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Primary Enter CTA */}
+            {/* Primary Enter / Start Assessment CTA */}
             <div className="flex justify-end pt-4">
               <button
                 type="button"
                 onClick={handleFinishOnboarding}
                 className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#0d1f18] hover:bg-[#22382f] text-white font-serif text-lg font-bold transition-all shadow-sm flex items-center justify-center gap-3"
               >
-                <span>Enter my ATLAS workspace</span>
+                <span>{state.assessmentCompleted ? 'Enter my ATLAS workspace' : 'Start Assessment'}</span>
                 <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
               </button>
             </div>

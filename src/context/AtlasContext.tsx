@@ -53,6 +53,7 @@ interface AtlasContextType {
   state: AtlasAppState;
   roleDefinition: RoleDefinition;
   hasProfile: boolean;
+  hasAssessment: boolean;
   skillGaps: SkillGapDetail[];
   allocations: SkillAllocation[];
   careerReadiness: number;
@@ -229,6 +230,7 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const hasProfile = Boolean(state.profile?.hasCompletedSetup && state.profile?.fullName);
+  const hasAssessment = Boolean(state.assessmentCompleted);
 
   // Dynamically derive demonstrated scores from assessment result or self ratings
   const demonstratedMap = useMemo(() => {
@@ -623,6 +625,7 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     state,
     roleDefinition,
     hasProfile,
+    hasAssessment,
     skillGaps,
     allocations,
     careerReadiness,
