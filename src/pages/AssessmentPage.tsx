@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer';
 import { PageTransition, AnimatedProgressBar } from '../components/motion/Motion';
 import { SupabaseAuthService } from '../services/supabaseAuth';
 import { AssessmentApiService } from '../services/assessmentService';
+import { RoadmapApiService } from '../services/roadmapService';
 
 export const AssessmentPage: React.FC = () => {
   const navigate = useNavigate();
@@ -63,7 +64,13 @@ export const AssessmentPage: React.FC = () => {
           questions,
           state.selfRatings,
           token
-        ).catch((err) => {
+        ).then((submitRes) => {
+          if (submitRes.success) {
+            RoadmapApiService.generateRoadmap(token).catch((err) => {
+              console.warn('[AssessmentPage] Roadmap generation error:', err);
+            });
+          }
+        }).catch((err) => {
           console.warn('[AssessmentPage] Background assessment submit failed:', err);
         });
       }

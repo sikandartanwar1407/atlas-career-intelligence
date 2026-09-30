@@ -4,6 +4,8 @@ from app.config import get_settings
 from app.routers.health import router as health_router
 from app.routers.profiles import router as profiles_router
 from app.routers.assessment import router as assessment_router
+from app.routers.diagnosis import router as diagnosis_router
+from app.routers.roadmap import router as roadmap_router
 
 settings = get_settings()
 
@@ -26,6 +28,8 @@ app.add_middleware(
 app.include_router(health_router, prefix="/api")
 app.include_router(profiles_router, prefix="/api")
 app.include_router(assessment_router, prefix="/api")
+app.include_router(diagnosis_router, prefix="/api")
+app.include_router(roadmap_router, prefix="/api")
 
 
 @app.get("/", summary="Root Endpoint")

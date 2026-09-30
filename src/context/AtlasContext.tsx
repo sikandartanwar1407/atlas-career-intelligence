@@ -21,6 +21,7 @@ import {
 
 import { SupabaseAuthService } from '../services/supabaseAuth';
 import { AssessmentApiService } from '../services/assessmentService';
+import { RoadmapApiService } from '../services/roadmapService';
 
 export function loadInitialState(): AtlasAppState {
   const storedProfile = StorageService.getItem<UserProfile>(STORAGE_KEYS.PROFILE, EMPTY_PROFILE);
@@ -131,6 +132,36 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                   skillScores,
                 },
                 lastUpdated: latest.completed_at || new Date().toISOString(),
+              }));
+            }
+          });
+
+          // Fetch candidate roadmap
+          RoadmapApiService.fetchRoadmap(token).then((roadmapRes) => {
+            if (roadmapRes.success && roadmapRes.data && roadmapRes.data.steps.length > 0) {
+              const remoteSteps: RoadmapStep[] = roadmapRes.data.steps.map((s) => ({
+                id: s.step_id,
+                stepNumber: s.step_number,
+                skill: s.skill_name as SkillKey,
+                priority: s.priority as any,
+                gap: s.gap,
+                allocatedHours: s.allocated_hours,
+                estimatedDurationWeeks: s.estimated_duration_weeks,
+                title: s.title,
+                description: s.description,
+                completed: s.is_completed,
+                completedActionIds: s.actions.filter((a) => a.is_completed).map((a) => a.action_id),
+                actions: s.actions.map((a) => ({
+                  id: a.action_id,
+                  title: a.title,
+                  description: a.description || '',
+                  estimatedMinutes: a.estimated_minutes,
+                  type: a.action_type,
+                })),
+              }));
+              setState((prev) => ({
+                ...prev,
+                roadmapSteps: remoteSteps,
               }));
             }
           });
