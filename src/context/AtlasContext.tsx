@@ -24,6 +24,7 @@ import { AssessmentApiService } from '../services/assessmentService';
 import { RoadmapApiService } from '../services/roadmapService';
 import { ResourceApiService } from '../services/resourceService';
 import { EvidenceApiService } from '../services/evidenceService';
+import { ReassessmentApiService } from '../services/reassessmentService';
 
 export function loadInitialState(): AtlasAppState {
   const storedProfile = StorageService.getItem<UserProfile>(STORAGE_KEYS.PROFILE, EMPTY_PROFILE);
@@ -201,6 +202,24 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               setState((prev) => ({
                 ...prev,
                 evidence: remoteEvidence,
+              }));
+            }
+          });
+
+          // Fetch latest candidate reassessment
+          ReassessmentApiService.fetchLatestReassessment(token).then((reassessRes) => {
+            if (reassessRes.success && reassessRes.data) {
+              const r = reassessRes.data;
+              setState((prev) => ({
+                ...prev,
+                reassessment: {
+                  completed: true,
+                  timestamp: r.created_at || new Date().toISOString(),
+                  previousOverallScore: r.previous_overall_score,
+                  currentOverallScore: r.current_overall_score,
+                  improvement: r.improvement,
+                  skillDeltas: r.skill_deltas,
+                },
               }));
             }
           });
@@ -523,6 +542,45 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const submitReassessment = useCallback((newRatings: Record<SkillKey, number>) => {
+    const token = SupabaseAuthService.getAccessToken();
+    if (token) {
+      ReassessmentApiService.submitReassessment(newRatings, token).then((res) => {
+        if (res.success && res.data) {
+          // Re-fetch adapted roadmap
+          RoadmapApiService.fetchRoadmap(token).then((roadmapRes) => {
+            if (roadmapRes.success && roadmapRes.data && roadmapRes.data.steps.length > 0) {
+              const remoteSteps: RoadmapStep[] = roadmapRes.data.steps.map((s) => ({
+                id: s.step_id,
+                stepNumber: s.step_number,
+                skill: s.skill_name as SkillKey,
+                priority: s.priority as any,
+                gap: s.gap,
+                allocatedHours: s.allocated_hours,
+                estimatedDurationWeeks: s.estimated_duration_weeks,
+                title: s.title,
+                description: s.description,
+                completed: s.is_completed,
+                completedActionIds: s.actions.filter((a) => a.is_completed).map((a) => a.action_id),
+                actions: s.actions.map((a) => ({
+                  id: a.action_id,
+                  title: a.title,
+                  description: a.description || '',
+                  estimatedMinutes: a.estimated_minutes,
+                  type: a.action_type,
+                })),
+              }));
+              setState((prev) => ({
+                ...prev,
+                roadmapSteps: remoteSteps,
+              }));
+            }
+          });
+        }
+      }).catch((err) => {
+        console.warn('[AtlasContext] Error submitting reassessment to backend:', err);
+      });
+    }
+
     setState((prev) => {
       const prevScore = prev.assessmentResult.overallDemonstrated;
       const sum = Object.values(newRatings).reduce((a, b) => a + b, 0);
