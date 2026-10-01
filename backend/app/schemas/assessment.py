@@ -7,8 +7,10 @@ from pydantic import BaseModel, ConfigDict, Field
 class AssessmentAnswerInput(BaseModel):
     question_id: str = Field(..., min_length=1, max_length=255)
     skill_name: str = Field(..., min_length=1, max_length=255)
-    selected_option: int = Field(..., ge=0, le=10)
+    selected_option: int = Field(..., ge=-1, le=10) # -1 indicates skipped
     is_correct: Optional[bool] = None
+    question_type: Optional[str] = "theory" # "theory" | "coding"
+    submitted_text: Optional[str] = None
 
 
 class AssessmentSubmitRequest(BaseModel):
@@ -31,6 +33,9 @@ class SkillDiagnosticResponse(BaseModel):
     evidence_status: str
     description: Optional[str] = None
     strategic_note: Optional[str] = None
+    theory_performance: Optional[str] = None
+    coding_performance: Optional[str] = None
+    competency_status: Optional[str] = None
 
 
 class AssessmentAnswerResponse(BaseModel):
@@ -54,3 +59,10 @@ class AssessmentSubmissionResponse(BaseModel):
     created_at: Optional[datetime] = None
     skill_diagnostics: List[SkillDiagnosticResponse] = Field(default_factory=list)
     answers_count: int = 0
+    theory_score: Optional[int] = None
+    coding_score: Optional[int] = None
+    theory_correct_count: Optional[int] = None
+    theory_total_count: Optional[int] = None
+    coding_correct_count: Optional[int] = None
+    coding_skipped_count: Optional[int] = None
+    coding_total_count: Optional[int] = None

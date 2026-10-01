@@ -13,6 +13,9 @@ export interface RemoteSkillDiagnostic {
   evidence_status: 'Missing' | 'Moderate' | 'Strong' | 'Unverified';
   description?: string;
   strategic_note?: string;
+  theory_performance?: string;
+  coding_performance?: string;
+  competency_status?: 'demonstrated' | 'gap_signal' | 'skipped';
 }
 
 export interface RemoteAssessmentResponse {
@@ -24,6 +27,13 @@ export interface RemoteAssessmentResponse {
   completed_at: string;
   skill_diagnostics: RemoteSkillDiagnostic[];
   answers_count: number;
+  theory_score?: number;
+  coding_score?: number;
+  theory_correct_count?: number;
+  theory_total_count?: number;
+  coding_correct_count?: number;
+  coding_skipped_count?: number;
+  coding_total_count?: number;
 }
 
 export class AssessmentApiService {
@@ -35,7 +45,8 @@ export class AssessmentApiService {
     answers: Record<string, number>,
     questions: AssessmentQuestion[],
     selfRatings: Record<string, number>,
-    token: string
+    token: string,
+    codingAnswers?: Record<string, { submittedText: string; status: 'correct' | 'incorrect' | 'skipped' }>
   ): Promise<{ success: boolean; data?: RemoteAssessmentResponse; error?: string }> {
     if (!token) {
       return { success: false, error: 'Missing authentication token.' };
@@ -46,13 +57,33 @@ export class AssessmentApiService {
 
       // Map answer dict to array format expected by backend
       const answersPayload = questions
-        .filter((q) => answers[q.id] !== undefined)
-        .map((q) => ({
-          question_id: q.id,
-          skill_name: q.skill,
-          selected_option: answers[q.id],
-          is_correct: answers[q.id] === q.correctAnswer,
-        }));
+        .filter((q) => answers[q.id] !== undefined || codingAnswers?.[q.id] !== undefined)
+        .map((q) => {
+          const isCoding = q.type === 'coding';
+          const codingSub = codingAnswers?.[q.id];
+          const rawAns = answers[q.id];
+
+          if (isCoding) {
+            const isSkipped = rawAns === -1 || codingSub?.status === 'skipped';
+            const isCorr = rawAns === 1 || codingSub?.status === 'correct';
+            return {
+              question_id: q.id,
+              skill_name: q.skill,
+              selected_option: isSkipped ? -1 : (isCorr ? 1 : 0),
+              is_correct: isCorr,
+              question_type: 'coding',
+              submitted_text: isSkipped ? '__SKIPPED__' : (codingSub?.submittedText || (isCorr ? q.expectedOutput : ''))
+            };
+          }
+
+          return {
+            question_id: q.id,
+            skill_name: q.skill,
+            selected_option: rawAns ?? 0,
+            is_correct: rawAns === q.correctAnswer,
+            question_type: 'theory'
+          };
+        });
 
       if (answersPayload.length === 0) {
         return { success: false, error: 'No assessment answers to submit.' };

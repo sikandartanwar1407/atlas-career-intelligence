@@ -66,6 +66,7 @@ interface AtlasContextType {
   updateAvailability: (hours: number) => void;
   updateSelfRatings: (ratings: Record<SkillKey, number>) => void;
   recordAssessmentAnswer: (questionId: string, answerIndex: number) => void;
+  recordCodingAnswer: (questionId: string, submittedText: string, status: 'correct' | 'incorrect' | 'skipped') => void;
   completeAssessment: () => void;
   resetAssessment: () => void;
   toggleResourceStarted: (resourceId: string) => void;
@@ -384,9 +385,25 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }));
   }, []);
 
+  const recordCodingAnswer = useCallback((questionId: string, submittedText: string, status: 'correct' | 'incorrect' | 'skipped') => {
+    setState((prev) => ({
+      ...prev,
+      codingAnswers: {
+        ...(prev.codingAnswers || {}),
+        [questionId]: {
+          questionId,
+          submittedText,
+          status,
+          answeredAt: new Date().toISOString()
+        }
+      },
+      lastUpdated: new Date().toISOString()
+    }));
+  }, []);
+
   const completeAssessment = useCallback(() => {
     setState((prev) => {
-      const result = scoreAssessmentAnswers(roleDefinition, prev.assessmentAnswers, prev.selfRatings);
+      const result = scoreAssessmentAnswers(roleDefinition, prev.assessmentAnswers, prev.selfRatings, prev.codingAnswers);
       const demonstrated: Record<SkillKey, number> = {};
       for (const k of Object.keys(result.skillScores)) {
         demonstrated[k] = result.skillScores[k].demonstrated;
@@ -410,6 +427,7 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setState((prev) => ({
       ...prev,
       assessmentAnswers: {},
+      codingAnswers: {},
       assessmentCompleted: false,
       lastUpdated: new Date().toISOString()
     }));
@@ -638,6 +656,7 @@ export const AtlasProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     updateAvailability,
     updateSelfRatings,
     recordAssessmentAnswer,
+    recordCodingAnswer,
     completeAssessment,
     resetAssessment,
     toggleResourceStarted,

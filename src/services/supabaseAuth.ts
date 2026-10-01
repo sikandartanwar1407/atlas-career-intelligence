@@ -57,32 +57,61 @@ export class SupabaseAuthService {
 
   static setSession(session: SupabaseAuthSession | null): void {
     this._currentSession = session;
-    if (typeof window !== 'undefined' && window.sessionStorage) {
+    if (typeof window !== 'undefined') {
       try {
         if (session) {
-          window.sessionStorage.setItem('atlas_supabase_session', JSON.stringify(session));
+          const serialized = JSON.stringify(session);
+          if (window.localStorage) {
+            window.localStorage.setItem('atlas_supabase_session', serialized);
+          }
+          if (window.sessionStorage) {
+            window.sessionStorage.setItem('atlas_supabase_session', serialized);
+          }
         } else {
-          window.sessionStorage.removeItem('atlas_supabase_session');
+          if (window.localStorage) {
+            window.localStorage.removeItem('atlas_supabase_session');
+          }
+          if (window.sessionStorage) {
+            window.sessionStorage.removeItem('atlas_supabase_session');
+          }
         }
       } catch {
-        // silent fallback
+        // silent fallback for restricted storage environments
       }
     }
   }
 
   static getSession(): SupabaseAuthSession | null {
     if (this._currentSession) return this._currentSession;
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      try {
-        const stored = window.sessionStorage.getItem('atlas_supabase_session');
-        if (stored) {
-          this._currentSession = JSON.parse(stored);
-          return this._currentSession;
+
+    if (typeof window !== 'undefined') {
+      // 1. Primary persistent store: localStorage
+      if (window.localStorage) {
+        try {
+          const storedLocal = window.localStorage.getItem('atlas_supabase_session');
+          if (storedLocal) {
+            this._currentSession = JSON.parse(storedLocal);
+            return this._currentSession;
+          }
+        } catch {
+          // silent fallback
         }
-      } catch {
-        // silent fallback
+      }
+
+      // 2. Fallback/compatibility store: sessionStorage
+      if (window.sessionStorage) {
+        try {
+          const storedSession = window.sessionStorage.getItem('atlas_supabase_session');
+          if (storedSession) {
+            this._currentSession = JSON.parse(storedSession);
+            return this._currentSession;
+          }
+        } catch {
+          // silent fallback
+        }
       }
     }
+
     return null;
   }
 

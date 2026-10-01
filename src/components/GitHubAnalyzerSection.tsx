@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAtlas } from '../context/AtlasContext';
 import { SupabaseAuthService } from '../services/supabaseAuth';
 import { EvidenceApiService, RemoteGitHubAnalysis } from '../services/evidenceService';
+import { ProfileService } from '../services/profileService';
 import {
   GitHubAnalysisPhase,
   GitHubAnalysisResult,
@@ -18,7 +20,7 @@ const PHASES: { id: GitHubAnalysisPhase; label: string; step: number }[] = [
 ];
 
 export const GitHubAnalyzerSection: React.FC = () => {
-  const { roleDefinition, addEvidence } = useAtlas();
+  const { state, roleDefinition, addEvidence } = useAtlas();
 
   const [inputVal, setInputVal] = useState('');
   const [phase, setPhase] = useState<GitHubAnalysisPhase>('idle');
@@ -99,13 +101,20 @@ export const GitHubAnalyzerSection: React.FC = () => {
   const handleRunAnalysis = async (_mode?: 'profile' | 'repo') => {
     if (!inputVal.trim()) {
       setErrorMessage('Please enter a public GitHub username or repository URL (e.g. torvalds or facebook/react).');
+      setPhase('error');
       return;
     }
 
     const token = SupabaseAuthService.getAccessToken();
     if (!token) {
       setErrorMessage('Please sign in to analyze and persist GitHub portfolio evidence.');
+      setPhase('error');
       return;
+    }
+
+    // Ensure candidate profile exists on backend before saving evidence
+    if (state.profile && (state.profile.fullName || state.profile.targetRole)) {
+      await ProfileService.saveRemoteProfile(state.profile, token).catch(() => {});
     }
 
     setErrorMessage(null);
@@ -173,6 +182,25 @@ export const GitHubAnalyzerSection: React.FC = () => {
         demonstratedSkillsDetected: analysis.demonstrated_skills_detected || [],
         evidenceReadinessBoost: analysis.evidence_readiness_boost || 12,
       };
+
+      // Ingest extracted evidence into local AtlasContext evidence locker
+      const newAddedMap: Record<string, boolean> = {};
+      formattedEvidence.forEach((evItem) => {
+        addEvidence({
+          title: evItem.title,
+          skill: evItem.skill,
+          type: evItem.type,
+          description: evItem.description,
+          link: evItem.link,
+          date: evItem.date,
+          metrics: evItem.metrics,
+          shaHash: evItem.shaHash,
+          verificationStatus: evItem.verificationStatus,
+          evaluatorFeedback: evItem.evaluatorFeedback,
+        });
+        newAddedMap[evItem.id] = true;
+      });
+      setAddedIds((prev) => ({ ...prev, ...newAddedMap }));
 
       setResult(finalResult);
       setPhase('results');
@@ -332,15 +360,25 @@ export const GitHubAnalyzerSection: React.FC = () => {
 
       {/* Error state */}
       {phase === 'error' && errorMessage && (
-        <FadeIn className="p-4 rounded-xl bg-[#ffdad6]/40 border border-[#ffdad6] text-[#ba1a1a] text-xs font-semibold flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[18px]">warning</span>
+        <FadeIn className="p-4 rounded-xl bg-[#ffdad6]/40 border border-[#ffdad6] text-[#ba1a1a] text-xs font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="material-symbols-outlined text-[18px] shrink-0">warning</span>
             <span>{errorMessage}</span>
+            {errorMessage.includes('sign in') && (
+              <Link
+                to="/login"
+                state={{ from: '/evidence' }}
+                className="inline-flex items-center gap-1 font-bold underline hover:text-[#0d1f18] ml-1 transition-colors"
+              >
+                <span>Sign in to ATLAS</span>
+                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </Link>
+            )}
           </div>
           <button
             type="button"
             onClick={() => setPhase('idle')}
-            className="px-3 py-1 rounded bg-white border border-[#ffdad6] text-xs hover:bg-[#ffdad6]"
+            className="px-3 py-1 rounded bg-white border border-[#ffdad6] text-xs hover:bg-[#ffdad6] self-start sm:self-auto shrink-0"
           >
             Dismiss
           </button>

@@ -7,7 +7,18 @@ import { GitHubAnalyzerSection } from '../components/GitHubAnalyzerSection';
 import { PageTransition, AnimatedNumber, StaggerContainer } from '../components/motion/Motion';
 
 export const EvidencePage: React.FC = () => {
-  const { state, roleDefinition, addEvidence, updateEvidence, deleteEvidence } = useAtlas();
+  const { state, roleDefinition, careerReadiness, addEvidence, updateEvidence, deleteEvidence } = useAtlas();
+
+  // Dynamic Evidence Readiness & Competency Coverage Calculations
+  const totalSkills = roleDefinition.skills.length || 5;
+  const coveredSkillsSet = new Set((state.evidence || []).map((e) => e.skill));
+  const verifiedSkillsCount = roleDefinition.skills.filter((s) => coveredSkillsSet.has(s.name)).length;
+  const evidenceReadiness = Math.min(100, Math.round((verifiedSkillsCount / Math.max(totalSkills, 1)) * 100));
+  const targetReadiness = 80;
+  const readinessDeficit = evidenceReadiness - targetReadiness;
+  const evidenceGapsCount = Math.max(0, totalSkills - verifiedSkillsCount);
+  const underReviewCount = (state.evidence || []).filter((e) => e.verificationStatus === 'Under Review').length;
+  const missingSkill = roleDefinition.skills.find((s) => !coveredSkillsSet.has(s.name));
 
   const [filter, setFilter] = useState<'all' | 'deficits' | 'verified'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -108,7 +119,7 @@ export const EvidencePage: React.FC = () => {
               </span>
               <span className="text-[#c2c8c3] hidden sm:inline">•</span>
               <span className="font-label-sm text-label-sm tracking-wider uppercase text-[#6b4ea6] font-semibold">
-                EVIDENCE CONFIDENCE: 94.2% • HIRING DEFENSE ENGINE
+                EVIDENCE CONFIDENCE: {evidenceReadiness}% • HIRING DEFENSE ENGINE
               </span>
             </div>
 
@@ -132,6 +143,13 @@ export const EvidencePage: React.FC = () => {
               <p className="font-body-lg text-body-lg text-[#424845] leading-relaxed">
                 Your skills become career evidence when you can demonstrate them. ATLAS verifies candidate artifacts against tier-1 enterprise technical rubrics to eliminate resume filtering.
               </p>
+              {/* Distinct Readiness Context Banner */}
+              <div className="p-3 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] text-xs text-[#5a625d] flex items-center gap-2.5 mt-2">
+                <span className="material-symbols-outlined text-[18px] text-[#6b4ea6]">info</span>
+                <span>
+                  <strong>Career readiness: {careerReadiness}%</strong> (calibrated from diagnostic assessment). Evidence readiness increases as ATLAS ingests projects, repositories, dashboards, and other supporting artifacts.
+                </span>
+              </div>
             </div>
 
             <div className="lg:col-span-4 flex lg:justify-end items-center">
@@ -151,22 +169,30 @@ export const EvidencePage: React.FC = () => {
           <div className="card-interactive bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between text-xs">
               <span className="text-[#737874] uppercase font-semibold">Evidence Readiness</span>
-              <span className="px-2 py-0.5 rounded bg-[#ffdad6] text-[#ba1a1a] font-bold">-32% Deficit</span>
+              <span className={`px-2 py-0.5 rounded font-bold ${
+                readinessDeficit >= 0 ? 'bg-[#d2e7dc] text-[#0d1f18]' : 'bg-[#ffdad6] text-[#ba1a1a]'
+              }`}>
+                {readinessDeficit >= 0 ? `+${readinessDeficit}% Target Met` : `${readinessDeficit}% Deficit`}
+              </span>
             </div>
             <div className="flex items-baseline gap-2 my-2">
               <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">
-                <AnimatedNumber value={48} suffix="%" />
+                <AnimatedNumber value={evidenceReadiness} suffix="%" />
               </span>
-              <span className="text-xs text-[#737874]">/ 80% Target</span>
+              <span className="text-xs text-[#737874]">/ {targetReadiness}% Target</span>
             </div>
-            <p className="text-[11px] text-[#737874]">Benchmark: 80% to bypass automated technical filters</p>
+            <p className="text-[11px] text-[#737874]">
+              {state.evidence.length === 0
+                ? `Evidence readiness is 0% until artifacts are linked. Target: ${targetReadiness}%.`
+                : `Benchmark: ${targetReadiness}% to bypass automated technical filters`}
+            </p>
           </div>
 
           <div className="card-interactive bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between text-xs">
               <span className="text-[#737874] uppercase font-semibold">Verified Projects</span>
               <span className="px-2 py-0.5 rounded bg-[#eaddff] text-[#25005a] font-bold">
-                {state.evidence.filter((e) => e.verificationStatus === 'Under Review').length} Under Review
+                {underReviewCount} Under Review
               </span>
             </div>
             <div className="flex items-baseline gap-2 my-2">
@@ -181,11 +207,13 @@ export const EvidencePage: React.FC = () => {
           <div className="card-interactive bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between text-xs">
               <span className="text-[#737874] uppercase font-semibold">Verified Skills</span>
-              <span className="px-2 py-0.5 rounded bg-[#d2e7dc] text-[#0d1f18] font-bold">4 of 5 Calibrated</span>
+              <span className="px-2 py-0.5 rounded bg-[#d2e7dc] text-[#0d1f18] font-bold">
+                {verifiedSkillsCount} of {totalSkills} Calibrated
+              </span>
             </div>
             <div className="flex items-baseline gap-2 my-2">
               <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">
-                <AnimatedNumber value={4} />
+                <AnimatedNumber value={verifiedSkillsCount} />
               </span>
               <span className="text-xs text-[#737874]">Competencies Backed</span>
             </div>
@@ -195,13 +223,19 @@ export const EvidencePage: React.FC = () => {
           <div className="card-interactive bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between text-xs">
               <span className="text-[#737874] uppercase font-semibold">Evidence Gaps</span>
-              <span className="px-2 py-0.5 rounded bg-[#ffdad6] text-[#ba1a1a] font-bold">Action Required</span>
+              <span className={`px-2 py-0.5 rounded font-bold ${
+                evidenceGapsCount > 0 ? 'bg-[#ffdad6] text-[#ba1a1a]' : 'bg-[#d2e7dc] text-[#0d1f18]'
+              }`}>
+                {evidenceGapsCount > 0 ? 'Action Required' : 'Fully Backed'}
+              </span>
             </div>
             <div className="flex items-baseline gap-2 my-2">
-              <span className="font-metric-lg text-metric-lg text-[#ba1a1a] font-bold">
-                <AnimatedNumber value={2} />
+              <span className={`font-metric-lg text-metric-lg font-bold ${
+                evidenceGapsCount > 0 ? 'text-[#ba1a1a]' : 'text-[#0d1f18]'
+              }`}>
+                <AnimatedNumber value={evidenceGapsCount} />
               </span>
-              <span className="text-xs text-[#737874]">Severe Deficits</span>
+              <span className="text-xs text-[#737874]">{evidenceGapsCount === 1 ? 'Severe Deficit' : 'Severe Deficits'}</span>
             </div>
             <p className="text-[11px] text-[#737874]">Critical gaps unbacked by live code, dashboard, or written memo</p>
           </div>
@@ -350,13 +384,15 @@ export const EvidencePage: React.FC = () => {
               <div className="p-3 rounded bg-white border border-[#e5e2dc] space-y-1.5 text-xs">
                 <div className="flex justify-between font-semibold">
                   <span className="text-[#737874]">Verification Readiness:</span>
-                  <span className="text-[#0d1f18]">48% → 80% Goal</span>
+                  <span className="text-[#0d1f18]">{evidenceReadiness}% → {targetReadiness}% Goal</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-[#e5e2dc] overflow-hidden">
-                  <div className="h-full bg-[#6b4ea6]" style={{ width: '48%' }}></div>
+                  <div className="h-full bg-[#6b4ea6] transition-all duration-500" style={{ width: `${evidenceReadiness}%` }}></div>
                 </div>
                 <span className="text-[11px] text-[#6b4ea6] font-medium block">
-                  Closing 1 Power BI dashboard lifts evidence readiness to 72%.
+                  {missingSkill
+                    ? `Adding a verified artifact for ${missingSkill.name} will increase evidence coverage to ${Math.min(100, Math.round(((verifiedSkillsCount + 1) / Math.max(totalSkills, 1)) * 100))}%.`
+                    : 'All target role competencies are backed by verified evidence artifacts.'}
                 </span>
               </div>
             </div>

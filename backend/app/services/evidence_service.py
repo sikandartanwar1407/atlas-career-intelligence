@@ -27,13 +27,35 @@ def _resolve_candidate_id(supabase, user_id: str):
             detail="Database error while resolving candidate profile.",
         ) from exc
 
-    if not profile_res or not profile_res.data:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Candidate profile not found.",
-        )
+    if profile_res and profile_res.data:
+        return profile_res.data["id"]
 
-    return profile_res.data["id"]
+    # Fallback auto-provisioning for authenticated user if not yet created
+    try:
+        insert_res = (
+            supabase.table("candidate_profiles")
+            .insert({
+                "user_id": user_id,
+                "full_name": "Candidate",
+                "email": f"{user_id}@atlas.internal",
+                "college": "ATLAS Academy",
+                "degree": "Data & Information Systems",
+                "year": "Final Year",
+                "experience_level": "Fresher",
+                "target_role": "Data Analyst",
+                "has_completed_setup": True,
+            })
+            .execute()
+        )
+        if insert_res and insert_res.data:
+            return insert_res.data[0]["id"]
+    except Exception:
+        pass
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Candidate profile not found.",
+    )
 
 
 def _extract_single(data):

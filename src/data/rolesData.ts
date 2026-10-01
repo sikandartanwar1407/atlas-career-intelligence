@@ -1,60 +1,18 @@
 import { RoleDefinition, RoleSkillConfig, AssessmentQuestion, LearningResource } from '../types/atlas';
+import { selectQuestionsForSkill, QUESTION_BANK } from './questionBank';
 
-// Helper to generate realistic questions for any skill
+// Re-export question bank for backwards compatibility
+export { QUESTION_BANK };
+
+// Helper to generate dynamic hybrid (50% Theory / 50% Coding) questions for any skill
 export function generateSkillQuestions(
   roleId: string,
   skillName: string,
   domain: string,
-  topics: [string, string, string]
+  topics?: string[],
+  attemptSeed: number = 0
 ): AssessmentQuestion[] {
-  const slug = skillName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-  return [
-    {
-      id: `${roleId}-${slug}-q1`,
-      skill: skillName,
-      difficulty: 'Foundation',
-      domain,
-      question: `In professional ${skillName}, which foundational principle is critical when initiating a new project regarding ${topics[0]}?`,
-      options: [
-        `Establishing clear specifications, baseline schemas, and deterministic constraints around ${topics[0]}`,
-        `Skipping initial documentation and deploying immediately to production environments`,
-        `Relying solely on default settings without parameter tuning or environment validation`,
-        `Ignoring security context and role-based access to speed up delivery`
-      ],
-      correctAnswer: 0,
-      explanation: `Foundational mastery requires rigorous parameter specification, input validation, and established constraints around ${topics[0]}.`
-    },
-    {
-      id: `${roleId}-${slug}-q2`,
-      skill: skillName,
-      difficulty: 'Applied',
-      domain,
-      question: `When executing complex workflows involving ${topics[1]}, how should an anomaly or performance bottleneck be resolved?`,
-      options: [
-        `Restarting the server without inspecting profiling traces or query execution plans`,
-        `Isolating execution profiles, analyzing execution plan overhead, and applying targeted indexing or refactoring on ${topics[1]}`,
-        `Decreasing timeout thresholds to force early error propagation across all downstream clients`,
-        `Disabling validation middleware to temporarily alleviate latency`
-      ],
-      correctAnswer: 1,
-      explanation: `Applied competency requires systematic telemetry inspection, execution plan profiling, and isolating bottlenecks in ${topics[1]}.`
-    },
-    {
-      id: `${roleId}-${slug}-q3`,
-      skill: skillName,
-      difficulty: 'Advanced',
-      domain,
-      question: `In an enterprise architectural review for ${topics[2]}, what constitutes the standard for resilient high-availability design?`,
-      options: [
-        `Hardcoding configuration tokens directly into source control to minimize external dependency lookups`,
-        `Single-point-of-failure deployment without automated fallback or telemetry monitoring`,
-        `Decoupled horizontal scalability, graceful degradation protocols, and end-to-end observability across ${topics[2]}`,
-        `Synchronous blocking operations across distributed network boundaries without circuit breakers`
-      ],
-      correctAnswer: 2,
-      explanation: `Advanced enterprise readiness requires fault-tolerant architectural decoupling, circuit breakers, and end-to-end telemetry observability for ${topics[2]}.`
-    }
-  ];
+  return selectQuestionsForSkill(roleId, skillName, domain, topics || [], attemptSeed);
 }
 
 // Helper to generate resources for any skill
@@ -109,7 +67,8 @@ export function createRoleDefinition(
     prerequisite: string;
     deficitDesc: string;
     onTrackDesc: string;
-  }[]
+  }[],
+  attemptSeed: number = 0
 ): RoleDefinition {
   const requiredSkills = skillsData.map((s) => s.name);
   const skills: RoleSkillConfig[] = skillsData.map((s) => {
@@ -153,7 +112,7 @@ export function createRoleDefinition(
         }
       ],
       learningResources: generateSkillResources(s.name, name),
-      assessmentQuestions: generateSkillQuestions(id, s.name, category, s.topics)
+      assessmentQuestions: generateSkillQuestions(id, s.name, category, s.topics, attemptSeed)
     };
   });
 
@@ -952,13 +911,22 @@ export const ROLES_CATALOGUE: RoleDefinition[] = [
 ];
 
 // Helper to get or create role definition for custom "Other" roles
-export function getRoleDefinition(roleIdOrName: string): RoleDefinition {
+export function getRoleDefinition(roleIdOrName: string, attemptSeed: number = 0): RoleDefinition {
   const normalized = roleIdOrName.toLowerCase().trim();
   const found = ROLES_CATALOGUE.find(
     (r) => r.id === normalized || r.name.toLowerCase() === normalized
   );
 
-  if (found) return found;
+  if (found) {
+    if (attemptSeed === 0) return found;
+    return {
+      ...found,
+      skills: found.skills.map((s) => ({
+        ...s,
+        assessmentQuestions: generateSkillQuestions(found.id, s.name, s.category, s.assessmentTopics, attemptSeed)
+      }))
+    };
+  }
 
   // Custom "Other" Role Dynamic Adapter
   const customTitle = roleIdOrName && roleIdOrName.trim().length > 0 ? roleIdOrName.trim() : 'Custom Role Specialist';

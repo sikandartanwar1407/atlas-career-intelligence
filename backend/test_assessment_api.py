@@ -186,6 +186,76 @@ def run_assessment_unit_tests() -> bool:
         assert data["overall_demonstrated"] == 67
         print("  [OK] GET /api/assessment/latest returned latest candidate submission successfully.")
 
+    # 5. Hybrid & Coding Challenge Evaluation Unit Tests
+    print("\n--- 5. Hybrid & Coding Challenge Evaluation Tests ---")
+    from app.services.assessment_service import normalize_code_output, verify_coding_answer
+
+    # 5a. Normalization tests
+    raw_1 = "  [1, 2, 3, 4] \r\n"
+    assert normalize_code_output(raw_1) == "[1, 2, 3, 4]"
+    assert normalize_code_output("‘hello’") == "'hello'"
+    assert normalize_code_output("“test”") == '"test"'
+    print("  [OK] Deterministic code output normalization passed.")
+
+    # 5b. Coding answer verification tests
+    assert verify_coding_answer("[1, 2, 3]", "[1, 2, 3]") is True
+    assert verify_coding_answer("[1, 2, 3]", " [1,  2, 3] \n") is True
+    assert verify_coding_answer("[1, 2, 3]", "[1, 2, 4]") is False
+    assert verify_coding_answer("3", "3") is True
+    print("  [OK] Coding answer verification (correct / incorrect / normalized) passed.")
+
+    # 5c. Hybrid submission with theory, correct coding, incorrect coding, and skipped coding
+    with patch("app.services.assessment_service.get_supabase_client", return_value=mock_supabase):
+        hybrid_payload = {
+            "role_id": "data-analyst",
+            "answers": [
+                # Theory answers
+                {"question_id": "sql-01", "skill_name": "SQL", "selected_option": 1, "question_type": "theory"},
+                {"question_id": "pbi-01", "skill_name": "Power BI", "selected_option": 1, "question_type": "theory"},
+                # Coding answers: 1 correct, 1 incorrect, 1 skipped (-1)
+                {
+                    "question_id": "code-sql-01",
+                    "skill_name": "SQL",
+                    "selected_option": 1,
+                    "question_type": "coding",
+                    "submitted_text": "2",
+                },
+                {
+                    "question_id": "code-pbi-01",
+                    "skill_name": "Power BI",
+                    "selected_option": 0,
+                    "question_type": "coding",
+                    "submitted_text": "WRONG_OUTPUT",
+                },
+                {
+                    "question_id": "code-py-01",
+                    "skill_name": "Python",
+                    "selected_option": -1,  # Skipped coding challenge
+                    "question_type": "coding",
+                    "submitted_text": "",
+                },
+            ],
+            "self_ratings": {
+                "SQL": 70,
+                "Power BI": 50,
+                "Python": 60,
+            },
+        }
+
+        r = client.post("/api/assessment/submit", json=hybrid_payload)
+        assert r.status_code == 200, f"Expected 200, got {r.status_code}: {r.text}"
+        data = r.json()
+        assert data["id"] == mock_submission_id
+        assert "theory_score" in data
+        assert "coding_score" in data
+        assert "coding_correct_count" in data
+        assert "coding_skipped_count" in data
+        assert data["coding_correct_count"] == 1
+        assert data["coding_skipped_count"] == 1
+        print(f"  [OK] Hybrid assessment submission evaluated successfully:")
+        print(f"       Theory Score: {data['theory_score']}%, Coding Score: {data['coding_score']}%")
+        print(f"       Coding breakdown: {data['coding_correct_count']} correct, {data['coding_skipped_count']} skipped")
+
     app.dependency_overrides.clear()
     print("\n" + "=" * 65)
     print("ALL ASSESSMENT API UNIT TESTS PASSED (100%)")
@@ -195,3 +265,4 @@ def run_assessment_unit_tests() -> bool:
 
 if __name__ == "__main__":
     run_assessment_unit_tests()
+

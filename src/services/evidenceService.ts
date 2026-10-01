@@ -208,21 +208,65 @@ export class EvidenceApiService {
 
     try {
       const apiUrl = getApiUrl();
-      const response = await fetch(`${apiUrl}/api/evidence/github`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          source: 'github',
-          identifier: identifier.trim(),
-        }),
-      });
+      let response: Response;
+      try {
+        response = await fetch(`${apiUrl}/api/evidence/github`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            source: 'github',
+            identifier: identifier.trim(),
+          }),
+        });
+      } catch (fetchErr: any) {
+        return {
+          success: false,
+          error: 'ATLAS API is unreachable. Make sure the FastAPI backend is running on port 8000.',
+        };
+      }
 
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
+        if (response.status === 401) {
+          return {
+            success: false,
+            error: 'Your ATLAS session has expired. Please sign in again.',
+          };
+        }
+        if (response.status === 403 || response.status === 429) {
+          return {
+            success: false,
+            error: 'GitHub API rate limit reached. Please try again later.',
+          };
+        }
+        if (response.status === 404) {
+          return {
+            success: false,
+            error: data.detail || 'GitHub profile or repository was not found.',
+          };
+        }
+        if (response.status === 422) {
+          const detailMsg =
+            typeof data.detail === 'string'
+              ? data.detail
+              : Array.isArray(data.detail)
+              ? data.detail.map((d: any) => d.msg || d).join(', ')
+              : 'Validation error in GitHub analysis request.';
+          return {
+            success: false,
+            error: detailMsg,
+          };
+        }
+        if (response.status === 502) {
+          return {
+            success: false,
+            error: 'GitHub is temporarily unavailable.',
+          };
+        }
         return {
           success: false,
           error: data.detail || 'GitHub analysis failed.',
@@ -236,7 +280,10 @@ export class EvidenceApiService {
       return { success: true, data: { analysis: data, evidence: [] } };
     } catch (err: any) {
       console.warn('[EvidenceApiService] Error analyzing GitHub:', err);
-      return { success: false, error: err.message || 'Network error connecting to backend GitHub service.' };
+      return {
+        success: false,
+        error: err.message || 'ATLAS API is unreachable. Make sure the FastAPI backend is running on port 8000.',
+      };
     }
   }
 

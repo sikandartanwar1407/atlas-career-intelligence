@@ -22,7 +22,8 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS Configuration
+# CORS Configuration (Origins: 3000, 3001, 3002, 3003, 5173)
+# Allowed origins loaded dynamically from settings
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins_list,

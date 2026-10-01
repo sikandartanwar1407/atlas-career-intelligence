@@ -26,15 +26,25 @@ export interface SkillRating {
 
 export type QuestionDifficulty = 'Foundation' | 'Applied' | 'Advanced';
 
+export type QuestionType = 'theory' | 'coding';
+
 export interface AssessmentQuestion {
   id: string;
   skill: SkillKey;
   difficulty: QuestionDifficulty;
   domain: string;
-  question: string;
+  type?: QuestionType;
+  // Theory specific fields
+  question?: string;
+  options?: string[];
+  correctAnswer?: number;
+  // Coding specific fields
+  title?: string;
+  prompt?: string;
+  code?: string;
+  expectedOutput?: string;
+  // Common
   scenarioContext?: string;
-  options: string[];
-  correctAnswer: number;
   explanation: string;
 }
 
@@ -164,15 +174,29 @@ export interface AtlasAppState {
   availability: number; // hours per week
   selfRatings: Record<SkillKey, number>;
   assessmentAnswers: Record<string, number>;
+  codingAnswers?: Record<string, { submittedText: string; status: 'correct' | 'incorrect' | 'skipped' }>;
   assessmentCompleted: boolean;
   assessmentResult: {
     overallDemonstrated: number;
     largestGapSkill: SkillKey;
+    theoryScore?: number;
+    codingScore?: number;
+    theoryCorrectCount?: number;
+    theoryTotalCount?: number;
+    codingCorrectCount?: number;
+    codingSkippedCount?: number;
+    codingTotalCount?: number;
+    theoryPerformance?: Record<string, 'demonstrated' | 'not_demonstrated'>;
+    codingPerformance?: Record<string, 'demonstrated' | 'not_demonstrated' | 'skipped'>;
+    competencyStatus?: Record<string, 'demonstrated' | 'not_demonstrated' | 'skipped'>;
     skillScores: Record<SkillKey, {
       baseline: number;
       demonstrated: number;
       threshold: number;
       gap: number;
+      theoryPerformance?: string;
+      codingPerformance?: string;
+      competencyStatus?: 'demonstrated' | 'gap_signal' | 'skipped';
     }>;
   };
   resourceStatus: Record<string, { started: boolean; completed: boolean }>;

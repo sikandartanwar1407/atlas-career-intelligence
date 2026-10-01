@@ -149,7 +149,7 @@ def _execute_github_get(
     headers = _get_github_headers()
 
     try:
-        response = client.get(url, headers=headers, params=params, timeout=12.0)
+        response = client.get(url, headers=headers, params=params, timeout=12.0, follow_redirects=True)
     except httpx.TimeoutException as exc:
         logger.warning(f"GitHub API timeout requesting {endpoint}: {exc}")
         raise HTTPException(

@@ -52,18 +52,52 @@ export function calculateSkillGaps(
   }).sort((a, b) => b.gap - a.gap); // Strictly sorted by highest gap descending
 }
 
+export function normalizeCodeOutput(text: string | null | undefined): string {
+  if (!text) return '';
+  // 1. Normalize line endings and trim outer whitespace
+  let norm = String(text).replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+  // 2. Standardize curly quotes
+  norm = norm.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+  // 3. Trim individual lines
+  const lines = norm.split('\n').map((l) => l.trim());
+  return lines.join('\n').trim();
+}
+
+export function verifyCodingAnswer(expected: string, submitted: string | null | undefined): boolean {
+  const normExp = normalizeCodeOutput(expected);
+  const normSub = normalizeCodeOutput(submitted);
+  if (!normSub) return false;
+
+  if (normExp === normSub) return true;
+  if (normExp.toLowerCase() === normSub.toLowerCase()) return true;
+  // Compare numbers / punctuation tolerance
+  if (normExp.replace(/[,;.]/g, '') === normSub.replace(/[,;.]/g, '')) return true;
+  return false;
+}
+
 export function scoreAssessmentAnswers(
   roleDef: RoleDefinition,
   answers: Record<string, number>,
-  selfRatings: Record<SkillKey, number>
+  selfRatings: Record<SkillKey, number>,
+  codingAnswers?: Record<string, { submittedText: string; status: 'correct' | 'incorrect' | 'skipped' }>
 ): {
   overallDemonstrated: number;
   largestGapSkill: SkillKey;
+  theoryScore: number;
+  codingScore: number;
+  theoryCorrectCount: number;
+  theoryTotalCount: number;
+  codingCorrectCount: number;
+  codingSkippedCount: number;
+  codingTotalCount: number;
   skillScores: Record<SkillKey, {
     baseline: number;
     demonstrated: number;
     threshold: number;
     gap: number;
+    theoryPerformance: string;
+    codingPerformance: string;
+    competencyStatus: 'demonstrated' | 'gap_signal' | 'skipped';
   }>;
 } {
   const skillScores: Record<SkillKey, {
@@ -71,7 +105,16 @@ export function scoreAssessmentAnswers(
     demonstrated: number;
     threshold: number;
     gap: number;
+    theoryPerformance: string;
+    codingPerformance: string;
+    competencyStatus: 'demonstrated' | 'gap_signal' | 'skipped';
   }> = {};
+
+  let totalTheoryCorrect = 0;
+  let totalTheoryCount = 0;
+  let totalCodingCorrect = 0;
+  let totalCodingSkipped = 0;
+  let totalCodingCount = 0;
 
   for (const skillConfig of roleDef.skills) {
     const skill = skillConfig.name;
@@ -79,37 +122,80 @@ export function scoreAssessmentAnswers(
     const baseline = selfRatings[skill] ?? skillConfig.defaultBaseline;
     const threshold = skillConfig.targetThreshold;
 
-    let skillCorrect = 0;
-    let skillAnswered = 0;
+    let theoryCorrect = 0;
+    let theoryTotal = 0;
+    let codingCorrect = 0;
+    let codingSkipped = 0;
+    let codingTotal = 0;
 
     for (const q of questions) {
-      if (answers[q.id] !== undefined) {
-        skillAnswered++;
-        if (answers[q.id] === q.correctAnswer) {
-          skillCorrect++;
+      if (q.type === 'coding') {
+        codingTotal++;
+        totalCodingCount++;
+        const ansVal = answers[q.id];
+        const sub = codingAnswers?.[q.id];
+
+        if (ansVal === 1 || sub?.status === 'correct') {
+          codingCorrect++;
+          totalCodingCorrect++;
+        } else if (ansVal === -1 || sub?.status === 'skipped') {
+          codingSkipped++;
+          totalCodingSkipped++;
+        }
+      } else {
+        // Theory Question
+        theoryTotal++;
+        totalTheoryCount++;
+        const ansVal = answers[q.id];
+        if (ansVal !== undefined && ansVal === q.correctAnswer) {
+          theoryCorrect++;
+          totalTheoryCorrect++;
         }
       }
     }
 
+    const totalQuestions = theoryTotal + codingTotal;
+    const totalCorrect = theoryCorrect + codingCorrect;
     let demonstrated = baseline;
-    if (skillAnswered > 0) {
-      const accuracy = skillCorrect / questions.length;
-      demonstrated = Math.round(accuracy * 100);
+
+    if (totalQuestions > 0) {
+      demonstrated = Math.round((totalCorrect / totalQuestions) * 100);
     }
 
     const gap = Math.max(threshold - demonstrated, 0);
+
+    let theoryPerformance = `${theoryCorrect}/${theoryTotal} Demonstrated`;
+    let codingPerformance = `${codingCorrect}/${codingTotal} Demonstrated`;
+    if (codingSkipped > 0 && codingCorrect === 0) {
+      codingPerformance = 'Skipped — competency not demonstrated';
+    } else if (codingTotal > 0 && codingCorrect === 0) {
+      codingPerformance = '0/' + codingTotal + ' (Skill gap signal)';
+    }
+
+    let competencyStatus: 'demonstrated' | 'gap_signal' | 'skipped' = 'demonstrated';
+    if (codingSkipped > 0 && codingCorrect === 0 && theoryCorrect === 0) {
+      competencyStatus = 'skipped';
+    } else if (gap >= 15) {
+      competencyStatus = 'gap_signal';
+    }
 
     skillScores[skill] = {
       baseline,
       demonstrated,
       threshold,
-      gap
+      gap,
+      theoryPerformance,
+      codingPerformance,
+      competencyStatus
     };
   }
 
   // Calculate overall demonstrated competency
   const sumDemonstrated = Object.values(skillScores).reduce((acc, curr) => acc + curr.demonstrated, 0);
   const overallDemonstrated = Math.round(sumDemonstrated / Math.max(roleDef.skills.length, 1));
+
+  const theoryScore = totalTheoryCount > 0 ? Math.round((totalTheoryCorrect / totalTheoryCount) * 100) : 0;
+  const codingScore = totalCodingCount > 0 ? Math.round((totalCodingCorrect / totalCodingCount) * 100) : 0;
 
   // Determine largest gap purely from mathematics
   let largestGap = -1;
@@ -125,6 +211,13 @@ export function scoreAssessmentAnswers(
   return {
     overallDemonstrated,
     largestGapSkill,
+    theoryScore,
+    codingScore,
+    theoryCorrectCount: totalTheoryCorrect,
+    theoryTotalCount: totalTheoryCount,
+    codingCorrectCount: totalCodingCorrect,
+    codingSkippedCount: totalCodingSkipped,
+    codingTotalCount: totalCodingCount,
     skillScores
   };
 }
