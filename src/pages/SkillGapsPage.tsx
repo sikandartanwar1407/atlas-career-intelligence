@@ -50,33 +50,33 @@ export const SkillGapsPage: React.FC = () => {
   }, [skillGaps, activeFilter, searchQuery, sortOption]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#080B16] text-[#F1F5F9]">
       <Header />
 
-      <PageTransition className="w-full pt-16 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <PageTransition className="w-full pt-24 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         {/* Section 1: Header & Cognitive Framing */}
-        <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#e5e2dc]">
+        <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
           <div className="flex flex-col gap-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded bg-[#f1eee7] text-[#424845] font-label-sm text-label-sm tracking-widest uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#6b4ea6] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-[#A78BFA] font-mono text-[11px] tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF] animate-pulse"></span>
               <span>SKILL GAP DECOMPOSITION // ATLAS COGNITIVE ENGINE</span>
             </div>
-            <h1 className="font-headline-xl text-headline-xl text-[#0d1f18] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
               Your skill gaps.
             </h1>
-            <p className="font-headline-sm text-headline-sm text-[#424845] font-normal">
-              See exactly where your current capability differs from your target role.
+            <p className="text-base text-[#94A3B8]">
+              See exactly where your current capability differs from your target role threshold.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-[#f6f3ed] text-[#1c1c18] border border-[#e5e2dc] card-interactive">
-                <span className="material-symbols-outlined text-[16px] text-[#6b4ea6]">target</span>
-                <span className="font-label-md text-label-md">Target Role:</span>
-                <span className="font-title-md text-title-md text-[#0d1f18] font-semibold">{state.targetRole}</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#0D1224] border border-white/10">
+                <span className="material-symbols-outlined text-[16px] text-[#A78BFA]">target</span>
+                <span className="text-xs text-[#94A3B8]">Target Role:</span>
+                <span className="text-xs font-bold text-white">{state.targetRole}</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#f6f3ed] text-[#424845] font-label-sm text-label-sm border border-[#e5e2dc]">
-                <span className="w-2 h-2 rounded-full bg-[#4f6359]"></span>
-                <span>Standardized 80% Threshold</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0D1224] border border-white/10 text-xs text-[#94A3B8]">
+                <span className="w-2 h-2 rounded-full bg-[#2DD4BF]"></span>
+                <span className="font-mono">Standardized 80% Threshold</span>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@ export const SkillGapsPage: React.FC = () => {
           <div className="flex items-center gap-3 self-start lg:self-end shrink-0">
             <Link
               to="/resources"
-              className="btn-interactive inline-flex items-center gap-2 px-5 py-2.5 rounded bg-[#0d1f18] text-white font-title-md text-title-md shadow-sm hover:bg-[#22382f] transition-all font-semibold"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs uppercase tracking-wider transition-all shadow-sm"
             >
               <span>Build my learning plan</span>
               <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -95,89 +95,89 @@ export const SkillGapsPage: React.FC = () => {
         {/* Section 2: Telemetry Metrics Strip */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Metric 1 */}
-          <div className="card-interactive p-5 rounded-lg bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between gap-4">
+          <div className="glass-panel border-white/10 p-5 rounded-2xl shadow-lg flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
-              <span className="font-label-md text-label-md uppercase tracking-wider text-[#737874]">Career Readiness</span>
-              <span className="material-symbols-outlined text-[#6b4ea6] text-[20px]">analytics</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B]">Career Readiness</span>
+              <span className="material-symbols-outlined text-[#A78BFA] text-[20px]">analytics</span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">
+              <span className="text-3xl font-bold text-white font-mono">
                 <AnimatedNumber value={careerReadiness} suffix="%" durationMs={650} />
               </span>
-              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f1eee7] font-label-sm text-label-sm text-[#424845]">
-                <span className="material-symbols-outlined text-[14px] text-[#4f6359]">trending_up</span>
+              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-[10px] font-mono text-[#2DD4BF]">
+                <span className="material-symbols-outlined text-[14px]">trending_up</span>
                 <span>Calculated</span>
               </div>
             </div>
-            <div className="w-full h-1.5 bg-[#e5e2dc] rounded-full overflow-hidden">
-              <div className="h-full bg-[#6b4ea6] rounded-full transition-all duration-700" style={{ width: `${Math.min(careerReadiness, 100)}%` }} />
+            <div className="w-full h-1.5 bg-[#0D1224] rounded-full overflow-hidden">
+              <div className="h-full bg-violet-600 rounded-full transition-all duration-700" style={{ width: `${Math.min(careerReadiness, 100)}%` }} />
             </div>
           </div>
 
           {/* Metric 2 */}
-          <div className="card-interactive p-5 rounded-lg bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between gap-4">
+          <div className="glass-panel border-white/10 p-5 rounded-2xl shadow-lg flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
-              <span className="font-label-md text-label-md uppercase tracking-wider text-[#737874]">Skills Analysed</span>
-              <span className="material-symbols-outlined text-[#737874] text-[20px]">rule_settings</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B]">Skills Analysed</span>
+              <span className="material-symbols-outlined text-[#64748B] text-[20px]">rule_settings</span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">
+              <span className="text-3xl font-bold text-white font-mono">
                 <AnimatedNumber value={skillGaps.length} />
               </span>
-              <span className="font-label-sm text-label-sm text-[#737874]">Active Vectors</span>
+              <span className="text-[11px] font-mono text-[#64748B]">Active Vectors</span>
             </div>
-            <p className="font-body-sm text-body-sm text-[#737874] truncate">
+            <p className="text-xs text-[#94A3B8] truncate">
               Evaluated across core competencies
             </p>
           </div>
 
           {/* Metric 3 */}
-          <div className="card-interactive p-5 rounded-lg bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between gap-4">
+          <div className="glass-panel border-rose-500/30 bg-rose-950/10 p-5 rounded-2xl shadow-lg flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
-              <span className="font-label-md text-label-md uppercase tracking-wider text-[#ba1a1a]">High Priority</span>
-              <span className="material-symbols-outlined text-[#ba1a1a] text-[20px]">warning</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-rose-400">High Priority</span>
+              <span className="material-symbols-outlined text-rose-400 text-[20px]">warning</span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="font-metric-lg text-metric-lg text-[#ba1a1a] font-bold">
+              <span className="text-3xl font-bold text-rose-300 font-mono">
                 <AnimatedNumber value={highPriorityCount} />
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ffdad6] text-[#ba1a1a] font-label-sm text-label-sm font-semibold">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 text-[10px] font-mono font-semibold border border-rose-500/30">
                 Critical Blocker
               </span>
             </div>
-            <p className="font-body-sm text-body-sm text-[#737874] truncate">
+            <p className="text-xs text-[#94A3B8] truncate">
               Immediate screening interview triage
             </p>
           </div>
 
           {/* Metric 4 */}
-          <div className="card-interactive p-5 rounded-lg bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between gap-4">
+          <div className="glass-panel border-white/10 p-5 rounded-2xl shadow-lg flex flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
-              <span className="font-label-md text-label-md uppercase tracking-wider text-[#737874]">Evidence Gaps</span>
-              <span className="material-symbols-outlined text-[#6b4ea6] text-[20px]">folder_open</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B]">Evidence Gaps</span>
+              <span className="material-symbols-outlined text-[#A78BFA] text-[20px]">folder_open</span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">
+              <span className="text-3xl font-bold text-white font-mono">
                 <AnimatedNumber value={evidenceDeficitCount} />
               </span>
-              <span className="font-label-sm text-label-sm text-[#737874]">Unverified</span>
+              <span className="text-[11px] font-mono text-amber-300">Unverified</span>
             </div>
-            <p className="font-body-sm text-body-sm text-[#737874] truncate">
+            <p className="text-xs text-[#94A3B8] truncate">
               Missing commercial repo artifacts
             </p>
           </div>
         </section>
 
         {/* Section 3: Filter & Control Toolbar */}
-        <section className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 p-3 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc]">
+        <section className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 p-3 rounded-2xl glass-panel border-white/10 bg-[#0D1224]/80">
           <div className="flex flex-wrap items-center gap-1.5">
             <button
               type="button"
               onClick={() => setActiveFilter('all')}
-              className={`px-3 py-1.5 rounded font-label-md text-label-md transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 activeFilter === 'all'
-                  ? 'bg-[#0d1f18] text-white shadow-xs font-semibold'
-                  : 'text-[#424845] hover:bg-[#ebe8e2]'
+                  ? 'bg-violet-600 text-white shadow-sm'
+                  : 'text-[#94A3B8] hover:bg-white/5'
               }`}
             >
               All Skills ({skillGaps.length})
@@ -185,10 +185,10 @@ export const SkillGapsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveFilter('high')}
-              className={`px-3 py-1.5 rounded font-label-md text-label-md transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 activeFilter === 'high'
-                  ? 'bg-[#0d1f18] text-white shadow-xs font-semibold'
-                  : 'text-[#424845] hover:bg-[#ebe8e2]'
+                  ? 'bg-rose-600 text-white shadow-sm'
+                  : 'text-[#94A3B8] hover:bg-white/5'
               }`}
             >
               High Priority ({highPriorityCount})
@@ -196,10 +196,10 @@ export const SkillGapsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveFilter('medium')}
-              className={`px-3 py-1.5 rounded font-label-md text-label-md transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 activeFilter === 'medium'
-                  ? 'bg-[#0d1f18] text-white shadow-xs font-semibold'
-                  : 'text-[#424845] hover:bg-[#ebe8e2]'
+                  ? 'bg-amber-500 text-slate-950 shadow-sm'
+                  : 'text-[#94A3B8] hover:bg-white/5'
               }`}
             >
               Medium Priority ({mediumPriorityCount})
@@ -207,10 +207,10 @@ export const SkillGapsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveFilter('low')}
-              className={`px-3 py-1.5 rounded font-label-md text-label-md transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 activeFilter === 'low'
-                  ? 'bg-[#0d1f18] text-white shadow-xs font-semibold'
-                  : 'text-[#424845] hover:bg-[#ebe8e2]'
+                  ? 'bg-teal-500 text-slate-950 shadow-sm'
+                  : 'text-[#94A3B8] hover:bg-white/5'
               }`}
             >
               Low / On Track ({lowPriorityCount})
@@ -218,10 +218,10 @@ export const SkillGapsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveFilter('evidence')}
-              className={`px-3 py-1.5 rounded font-label-md text-label-md transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 activeFilter === 'evidence'
-                  ? 'bg-[#0d1f18] text-white shadow-xs font-semibold'
-                  : 'text-[#424845] hover:bg-[#ebe8e2]'
+                  ? 'bg-violet-600 text-white shadow-sm'
+                  : 'text-[#94A3B8] hover:bg-white/5'
               }`}
             >
               Evidence Deficits ({evidenceDeficitCount})
@@ -230,26 +230,26 @@ export const SkillGapsPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="relative flex items-center">
-              <span className="material-symbols-outlined absolute left-3 text-[#737874] text-[18px]">search</span>
+              <span className="material-symbols-outlined absolute left-3 text-[#64748B] text-[18px]">search</span>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search capabilities..."
-                className="w-full sm:w-60 pl-9 pr-3 py-1.5 bg-white text-[#1c1c18] border border-[#c2c8c3] rounded text-xs focus:outline-none focus:border-[#0d1f18]"
+                className="w-full sm:w-60 pl-9 pr-3 py-2 bg-[#11182B] text-white border border-white/10 rounded-xl text-xs focus:outline-none focus:border-violet-500 placeholder-[#64748B]"
               />
             </div>
             <div className="relative flex items-center">
               <select
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value as any)}
-                className="w-full sm:w-auto px-3 py-1.5 bg-white text-[#1c1c18] border border-[#c2c8c3] rounded text-xs focus:outline-none focus:border-[#0d1f18] cursor-pointer pr-8 appearance-none"
+                className="w-full sm:w-auto px-3 py-2 bg-[#11182B] text-white border border-white/10 rounded-xl text-xs focus:outline-none focus:border-violet-500 cursor-pointer pr-8 appearance-none"
               >
                 <option value="gap-desc">Sort by Priority Delta (Default)</option>
                 <option value="target-desc">Sort by Target Benchmark</option>
                 <option value="alpha">Alphabetical</option>
               </select>
-              <span className="material-symbols-outlined absolute right-2 text-[#737874] text-[16px] pointer-events-none">expand_more</span>
+              <span className="material-symbols-outlined absolute right-2 text-[#64748B] text-[16px] pointer-events-none">expand_more</span>
             </div>
           </div>
         </section>
@@ -259,58 +259,58 @@ export const SkillGapsPage: React.FC = () => {
           {displayedSkills.map((item: SkillGapDetail) => (
             <article
               key={item.skill}
-              className="card-interactive p-6 lg:p-7 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col gap-5 hover:shadow-md"
+              className="glass-panel border-white/10 p-6 lg:p-7 rounded-2xl shadow-xl flex flex-col gap-5 hover:border-violet-500/40 transition-all"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <span
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider ${
                         item.priority === 'HIGH PRIORITY'
-                          ? 'bg-[#ffdad6] text-[#ba1a1a]'
+                          ? 'bg-rose-500/15 border border-rose-500/30 text-rose-300'
                           : item.priority === 'MEDIUM PRIORITY'
-                          ? 'bg-[#ffddb3] text-[#291800]'
-                          : 'bg-[#d2e7dc] text-[#0d1f18]'
+                          ? 'bg-amber-500/15 border border-amber-500/30 text-amber-300'
+                          : 'bg-teal-500/15 border border-teal-500/30 text-[#2DD4BF]'
                       }`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
                       {item.priority === 'HIGH PRIORITY' ? 'HIGH PRIORITY BLOCKER' : item.priority}
                     </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#f1eee7] font-label-sm text-[10px] text-[#424845]">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#0D1224] border border-white/10 font-mono text-[10px] text-[#94A3B8]">
                       Role Prerequisite: 80% Threshold
                     </span>
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] ${
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] font-mono ${
                         item.evidenceStatus === 'Missing'
-                          ? 'bg-[#ffdad6]/40 text-[#ba1a1a] font-semibold'
-                          : 'bg-[#f1eee7] text-[#424845]'
+                          ? 'bg-rose-500/15 border border-rose-500/20 text-rose-300 font-semibold'
+                          : 'bg-[#0D1224] border border-white/10 text-[#94A3B8]'
                       }`}
                     >
                       Evidence: {item.evidenceStatus}
                     </span>
                   </div>
 
-                  <h2 className="font-headline-md text-headline-md text-[#0d1f18]">
+                  <h2 className="text-xl font-bold text-white tracking-tight">
                     {item.displayName}
                   </h2>
                 </div>
 
-                <div className="flex items-center gap-6 shrink-0 self-start md:self-auto bg-[#f6f3ed] border border-[#e5e2dc] px-4 py-2 rounded-lg">
-                  <div className="flex flex-col items-start">
-                    <span className="font-label-sm text-[10px] uppercase text-[#737874]">Current</span>
-                    <span className="font-metric-sm text-metric-sm text-[#424845] font-bold">{item.demonstrated}%</span>
+                <div className="flex items-center gap-6 shrink-0 self-start md:self-auto bg-[#0D1224] border border-white/10 px-4 py-2.5 rounded-xl">
+                  <div className="flex flex-col items-start font-mono">
+                    <span className="text-[10px] uppercase text-[#64748B]">Current</span>
+                    <span className="text-sm text-white font-bold">{item.demonstrated}%</span>
                   </div>
-                  <div className="h-6 w-px bg-[#c2c8c3]"></div>
-                  <div className="flex flex-col items-start">
-                    <span className="font-label-sm text-[10px] uppercase text-[#737874]">Target</span>
-                    <span className="font-metric-sm text-metric-sm text-[#0d1f18] font-bold">{item.roleThreshold}%</span>
+                  <div className="h-6 w-px bg-white/10"></div>
+                  <div className="flex flex-col items-start font-mono">
+                    <span className="text-[10px] uppercase text-[#64748B]">Target</span>
+                    <span className="text-sm text-white font-bold">{item.roleThreshold}%</span>
                   </div>
-                  <div className="h-6 w-px bg-[#c2c8c3]"></div>
-                  <div className="flex flex-col items-start">
-                    <span className={`font-label-sm text-[10px] uppercase font-bold ${item.gap > 0 ? 'text-[#ba1a1a]' : 'text-[#4f6359]'}`}>
+                  <div className="h-6 w-px bg-white/10"></div>
+                  <div className="flex flex-col items-start font-mono">
+                    <span className={`text-[10px] uppercase font-bold ${item.gap > 0 ? 'text-rose-400' : 'text-[#2DD4BF]'}`}>
                       {item.gap > 0 ? 'Deficit' : 'Status'}
                     </span>
-                    <span className={`font-metric-sm text-metric-sm font-bold ${item.gap > 0 ? 'text-[#ba1a1a]' : 'text-[#4f6359]'}`}>
+                    <span className={`text-sm font-bold ${item.gap > 0 ? 'text-rose-400' : 'text-[#2DD4BF]'}`}>
                       {item.gap > 0 ? `Δ -${item.gap} pts` : 'Cleared'}
                     </span>
                   </div>
@@ -328,12 +328,12 @@ export const SkillGapsPage: React.FC = () => {
 
               {/* Explanatory description & action buttons */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center pt-2">
-                <div className="lg:col-span-8 p-3.5 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc]">
+                <div className="lg:col-span-8 p-4 rounded-xl bg-[#0D1224]/80 border border-white/10">
                   <div className="flex items-start gap-2.5">
-                    <span className={`material-symbols-outlined text-[18px] shrink-0 mt-0.5 ${item.gap > 0 ? 'text-[#ba1a1a]' : 'text-[#4f6359]'}`}>
+                    <span className={`material-symbols-outlined text-[18px] shrink-0 mt-0.5 ${item.gap > 0 ? 'text-rose-400' : 'text-[#2DD4BF]'}`}>
                       {item.gap > 0 ? 'report_problem' : 'check_circle'}
                     </span>
-                    <p className="font-body-md text-body-md text-[#1c1c18] leading-relaxed">
+                    <p className="text-xs text-[#94A3B8] leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -342,7 +342,7 @@ export const SkillGapsPage: React.FC = () => {
                 <div className="lg:col-span-4 flex items-center justify-start lg:justify-end gap-2.5">
                   <Link
                     to="/career-roadmap"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-[#0d1f18] text-white font-title-md text-title-md hover:bg-[#22382f] transition-all shadow-xs"
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-sm"
                   >
                     <span>See Action Plan</span>
                     <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -354,38 +354,38 @@ export const SkillGapsPage: React.FC = () => {
         </StaggerContainer>
 
         {/* Section 5: Strategic Intelligence Container */}
-        <section className="p-8 lg:p-10 rounded-2xl bg-[#0d1f18] text-white shadow-xl relative overflow-hidden">
+        <section className="p-8 lg:p-10 rounded-2xl glass-panel-elevated border-violet-500/30 text-white shadow-2xl relative overflow-hidden">
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="flex flex-col gap-4 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-[#d2e7dc] font-label-sm text-label-sm tracking-wider uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/20 text-[#A78BFA] font-mono text-[11px] tracking-wider uppercase border border-violet-500/30">
                 <span className="material-symbols-outlined text-[14px]">psychology</span>
                 <span>ATLAS Strategic Triage Synthesis</span>
               </div>
-              <h2 className="font-headline-lg text-headline-lg text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 Not every gap deserves equal attention.
               </h2>
-              <p className="font-body-lg text-body-lg text-[#b7cbc0] leading-relaxed">
+              <p className="text-sm text-[#94A3B8] leading-relaxed">
                 ATLAS prioritises the skills with the highest empirical weighting in tier-1 screens. Remediating your primary {skillGaps[0]?.skill} deficit unlocks the majority of hiring criteria while immediately lifting your composite readiness score.
               </p>
               <div className="flex flex-wrap items-center gap-3 pt-1">
-                <div className="px-3 py-1.5 rounded bg-white/10 text-white font-label-md text-xs flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#ba1a1a]"></span>
+                <div className="px-3.5 py-1.5 rounded-xl bg-[#0D1224] border border-white/10 text-white font-mono text-xs flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-rose-500"></span>
                   <span>{skillGaps[0]?.skill}: Maximum ROI (High Impact / Remediation Target)</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 w-full sm:w-auto relative z-10">
               <Link
                 to="/resources"
-                className="btn-interactive inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded bg-white text-[#0d1f18] font-title-md text-title-md shadow-md hover:bg-[#f6f3ed] transition-all font-bold"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
               >
                 <span>Build My Learning Plan</span>
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </Link>
               <Link
                 to="/career-roadmap"
-                className="btn-interactive inline-flex items-center justify-center gap-2 px-6 py-3 rounded bg-white/10 text-white font-label-md text-label-md hover:bg-white/20 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#172039] border border-white/10 text-white hover:bg-white/10 text-xs font-mono transition-colors"
               >
                 <span>Inspect Roadmap Sequence</span>
               </Link>

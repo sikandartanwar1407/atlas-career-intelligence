@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAtlas } from '../context/AtlasContext';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { SkillKey, ResourceType } from '../types/atlas';
 import { PageTransition, StaggerContainer } from '../components/motion/Motion';
 
 export const ResourcesPage: React.FC = () => {
@@ -22,25 +21,25 @@ export const ResourcesPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#080B16] text-[#F1F5F9]">
       <Header />
 
-      <PageTransition className="w-full pt-16 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <PageTransition className="w-full pt-24 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         {/* Top Breadcrumb / Telemetry Strip */}
-        <section className="w-full bg-[#f6f3ed] border border-[#e5e2dc] rounded-lg p-3.5 flex flex-wrap items-center justify-between gap-4">
+        <section className="w-full glass-panel border-white/10 bg-[#0D1224]/80 rounded-2xl p-3.5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#f1eee7] text-[#424845] font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#6b4ea6]"></span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-[#A78BFA] font-mono text-[11px] uppercase tracking-wider font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF] animate-pulse"></span>
               COGNITIVE CAPITAL ENGINE // VECTOR ALLOCATION
             </span>
-            <span className="text-[#c2c8c3] hidden sm:inline">|</span>
-            <span className="font-body-sm text-body-sm text-[#424845] hidden md:inline">
-              Model: <span className="font-semibold text-[#0d1f18]">{state.targetRole} Dynamic Path</span>
+            <span className="text-white/20 hidden sm:inline">|</span>
+            <span className="text-xs text-[#94A3B8] hidden md:inline font-mono">
+              Model: <span className="font-semibold text-white">{state.targetRole} Dynamic Path</span>
             </span>
           </div>
-          <div className="flex items-center gap-4 text-xs uppercase tracking-wider text-[#737874]">
-            <span className="flex items-center gap-1 text-[#0d1f18] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4f6359]"></span>
+          <div className="flex items-center gap-4 text-xs font-mono uppercase tracking-wider text-[#64748B]">
+            <span className="flex items-center gap-1 text-[#2DD4BF] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF]"></span>
               Deficit-Calibrated Hours
             </span>
           </div>
@@ -48,24 +47,24 @@ export const ResourcesPage: React.FC = () => {
 
         {/* Hero Section */}
         <section className="space-y-6">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#e5e2dc]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
             <div className="max-w-3xl space-y-2">
-              <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#6b4ea6] font-bold">
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#A78BFA] font-bold">
                 <span className="material-symbols-outlined text-[16px]">pie_chart</span>
                 <span>Algorithmic Time Allocation</span>
               </div>
-              <h1 className="font-headline-xl text-headline-xl text-[#0d1f18] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 Where should your time go?
               </h1>
-              <p className="font-body-lg text-body-lg text-[#424845]">
-                You have <strong className="text-[#0d1f18]">{state.availability} hours</strong> available this week. ATLAS has calibrated every hour against your competency deficits to maximize interview clearance.
+              <p className="text-base text-[#94A3B8]">
+                You have <strong className="text-white font-mono">{state.availability} hours</strong> available this week. ATLAS has calibrated every hour against your competency deficits to maximize interview clearance.
               </p>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
               <Link
                 to="/career-roadmap"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#0d1f18] text-white hover:bg-[#22382f] rounded font-title-md text-title-md transition-all shadow-md font-semibold"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
               >
                 <span>View my roadmap</span>
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -74,32 +73,32 @@ export const ResourcesPage: React.FC = () => {
           </div>
 
           {/* Interactive Commitment Selector Strip */}
-          <div className="p-6 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="p-6 rounded-2xl glass-panel border-white/10 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="font-title-md text-title-md text-[#0d1f18] font-bold">Available Weekly Commitment</span>
-                <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-widest font-bold bg-[#f1eee7] text-[#424845]">
+                <span className="text-base font-bold text-white">Available Weekly Commitment</span>
+                <span className="px-2 py-0.5 rounded text-[10px] uppercase font-mono tracking-widest font-bold bg-violet-500/10 border border-violet-500/20 text-[#A78BFA]">
                   Dynamic Shift
                 </span>
               </div>
-              <p className="text-xs text-[#737874]">
+              <p className="text-xs text-[#94A3B8]">
                 Select cognitive capacity. ATLAS rescales time across blockers while preserving high-yield priority ratios.
               </p>
             </div>
 
-            <div className="inline-flex p-1 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] shrink-0">
+            <div className="inline-flex p-1.5 rounded-xl bg-[#0D1224] border border-white/10 shrink-0">
               {[5, 10, 15, 20].map((hrs) => (
                 <button
                   key={hrs}
                   type="button"
                   onClick={() => updateAvailability(hrs)}
-                  className={`px-4 py-2 rounded text-xs uppercase tracking-wider font-semibold transition-all ${
+                  className={`px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all ${
                     state.availability === hrs
-                      ? 'bg-white text-[#0d1f18] shadow-xs'
-                      : 'text-[#737874] hover:text-[#0d1f18]'
+                      ? 'bg-violet-600 text-white shadow-sm'
+                      : 'text-[#64748B] hover:text-white'
                   }`}
                 >
-                  {hrs} hrs/wk {hrs === 10 && <span className="ml-1 text-[10px] text-[#6b4ea6] font-bold">● TARGET</span>}
+                  {hrs} hrs/wk {hrs === 10 && <span className="ml-1 text-[10px] text-[#2DD4BF] font-bold">● TARGET</span>}
                 </button>
               ))}
             </div>
@@ -109,15 +108,15 @@ export const ResourcesPage: React.FC = () => {
         {/* Dual Split Engine: Donut Summary + Detailed Allocation Bars */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: SVG Donut Visualizer */}
-          <div className="lg:col-span-5 p-6 sm:p-8 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl glass-panel border-white/10 shadow-xl flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div>
-                <span className="font-label-sm text-[10px] uppercase tracking-wider text-[#737874] font-bold">
+                <span className="text-[10px] uppercase tracking-wider text-[#64748B] font-mono font-bold">
                   Sprint Composition
                 </span>
-                <h3 className="font-title-lg text-title-lg text-[#0d1f18] font-bold">Empirical Distribution Matrix</h3>
+                <h3 className="text-base font-bold text-white">Empirical Distribution Matrix</h3>
               </div>
-              <span className="px-2.5 py-1 rounded bg-[#eaddff] text-[#25005a] text-xs font-bold uppercase">
+              <span className="px-2.5 py-1 rounded-lg bg-teal-500/20 text-[#2DD4BF] border border-teal-500/30 text-xs font-mono font-bold uppercase">
                 Calibrated
               </span>
             </div>
@@ -125,12 +124,12 @@ export const ResourcesPage: React.FC = () => {
             {/* Central Donut Graphic */}
             <div className="relative my-6 flex items-center justify-center">
               <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 240 240">
-                <circle cx="120" cy="120" r="90" fill="transparent" stroke="#f1eee7" strokeWidth="24" />
+                <circle cx="120" cy="120" r="90" fill="transparent" stroke="#172039" strokeWidth="24" />
                 {/* Segments rendered dynamically */}
                 {(() => {
                   let accumulatedOffset = 0;
                   const circumference = 2 * Math.PI * 90;
-                  const colors = ['#6b4ea6', '#0d1f18', '#ab7b32', '#4f6359', '#737874'];
+                  const colors = ['#8B5CF6', '#2DD4BF', '#38BDF8', '#6366F1', '#EC4899'];
 
                   return allocations.map((alloc, idx) => {
                     const strokeDash = (alloc.allocatedHours / state.availability) * circumference;
@@ -156,25 +155,25 @@ export const ResourcesPage: React.FC = () => {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-                <span className="font-label-sm text-[10px] uppercase tracking-widest text-[#737874] font-bold">Total Sprint</span>
-                <span className="font-metric-lg text-[44px] font-bold text-[#0d1f18] leading-none">{state.availability}</span>
-                <span className="text-xs text-[#737874] uppercase tracking-wider font-semibold">Hours / Week</span>
-                <span className="mt-1 px-2 py-0.5 rounded-full bg-[#f6f3ed] text-[10px] text-[#6b4ea6] font-bold">
+                <span className="text-[10px] uppercase tracking-widest text-[#64748B] font-mono font-bold">Total Sprint</span>
+                <span className="text-5xl font-bold text-white font-mono leading-none my-1">{state.availability}</span>
+                <span className="text-xs text-[#94A3B8] font-mono uppercase tracking-wider">Hours / Week</span>
+                <span className="mt-2 px-2.5 py-0.5 rounded-full bg-violet-500/20 border border-violet-500/30 text-[10px] text-[#A78BFA] font-mono font-bold">
                   {allocations.length} Skills Calibrated
                 </span>
               </div>
             </div>
 
             {/* Donut Legend */}
-            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-[#f1eee7]">
+            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-white/10">
               {allocations.map((alloc, idx) => {
-                const colors = ['bg-[#6b4ea6]', 'bg-[#0d1f18]', 'bg-[#ab7b32]', 'bg-[#4f6359]', 'bg-[#737874]'];
+                const colors = ['bg-[#8B5CF6]', 'bg-[#2DD4BF]', 'bg-[#38BDF8]', 'bg-[#6366F1]', 'bg-[#EC4899]'];
                 return (
-                  <div key={alloc.skill} className="flex items-center gap-2 p-2 rounded bg-[#f6f3ed] border border-[#e5e2dc]">
-                    <span className={`w-3 h-3 rounded-xs ${colors[idx % colors.length]} shrink-0`} />
+                  <div key={alloc.skill} className="flex items-center gap-2 p-2.5 rounded-xl bg-[#0D1224] border border-white/10">
+                    <span className={`w-3 h-3 rounded-md ${colors[idx % colors.length]} shrink-0 shadow-sm`} />
                     <div className="min-w-0">
-                      <div className="text-xs font-bold text-[#0d1f18] truncate">{alloc.skill}</div>
-                      <div className="text-[11px] text-[#737874]">{alloc.allocatedHours}h · {alloc.percentage}%</div>
+                      <div className="text-xs font-bold text-white truncate">{alloc.skill}</div>
+                      <div className="text-[11px] font-mono text-[#64748B]">{alloc.allocatedHours}h · {alloc.percentage}%</div>
                     </div>
                   </div>
                 );
@@ -183,12 +182,12 @@ export const ResourcesPage: React.FC = () => {
           </div>
 
           {/* Right Column: Detailed Priority Tiers */}
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider text-[#737874] font-bold">
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl glass-panel border-white/10 shadow-xl flex flex-col justify-between space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] font-bold">
                 Priority Tiers &amp; Execution Windows
               </span>
-              <span className="text-xs font-bold text-[#6b4ea6]">Deficit-Calibrated</span>
+              <span className="text-xs font-mono font-bold text-[#A78BFA]">Deficit-Calibrated</span>
             </div>
 
             <div className="space-y-5">
@@ -196,49 +195,49 @@ export const ResourcesPage: React.FC = () => {
                 <div key={alloc.skill} className="space-y-1.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-title-md text-title-md text-[#0d1f18] font-bold">{alloc.skill}</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                      <span className="text-sm font-bold text-white">{alloc.skill}</span>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
                         alloc.priority === 'HIGH PRIORITY'
-                          ? 'bg-[#ffdad6] text-[#ba1a1a]'
+                          ? 'bg-rose-500/15 border border-rose-500/30 text-rose-300'
                           : alloc.priority === 'MEDIUM PRIORITY'
-                          ? 'bg-[#ffddb3] text-[#291800]'
-                          : 'bg-[#d2e7dc] text-[#0d1f18]'
+                          ? 'bg-amber-500/15 border border-amber-500/30 text-amber-300'
+                          : 'bg-teal-500/15 border border-teal-500/30 text-[#2DD4BF]'
                       }`}>
                         {alloc.priority}
                       </span>
                     </div>
 
                     <div className="flex items-baseline gap-2 font-mono">
-                      <span className="font-metric-sm text-metric-sm text-[#0d1f18] font-bold">{alloc.allocatedHours} hrs</span>
-                      <span className="text-xs text-[#737874]">({alloc.percentage}%)</span>
+                      <span className="text-sm text-white font-bold">{alloc.allocatedHours} hrs</span>
+                      <span className="text-xs text-[#64748B]">({alloc.percentage}%)</span>
                     </div>
                   </div>
 
-                  <div className="w-full h-2.5 rounded-full bg-[#e5e2dc] overflow-hidden">
+                  <div className="w-full h-2.5 rounded-full bg-[#172039] overflow-hidden">
                     <div
-                      className={`h-full rounded-full ${
+                      className={`h-full rounded-full transition-all duration-700 ${
                         alloc.priority === 'HIGH PRIORITY'
-                          ? 'bg-[#ba1a1a]'
+                          ? 'bg-rose-500'
                           : alloc.priority === 'MEDIUM PRIORITY'
-                          ? 'bg-[#6b4ea6]'
-                          : 'bg-[#4f6359]'
+                          ? 'bg-violet-500'
+                          : 'bg-teal-500'
                       }`}
                       style={{ width: `${Math.min(alloc.percentage, 100)}%` }}
                     />
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-[#737874]">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#64748B]">
                     <span>Proportional weighting: {alloc.gap > 0 ? `${alloc.gap} point deficit` : 'Maintenance baseline'}</span>
-                    <span className="font-semibold text-[#0d1f18]">Allocated: {alloc.allocatedHours}h / week</span>
+                    <span className="text-white font-semibold">Allocated: {alloc.allocatedHours}h / week</span>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Total Check confirmation banner */}
-            <div className="p-4 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] flex items-center justify-between text-xs">
-              <span className="text-[#424845]">Total Sum of Allocated Vectors:</span>
-              <span className="font-bold text-[#0d1f18] font-mono text-sm">
+            <div className="p-4 rounded-xl bg-[#0D1224] border border-white/10 flex items-center justify-between text-xs font-mono">
+              <span className="text-[#94A3B8]">Total Sum of Allocated Vectors:</span>
+              <span className="font-bold text-white text-sm">
                 {allocations.reduce((a, b) => a + b.allocatedHours, 0)} / {state.availability}.0 Hours
               </span>
             </div>
@@ -246,13 +245,13 @@ export const ResourcesPage: React.FC = () => {
         </section>
 
         {/* Learning Resources Directory */}
-        <section className="bg-white rounded-xl p-6 sm:p-8 border border-[#e5e2dc] shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#f1eee7]">
+        <section className="glass-panel border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
             <div>
-              <h2 className="font-headline-sm text-headline-sm text-[#0d1f18]">
+              <h2 className="text-xl font-bold text-white">
                 Recommended Learning &amp; Project Resources
               </h2>
-              <p className="text-xs text-[#737874] mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 Curated modules, practical scenario drills, and portfolio projects aligned with your allocated hours.
               </p>
             </div>
@@ -262,7 +261,7 @@ export const ResourcesPage: React.FC = () => {
               <select
                 value={selectedSkillFilter}
                 onChange={(e) => setSelectedSkillFilter(e.target.value)}
-                className="px-3 py-1.5 rounded bg-[#f6f3ed] border border-[#c2c8c3] text-xs font-semibold text-[#0d1f18] focus:outline-none"
+                className="px-3 py-2 rounded-xl bg-[#0D1224] border border-white/10 text-xs font-semibold text-white focus:outline-none focus:border-violet-500"
               >
                 <option value="all">All Skills</option>
                 {roleDefinition.skills.map((s) => (
@@ -273,7 +272,7 @@ export const ResourcesPage: React.FC = () => {
               <select
                 value={selectedTypeFilter}
                 onChange={(e) => setSelectedTypeFilter(e.target.value)}
-                className="px-3 py-1.5 rounded bg-[#f6f3ed] border border-[#c2c8c3] text-xs font-semibold text-[#0d1f18] focus:outline-none"
+                className="px-3 py-2 rounded-xl bg-[#0D1224] border border-white/10 text-xs font-semibold text-white focus:outline-none focus:border-violet-500"
               >
                 <option value="all">All Resource Types</option>
                 <option value="Course">Course</option>
@@ -293,42 +292,42 @@ export const ResourcesPage: React.FC = () => {
               return (
                 <div
                   key={res.id}
-                  className={`card-interactive p-5 rounded-lg border flex flex-col justify-between gap-4 ${
+                  className={`p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all ${
                     status.started
-                      ? 'bg-[#eaddff]/20 border-[#6b4ea6]'
-                      : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                      ? 'bg-violet-950/20 border-violet-500/50 shadow-sm'
+                      : 'bg-[#0D1224]/80 border-white/10 hover:border-violet-500/30'
                   }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded bg-white border border-[#e5e2dc] text-[10px] font-bold uppercase text-[#0d1f18]">
+                        <span className="px-2.5 py-0.5 rounded-lg bg-[#172039] border border-white/10 text-[10px] font-mono font-bold uppercase text-white">
                           {res.skill}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-[#f1eee7] text-[10px] font-semibold text-[#424845]">
+                        <span className="px-2 py-0.5 rounded-lg bg-violet-500/10 border border-violet-500/20 text-[10px] font-mono font-semibold text-[#A78BFA]">
                           {res.type}
                         </span>
                       </div>
-                      <span className="text-xs text-[#737874] font-medium">{res.estimatedHours} hrs</span>
+                      <span className="text-xs font-mono text-[#64748B]">{res.estimatedHours} hrs</span>
                     </div>
 
-                    <h3 className="font-title-md text-title-md text-[#0d1f18] font-bold">
+                    <h3 className="text-base font-bold text-white">
                       {res.title}
                     </h3>
-                    <p className="text-xs text-[#424845] leading-relaxed">
+                    <p className="text-xs text-[#94A3B8] leading-relaxed">
                       {res.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-[#e5e2dc]/60 text-xs">
-                    <span className="text-[#737874]">{res.provider}</span>
+                  <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs">
+                    <span className="text-[#64748B] font-mono">{res.provider}</span>
                     <button
                       type="button"
                       onClick={() => toggleResourceStarted(res.id)}
-                      className={`btn-interactive px-3 py-1.5 rounded font-semibold text-xs flex items-center gap-1 shadow-2xs ${
+                      className={`px-3.5 py-1.5 rounded-xl font-semibold text-xs flex items-center gap-1 transition-all ${
                         status.started
-                          ? 'bg-[#6b4ea6] text-white hover:bg-[#52358c]'
-                          : 'bg-[#0d1f18] text-white hover:bg-[#22382f]'
+                          ? 'bg-violet-600 text-white shadow-sm'
+                          : 'bg-[#172039] text-white hover:bg-white/10 border border-white/10'
                       }`}
                     >
                       <span>{status.started ? 'Mark in Progress' : 'Start Resource'}</span>
@@ -342,42 +341,42 @@ export const ResourcesPage: React.FC = () => {
             })}
           </StaggerContainer>
 
-          <div className="pt-4 flex justify-between items-center text-xs text-[#737874]">
+          <div className="pt-4 flex justify-between items-center text-xs text-[#64748B] font-mono">
             <span>Showing {filteredResources.length} curated resources</span>
-            <Link to="/career-roadmap" className="text-[#6b4ea6] font-bold hover:underline">
+            <Link to="/career-roadmap" className="text-[#A78BFA] font-bold hover:text-white transition-colors">
               View generated sprint roadmap →
             </Link>
           </div>
         </section>
 
         {/* Pedagogical Principles */}
-        <section className="bg-[#f6f3ed] p-8 rounded-xl border border-[#e5e2dc] space-y-4">
+        <section className="glass-panel border-white/10 p-8 rounded-2xl space-y-4">
           <div className="space-y-1">
-            <span className="font-label-sm text-xs uppercase tracking-wider text-[#737874] font-bold">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] font-bold">
               ATLAS Pedagogical Foundation
             </span>
-            <h3 className="font-headline-sm text-headline-sm text-[#0d1f18]">
+            <h3 className="text-xl font-bold text-white">
               Principles of Cognitive Allocation
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
             <div className="space-y-1.5">
-              <span className="font-title-md text-title-md text-[#6b4ea6] font-bold">01. Deficit-Weighted, Not Equal-Split</span>
-              <p className="text-xs text-[#424845] leading-relaxed">
-                Equal time distribution across all curriculum topics dilutes focus. Allocating proportionally to skill deficits cuts career readiness time by over 50%.
+              <span className="text-sm text-[#A78BFA] font-bold block">01. Deficit-Weighted, Not Equal-Split</span>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">
+                Equal time distribution across curriculum topics dilutes focus. Allocating proportionally to skill deficits cuts career readiness time by over 50%.
               </p>
             </div>
             <div className="space-y-1.5">
-              <span className="font-title-md text-title-md text-[#6b4ea6] font-bold">02. Threshold Completion Bias</span>
-              <p className="text-xs text-[#424845] leading-relaxed">
-                Pushing a skill from 48% to 80% (the enterprise screening threshold) yields exponential interview invites compared to polishing already passing skills from 85% to 95%.
+              <span className="text-sm text-[#2DD4BF] font-bold block">02. Threshold Completion Bias</span>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">
+                Pushing a skill from 48% to 80% (the enterprise screening threshold) yields exponential interview clearance compared to polishing already passing skills.
               </p>
             </div>
             <div className="space-y-1.5">
-              <span className="font-title-md text-title-md text-[#6b4ea6] font-bold">03. Active Artifact Synthesis</span>
-              <p className="text-xs text-[#424845] leading-relaxed">
-                Every allocated hour mandates tangible project output: reproducible SQL scripts, hosted DAX models, or executive markdown briefings rather than passive video consumption.
+              <span className="text-sm text-[#38BDF8] font-bold block">03. Active Artifact Synthesis</span>
+              <p className="text-xs text-[#94A3B8] leading-relaxed">
+                Every allocated hour mandates tangible project output: reproducible scripts, hosted models, or executive markdown briefings rather than passive video consumption.
               </p>
             </div>
           </div>

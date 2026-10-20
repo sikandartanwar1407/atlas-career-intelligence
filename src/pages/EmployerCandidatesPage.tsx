@@ -25,32 +25,34 @@ export const EmployerCandidatesPage: React.FC = () => {
   }, [roleFilter, sortBy]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#080B16] text-slate-100 selection:bg-violet-500/30 selection:text-white">
       <EmployerHeader />
 
-      <main className="w-full pt-20 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+      <main className="w-full pt-20 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#737874]">
-          <Link to="/employer" className="hover:text-[#0d1f18] transition-colors flex items-center gap-1">
+        <div className="flex items-center gap-2 text-xs text-slate-400">
+          <Link to="/employer" className="hover:text-violet-400 transition-colors flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             <span>Employer Dashboard</span>
           </Link>
           <span>/</span>
-          <span className="text-[#0d1f18] font-medium">Candidate Pipeline</span>
+          <span className="text-white font-medium">Candidate Pipeline</span>
         </div>
 
         {/* Editorial Page Header */}
-        <section className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#e5e2dc]">
-          <div className="flex flex-col max-w-3xl">
-            <span className="font-label-sm text-label-sm uppercase tracking-widest text-[#6b4ea6] font-semibold mb-1 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#6b4ea6]"></span>
-              ATLAS FOR EMPLOYERS · Demonstrated Talent
-            </span>
-            <h1 className="font-headline-xl text-headline-xl text-[#0d1f18] tracking-tight">
+        <section className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
+          <div className="flex flex-col max-w-3xl space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></span>
+              <span className="text-xs uppercase tracking-widest text-violet-400 font-bold">
+                ATLAS FOR EMPLOYERS · Demonstrated Talent
+              </span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Candidate Capability Pipeline
             </h1>
-            <p className="font-headline-sm text-headline-sm text-[#424845] mt-1.5 font-sans text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
               Explore evaluated candidates whose quantitative skill scores and verified project artifacts align with your engineering and data roles.
             </p>
           </div>
@@ -58,7 +60,7 @@ export const EmployerCandidatesPage: React.FC = () => {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/employer/opportunities"
-              className="px-4 py-2 rounded-xl bg-[#f0ebe1] hover:bg-[#e6e0d5] text-[#0d1f18] font-label-md text-xs font-semibold transition-colors flex items-center gap-1.5 border border-[#e2ddd3]"
+              className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-white/10 active:scale-[0.98]"
             >
               <span className="material-symbols-outlined text-[16px]">work</span>
               <span>View Active Roles</span>
@@ -67,39 +69,41 @@ export const EmployerCandidatesPage: React.FC = () => {
         </section>
 
         {/* Sort and Filter Control Bar */}
-        <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#f8f5ee] p-3 rounded-xl border border-[#e5e0d6]">
+        <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#11182B]/80 p-3 rounded-xl border border-white/10 backdrop-blur-sm">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold text-[#0d1f18]">Sort by:</span>
-            <button
-              type="button"
-              onClick={() => setSortBy('match')}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-                sortBy === 'match'
-                  ? 'bg-[#0d1f18] text-white shadow-2xs'
-                  : 'text-[#424845] hover:bg-[#ebe6dc]'
-              }`}
-            >
-              Overall Alignment
-            </button>
-            <button
-              type="button"
-              onClick={() => setSortBy('evidence')}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-                sortBy === 'evidence'
-                  ? 'bg-[#0d1f18] text-white shadow-2xs'
-                  : 'text-[#424845] hover:bg-[#ebe6dc]'
-              }`}
-            >
-              Verified Evidence
-            </button>
+            <span className="text-xs font-semibold text-slate-300">Sort by:</span>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => setSortBy('match')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                  sortBy === 'match'
+                    ? 'bg-violet-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                Overall Alignment
+              </button>
+              <button
+                type="button"
+                onClick={() => setSortBy('evidence')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                  sortBy === 'evidence'
+                    ? 'bg-violet-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                Verified Evidence
+              </button>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-[#737874]">Target Career:</span>
+            <span className="text-slate-400">Target Career:</span>
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="px-2.5 py-1 text-xs bg-white border border-[#d6d0c4] rounded-lg focus:outline-none"
+              className="px-3 py-1.5 text-xs bg-[#0D1224] border border-white/10 rounded-lg text-white focus:outline-none focus:border-violet-500/50"
             >
               <option value="all">All Trajectories</option>
               <option value="Data Analyst">Data Analyst</option>
@@ -114,43 +118,43 @@ export const EmployerCandidatesPage: React.FC = () => {
             return (
               <article
                 key={cand.id}
-                className="bg-white border border-[#e5e2dc] rounded-2xl p-6 shadow-xs hover:border-[#c8c2b7] transition-all flex flex-col justify-between space-y-4"
+                className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 shadow-xl hover:border-violet-500/40 transition-all flex flex-col justify-between space-y-4 backdrop-blur-sm group"
               >
                 <div className="space-y-4">
                   <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f6f2e9] border border-[#e5e0d6] font-mono text-xs font-bold text-[#6b4ea6]">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/30 font-mono text-xs font-bold text-violet-300">
                           {cand.overallMatch}% ATLAS COMPATIBILITY
                         </span>
-                        <span className="text-[11px] text-[#737874] uppercase tracking-wider font-semibold">
+                        <span className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">
                           {cand.experienceLevel}
                         </span>
                       </div>
 
-                      <h3 className="font-headline-sm text-xl font-bold text-[#0d1f18] pt-1">
+                      <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors pt-1">
                         {cand.name}
                       </h3>
 
-                      <div className="text-xs text-[#5a625d]">
-                        Target: <strong className="text-[#0d1f18]">{cand.targetRole}</strong>
+                      <div className="text-xs text-slate-400">
+                        Target: <strong className="text-teal-400">{cand.targetRole}</strong>
                       </div>
                     </div>
 
-                    <div className="w-10 h-10 rounded-full bg-[#0d1f18] text-[#fcf9f3] flex items-center justify-center text-xs font-bold shrink-0">
+                    <div className="w-11 h-11 rounded-full bg-violet-600 text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">
                       {cand.name.split(' ').map((p) => p[0]).join('')}
                     </div>
                   </div>
 
-                  <div className="space-y-1.5 pt-2 border-t border-[#f4f0e6]">
-                    <span className="text-[11px] uppercase tracking-wider text-[#0d1f18] font-bold block">
+                  <div className="space-y-1.5 pt-3 border-t border-white/10">
+                    <span className="text-[11px] uppercase tracking-wider text-slate-300 font-bold block">
                       Strong alignment:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {cand.keySkills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-0.5 rounded bg-[#f4f9f5] border border-[#d2e7dc] text-[11px] font-medium text-[#0d1f18]"
+                          className="px-2.5 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/20 text-[11px] font-medium text-teal-300 font-mono"
                         >
                           ✓ {skill}
                         </span>
@@ -159,33 +163,34 @@ export const EmployerCandidatesPage: React.FC = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                    <div className="p-2.5 rounded-xl bg-[#fbf9f4] border border-[#ebe6dc]">
-                      <span className="text-[10px] text-[#737874] uppercase tracking-wider font-semibold block">
+                    <div className="p-3 rounded-xl bg-[#0D1224]/80 border border-white/10">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block mb-0.5">
                         Evidence Proofs
                       </span>
-                      <span className="font-bold text-[#0d1f18] text-xs">
-                        🛡️ {cand.evidenceCount} relevant projects
+                      <span className="font-bold text-white text-xs flex items-center gap-1.5">
+                        <span className="text-teal-400">🛡️</span> {cand.evidenceCount} relevant projects
                       </span>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-[#fcf5ff] border border-[#eaddff]">
-                      <span className="text-[10px] text-[#6b4ea6] uppercase tracking-wider font-semibold block">
+                    <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/20">
+                      <span className="text-[10px] text-violet-400 uppercase tracking-wider font-semibold block mb-0.5">
                         Primary Gap
                       </span>
-                      <span className="font-medium text-[#25005a] text-xs truncate block">
+                      <span className="font-medium text-violet-200 text-xs truncate block font-mono">
                         △ {cand.primaryDevelopmentGap}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[#f4f0e6] flex items-center justify-between">
-                  <span className="text-[11px] text-[#737874] italic">
-                    Candidate visibility preference: Active
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
+                    <span>Visibility: Active</span>
                   </span>
                   <Link
                     to={`/employer/candidates/${cand.id}`}
-                    className="px-4 py-2 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold tracking-wide transition-colors flex items-center gap-1 shadow-2xs"
+                    className="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold tracking-wide transition-all flex items-center gap-1 shadow-sm active:scale-[0.98]"
                   >
                     <span>View candidate</span>
                     <span>→</span>
@@ -197,8 +202,8 @@ export const EmployerCandidatesPage: React.FC = () => {
         </section>
 
         {/* Privacy Note */}
-        <section className="p-4 rounded-xl bg-white border border-[#e5e2dc] text-xs text-[#737874] flex items-center gap-3">
-          <span className="material-symbols-outlined text-[#6b4ea6] text-xl">
+        <section className="p-4 rounded-xl bg-[#11182B]/60 border border-white/10 text-xs text-slate-400 flex items-center gap-3 backdrop-blur-sm">
+          <span className="material-symbols-outlined text-violet-400 text-xl shrink-0">
             privacy_tip
           </span>
           <p>
