@@ -32,22 +32,22 @@ export const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#080B16] text-[#F1F5F9] relative overflow-hidden">
       {/* Clean Brand Header */}
-      <header className="h-16 border-b border-[#e5e2dc] bg-[#fcf9f3]/95 px-6 lg:px-10 flex items-center justify-between">
+      <header className="h-16 border-b border-white/[0.08] bg-[#080B16]/90 backdrop-blur-xl px-6 lg:px-10 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-full border border-[#0d1f18] flex items-center justify-center relative bg-white shadow-xs group-hover:border-[#6b4ea6] transition-colors">
-            <div className="w-4 h-4 rounded-full border border-dashed border-[#6b4ea6] flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0d1f18]"></div>
+          <div className="w-8 h-8 rounded-xl bg-[#11182B] border border-violet-500/30 shadow-sm flex items-center justify-center transition-colors group-hover:border-violet-500/50">
+            <div className="w-3.5 h-3.5 rounded-full border border-violet-400 flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
             </div>
           </div>
-          <span className="font-headline-sm text-headline-sm text-[#0d1f18] tracking-tight font-medium">
+          <span className="font-sans text-lg text-white font-extrabold tracking-tight">
             ATLAS
           </span>
         </Link>
         <Link
           to="/login"
-          className="text-xs font-semibold uppercase tracking-wider text-[#424845] hover:text-[#0d1f18] transition-colors"
+          className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] hover:text-white transition-colors"
         >
           Sign In →
         </Link>
@@ -58,38 +58,38 @@ export const ForgotPasswordPage: React.FC = () => {
         <PageTransition className="space-y-6">
           {/* Header Description */}
           <div className="text-center space-y-2">
-            <span className="font-label-sm text-[11px] font-semibold uppercase tracking-widest text-[#6b4ea6] inline-block">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-violet-400 inline-block px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20">
               Security · Account Recovery
             </span>
-            <h1 className="font-headline-xl text-3xl font-bold text-[#0d1f18] tracking-tight">
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">
               Forgot password?
             </h1>
-            <p className="text-xs sm:text-sm text-[#424845]">
+            <p className="text-xs sm:text-sm text-[#94A3B8]">
               Enter your registered account email and we'll send a secure link to reset your password.
             </p>
           </div>
 
           {/* Card */}
-          <div className="bg-white border border-[#e5e2dc] rounded-2xl p-7 sm:p-8 shadow-sm space-y-5">
+          <div className="glass-panel-elevated rounded-2xl p-7 sm:p-8 shadow-xl border border-white/10 space-y-5">
             {success ? (
               /* Success State */
               <div className="space-y-5 text-center">
-                <div className="w-12 h-12 rounded-full bg-[#2e7d32]/10 border border-[#2e7d32]/20 text-[#2e7d32] flex items-center justify-center mx-auto text-2xl">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-sm">
                   ✓
                 </div>
                 <div className="space-y-1.5">
-                  <h2 className="font-serif text-xl font-bold text-[#0d1f18]">
+                  <h2 className="text-xl font-bold text-white">
                     Recovery email sent!
                   </h2>
-                  <p className="text-xs text-[#5a625d] leading-relaxed">
-                    If an account exists for <span className="font-semibold text-[#0d1f18]">{email}</span>, you will receive an email shortly containing a link to reset your password.
+                  <p className="text-xs text-[#94A3B8] leading-relaxed">
+                    If an account exists for <span className="font-mono font-semibold text-white">{email}</span>, you will receive an email shortly containing a link to reset your password.
                   </p>
                 </div>
 
                 <div className="pt-2 space-y-2">
                   <Link
                     to="/login"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm btn-interactive"
                   >
                     <span>Return to Sign in</span>
                     <span className="text-sm">→</span>
@@ -101,37 +101,36 @@ export const ForgotPasswordPage: React.FC = () => {
                       setSuccess(false);
                       setEmail('');
                     }}
-                    className="w-full py-2 text-xs text-[#737874] hover:text-[#0d1f18] font-medium"
+                    className="w-full py-2.5 text-xs text-[#94A3B8] hover:text-white transition-colors"
                   >
-                    Send to a different email address
+                    Send to a different email
                   </button>
                 </div>
               </div>
             ) : (
-              /* Form */
+              /* Form State */
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <div className="p-3 rounded-lg bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] text-xs font-semibold leading-relaxed">
+                  <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold leading-relaxed">
                     {error}
                   </div>
                 )}
 
                 <div className="space-y-1.5">
                   <label
-                    htmlFor="forgot-email"
-                    className="block text-xs font-bold uppercase tracking-wider text-[#0d1f18]"
+                    htmlFor="email"
+                    className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#CBD5E1]"
                   >
-                    Account Email Address
+                    Registered Account Email
                   </label>
                   <input
-                    id="forgot-email"
+                    id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. name@university.edu or your@company.com"
-                    className="w-full px-4 py-2.5 rounded-lg border border-[#e5e2dc] bg-[#fcf9f3] text-sm text-[#0d1f18] focus:outline-none focus:border-[#6b4ea6] transition-colors"
+                    placeholder="name@example.com"
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-[#0D1224] text-sm text-white placeholder-[#64748B] focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition-all"
                     autoComplete="email"
-                    autoFocus
                     required
                   />
                 </div>
@@ -139,36 +138,28 @@ export const ForgotPasswordPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] disabled:bg-[#737874] text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer btn-interactive"
                 >
                   {loading ? (
-                    <span>Sending reset link...</span>
+                    <span>Sending recovery link...</span>
                   ) : (
                     <>
-                      <span>Send reset link</span>
+                      <span>Send Recovery Link</span>
                       <span className="text-sm">→</span>
                     </>
                   )}
                 </button>
-
-                <div className="pt-2 text-center border-t border-[#f1eee7]">
-                  <Link
-                    to="/login"
-                    className="text-xs text-[#737874] hover:text-[#0d1f18] font-medium inline-flex items-center gap-1"
-                  >
-                    <span>←</span>
-                    <span>Back to Sign In</span>
-                  </Link>
-                </div>
               </form>
             )}
-          </div>
 
-          <div className="text-center text-xs text-[#737874]">
-            <span>Need assistance? </span>
-            <Link to="/" className="text-[#0d1f18] underline font-medium">
-              Return to ATLAS home
-            </Link>
+            <div className="pt-3 border-t border-white/[0.08] text-center">
+              <Link
+                to="/login"
+                className="text-xs text-[#94A3B8] hover:text-white transition-colors"
+              >
+                ← Back to Sign in
+              </Link>
+            </div>
           </div>
         </PageTransition>
       </main>
