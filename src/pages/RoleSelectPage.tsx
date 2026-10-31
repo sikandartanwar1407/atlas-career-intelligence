@@ -6,7 +6,7 @@ import { Footer } from '../components/Footer';
 
 export const RoleSelectPage: React.FC = () => {
   const navigate = useNavigate();
-  const { switchAccount, isEmployerVerified, employerProfile } = useAccount();
+  const { switchAccount, employerProfile } = useAccount();
   const { hasProfile } = useAtlas();
 
   const handleSelectCandidate = () => {
@@ -28,21 +28,21 @@ export const RoleSelectPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563] relative overflow-hidden">
       {/* Clean Header Bar */}
-      <header className="h-16 border-b border-[#e5e2dc] bg-[#fcf9f3]/95 px-6 lg:px-10 flex items-center justify-between">
+      <header className="h-16 border-b border-[#E5E7EB] bg-[#F3F4F6]/90 backdrop-blur-xl px-6 lg:px-10 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full border border-[#0d1f18] flex items-center justify-center relative bg-white shadow-xs">
-            <div className="w-4 h-4 rounded-full border border-dashed border-[#6b4ea6] flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0d1f18]"></div>
+          <div className="w-8 h-8 rounded-xl bg-[#FAF7F2] border border-[#18283D]/30 shadow-sm flex items-center justify-center transition-colors group-hover:border-[#18283D]/50">
+            <div className="w-3.5 h-3.5 rounded-full border border-[#18283D]/80 flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#8B6F5A]"></div>
             </div>
           </div>
-          <span className="font-headline-sm text-headline-sm text-[#0d1f18] tracking-tight font-medium">
+          <span className="font-sans text-lg text-[#18283D] font-extrabold tracking-tight">
             ATLAS
           </span>
         </Link>
-        <div className="text-xs text-[#737874]">
-          Empirical Capability Platform
+        <div className="text-xs font-mono text-[#6B7280]">
+          Autonomous Career Intelligence
         </div>
       </header>
 
@@ -51,13 +51,13 @@ export const RoleSelectPage: React.FC = () => {
         
         {/* Editorial Heading */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-12">
-          <span className="font-label-sm text-xs font-semibold uppercase tracking-widest text-[#6b4ea6] inline-block">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#8B6F5A] inline-block px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5]">
             Account Architecture · Role Selection
           </span>
-          <h1 className="font-headline-xl text-3xl sm:text-4xl text-[#0d1f18] font-bold tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#18283D] tracking-tight">
             How will you use ATLAS?
           </h1>
-          <p className="font-headline-sm text-[#424845] text-sm sm:text-base leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">
             Choose your dedicated workspace. Candidates calibrate their competency and discover matched opportunities; employers evaluate verified talent against role requirements.
           </p>
         </div>
@@ -68,42 +68,42 @@ export const RoleSelectPage: React.FC = () => {
           {/* Option 1: CANDIDATE */}
           <div
             onClick={handleSelectCandidate}
-            className="bg-white border-2 border-[#e5e2dc] hover:border-[#6b4ea6] rounded-2xl p-7 sm:p-8 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group space-y-6"
+            className="glass-panel-elevated rounded-2xl p-7 sm:p-8 border border-[#E5E7EB] hover:border-[#8B6F5A]/60 shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:bg-[#D8C3A5]/5 transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between group space-y-6 card-interactive"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-[#f6f2e9] border border-[#e5e0d6] flex items-center justify-center text-[#6b4ea6] group-hover:bg-[#6b4ea6] group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-[#D8C3A5]/25 border border-[#18283D]/30 flex items-center justify-center text-[#8B6F5A] group-hover:bg-[#18283D] group-hover:text-[#FAF7F2] transition-all duration-180 shadow-sm">
                   <span className="material-symbols-outlined text-2xl">person</span>
                 </div>
-                <span className="text-[11px] uppercase tracking-wider font-bold text-[#6b4ea6] bg-[#fbf9f4] px-2.5 py-1 rounded-full border border-[#ebe6dc]">
+                <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#8B6F5A] bg-[#D8C3A5]/25 px-2.5 py-1 rounded-full border border-[#18283D]/30">
                   Candidate
                 </span>
               </div>
 
               <div className="space-y-1.5">
-                <h2 className="font-serif text-2xl font-bold text-[#0d1f18] group-hover:text-[#6b4ea6] transition-colors">
+                <h2 className="text-2xl font-bold text-[#18283D] group-hover:text-[#8B6F5A] transition-colors">
                   I’m a Candidate
                 </h2>
-                <p className="font-medium text-xs sm:text-sm text-[#0d1f18]">
+                <p className="font-medium text-xs sm:text-sm text-[#6B7280]">
                   Build my career intelligence profile.
                 </p>
               </div>
 
-              <p className="text-xs text-[#5a625d] leading-relaxed">
+              <p className="text-xs text-[#6B7280] leading-relaxed">
                 Calibrate readiness for your target role, diagnose competency gaps against industry thresholds, assemble verified project evidence, and receive transparent opportunity matches.
               </p>
 
-              <div className="space-y-2 pt-2 border-t border-[#f4f0e6] text-xs text-[#424845]">
+              <div className="space-y-2 pt-3 border-t border-[#E5E7EB] text-xs text-[#4B5563]">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Calibrated competency assessments</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Actionable sprint roadmap & gap triage</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Verified Evidence Locker & matching feed</span>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export const RoleSelectPage: React.FC = () => {
 
             <button
               type="button"
-              className="w-full py-3 px-4 rounded-xl bg-[#0d1f18] group-hover:bg-[#6b4ea6] text-white text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-2 shadow-xs"
+              className="w-full py-3 px-4 rounded-xl bg-[#18283D] group-hover:bg-[#223752] group-hover:border-[#D8C3A5]/60 group-hover:shadow-md group-hover:-translate-y-0.5 text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all duration-180 flex items-center justify-center gap-2 shadow-sm cursor-pointer"
             >
               <span>Continue as Candidate</span>
               <span className="text-sm">→</span>
@@ -121,42 +121,42 @@ export const RoleSelectPage: React.FC = () => {
           {/* Option 2: EMPLOYER */}
           <div
             onClick={handleSelectEmployer}
-            className="bg-white border-2 border-[#e5e2dc] hover:border-[#0d1f18] rounded-2xl p-7 sm:p-8 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group space-y-6"
+            className="glass-panel-elevated rounded-2xl p-7 sm:p-8 border border-[#E5E7EB] hover:border-[#8B6F5A]/60 shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:bg-[#D8C3A5]/5 transition-all duration-200 ease-out cursor-pointer flex flex-col justify-between group space-y-6 card-interactive"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-[#f6f2e9] border border-[#e5e0d6] flex items-center justify-center text-[#0d1f18] group-hover:bg-[#0d1f18] group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-[#D8C3A5]/25 border border-[#8B6F5A]/30 flex items-center justify-center text-[#8B6F5A] group-hover:bg-[#18283D] group-hover:text-[#FAF7F2] transition-all duration-180 shadow-sm">
                   <span className="material-symbols-outlined text-2xl">domain</span>
                 </div>
-                <span className="text-[11px] uppercase tracking-wider font-bold text-[#0d1f18] bg-[#fbf9f4] px-2.5 py-1 rounded-full border border-[#ebe6dc]">
+                <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#8B6F5A] bg-[#D8C3A5]/25 px-2.5 py-1 rounded-full border border-[#8B6F5A]/30">
                   Employer
                 </span>
               </div>
 
               <div className="space-y-1.5">
-                <h2 className="font-serif text-2xl font-bold text-[#0d1f18]">
+                <h2 className="text-2xl font-bold text-[#18283D] group-hover:text-[#8B6F5A] transition-colors">
                   I’m an Employer
                 </h2>
-                <p className="font-medium text-xs sm:text-sm text-[#0d1f18]">
-                  Discover candidates whose demonstrated capabilities match your opportunities.
+                <p className="font-medium text-xs sm:text-sm text-[#6B7280]">
+                  Discover verified talent matching role benchmarks.
                 </p>
               </div>
 
-              <p className="text-xs text-[#5a625d] leading-relaxed">
+              <p className="text-xs text-[#6B7280] leading-relaxed">
                 Post roles calibrated around required skills, set quantitative threshold benchmarks, review peer-evaluated project artifacts, and interview verified talent directly.
               </p>
 
-              <div className="space-y-2 pt-2 border-t border-[#f4f0e6] text-xs text-[#424845]">
+              <div className="space-y-2 pt-3 border-t border-[#E5E7EB] text-xs text-[#4B5563]">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Skill-calibrated opportunity posting</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Empirical candidate match pipelines</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#2e7d32] font-bold">✓</span>
+                  <span className="text-[#8B6F5A] font-bold">✓</span>
                   <span>Verified project evidence & privacy controls</span>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export const RoleSelectPage: React.FC = () => {
 
             <button
               type="button"
-              className="w-full py-3 px-4 rounded-xl bg-[#0d1f18] group-hover:bg-[#22382f] text-white text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-2 shadow-xs"
+              className="w-full py-3 px-4 rounded-xl bg-[#18283D] group-hover:bg-[#223752] group-hover:border-[#D8C3A5]/60 group-hover:shadow-md group-hover:-translate-y-0.5 text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all duration-180 flex items-center justify-center gap-2 shadow-sm cursor-pointer"
             >
               <span>Continue as Employer</span>
               <span className="text-sm">→</span>
@@ -174,7 +174,7 @@ export const RoleSelectPage: React.FC = () => {
         </div>
 
         {/* Footer note */}
-        <div className="text-center pt-8 text-xs text-[#737874]">
+        <div className="text-center pt-8 text-xs font-mono text-[#6B7280]">
           <span>You can switch between Candidate and Employer viewpoints at any time from your account menu.</span>
         </div>
 

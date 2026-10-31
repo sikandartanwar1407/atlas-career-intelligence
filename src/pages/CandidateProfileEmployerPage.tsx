@@ -14,18 +14,18 @@ export const CandidateProfileEmployerPage: React.FC = () => {
 
   if (!candidate) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+      <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100">
         <EmployerHeader />
         <main className="flex-1 max-w-xl mx-auto px-4 pt-32 text-center space-y-4">
-          <h2 className="font-serif text-2xl font-bold text-[#0d1f18]">
+          <h2 className="text-2xl font-bold text-[#18283D]">
             Candidate Record Not Found
           </h2>
-          <p className="text-xs text-[#5a625d]">
+          <p className="text-xs text-slate-400">
             This candidate record may have been removed or set to private.
           </p>
           <Link
             to="/employer"
-            className="inline-block px-5 py-2.5 rounded-lg bg-[#0d1f18] text-white text-xs font-semibold"
+            className="inline-block px-5 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold transition-all shadow-sm"
           >
             ← Return to Employer Portal
           </Link>
@@ -40,45 +40,45 @@ export const CandidateProfileEmployerPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100 selection:bg-[#D8C3A5]/40 selection:text-[#18283D]">
       <EmployerHeader />
 
-      <main className="w-full pt-20 flex-1 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+      <main className="w-full pt-20 flex-1 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#737874]">
-          <Link to="/employer" className="hover:text-[#0d1f18] transition-colors flex items-center gap-1">
+        <div className="flex items-center gap-2 text-xs text-slate-400">
+          <Link to="/employer" className="hover:text-[#8B6F5A] transition-colors flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             <span>Employer Portal</span>
           </Link>
           <span>/</span>
-          <span className="text-[#0d1f18] font-medium">{candidate.name} Candidate Profile</span>
+          <span className="text-[#18283D] font-medium">{candidate.name} Candidate Profile</span>
         </div>
 
         {/* Candidate Dossier Hero */}
-        <section className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-8 shadow-xs">
+        <section className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
             <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-full bg-[#0d1f18] text-white flex items-center justify-center font-bold text-lg shadow-xs shrink-0">
+              <div className="w-16 h-16 rounded-full bg-violet-600 text-white flex items-center justify-center font-bold text-xl shadow-sm shrink-0">
                 {candidate.name.split(' ').map((p) => p[0]).join('')}
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="font-label-sm text-xs font-bold uppercase tracking-wider text-[#6b4ea6] bg-[#f6f2e9] px-2.5 py-0.5 rounded-full border border-[#e5e0d6]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8B6F5A] bg-[#D8C3A5]/25 px-2.5 py-0.5 rounded-full border border-[#18283D]/30">
                     {candidate.experienceLevel} Candidate
                   </span>
-                  <span className="text-xs text-[#2e7d32] font-semibold flex items-center gap-1">
+                  <span className="text-xs text-[#8B6F5A] font-semibold flex items-center gap-1">
                     <span>✓</span> Verified ATLAS Profile
                   </span>
                 </div>
 
-                <h1 className="font-headline-xl text-2xl sm:text-3xl font-bold text-[#0d1f18]">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#18283D]">
                   {candidate.name}
                 </h1>
 
-                <p className="text-xs sm:text-sm text-[#5a625d]">
-                  Target Trajectory: <strong className="text-[#0d1f18]">{candidate.targetRole}</strong>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  Target Trajectory: <strong className="text-[#8B6F5A]">{candidate.targetRole}</strong>
                 </p>
               </div>
             </div>
@@ -86,23 +86,24 @@ export const CandidateProfileEmployerPage: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:items-end gap-3 shrink-0">
               {invitationSent ? (
-                <div className="px-4 py-2.5 rounded-lg bg-[#d2e7dc] border border-[#b2d7c4] text-[#0d1f18] text-xs font-semibold flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#2e7d32]"></span>
+                <div className="px-4 py-2.5 rounded-xl bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[#8B6F5A] text-xs font-semibold flex items-center gap-2 backdrop-blur-sm animate-in fade-in">
+                  <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
                   <span>Capability Interview Request Sent</span>
                 </div>
               ) : (
                 <button
                   type="button"
                   onClick={handleSendInterviewInvite}
-                  className="px-5 py-2.5 rounded-lg bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold tracking-wide transition-colors flex items-center gap-2 shadow-sm"
+                  className="px-5 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all flex items-center gap-2 shadow-sm"
                 >
                   <span className="material-symbols-outlined text-[16px]">mail</span>
                   <span>Contact for Interview</span>
                 </button>
               )}
 
-              <span className="text-[11px] text-[#737874]">
-                Candidate discoverability preference: Public
+              <span className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
+                <span>Discoverability preference: Public</span>
               </span>
             </div>
           </div>
@@ -115,26 +116,26 @@ export const CandidateProfileEmployerPage: React.FC = () => {
           <div className="lg:col-span-8 space-y-6">
             
             {/* Demonstrated Skills Breakdown */}
-            <div className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-8 shadow-xs space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-[#f4f0e6]">
-                <h2 className="font-serif text-lg font-bold text-[#0d1f18]">
+            <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+                <h2 className="text-lg font-bold text-[#18283D]">
                   Calibrated Competencies
                 </h2>
-                <span className="text-xs text-[#737874]">
+                <span className="text-xs text-slate-400">
                   Empirically assessed against role benchmarks
                 </span>
               </div>
 
               <div className="space-y-4">
                 {candidate.demonstratedSkills.map((sk) => (
-                  <div key={sk.skill} className="space-y-1">
+                  <div key={sk.skill} className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-[#0d1f18]">{sk.skill}</span>
-                      <span className="font-mono font-bold text-[#6b4ea6]">{sk.level}%</span>
+                      <span className="font-bold text-[#18283D] font-mono">{sk.skill}</span>
+                      <span className="font-mono font-bold text-[#8B6F5A]">{sk.level}%</span>
                     </div>
-                    <div className="w-full h-2.5 bg-[#ebe6dc] rounded-full overflow-hidden">
+                    <div className="w-full h-2.5 bg-[#FAF7F2] rounded-full overflow-hidden border border-[#E5E7EB]">
                       <div
-                        className="h-full bg-[#6b4ea6] rounded-full transition-all duration-300"
+                        className="h-full bg-violet-600 rounded-full transition-all duration-300"
                         style={{ width: `${sk.level}%` }}
                       ></div>
                     </div>
@@ -144,17 +145,17 @@ export const CandidateProfileEmployerPage: React.FC = () => {
             </div>
 
             {/* Verified Project Evidence */}
-            <div className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-8 shadow-xs space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-[#f4f0e6]">
+            <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <h2 className="font-serif text-lg font-bold text-[#0d1f18]">
+                  <h2 className="text-lg font-bold text-[#18283D]">
                     Verified Evidence Locker
                   </h2>
-                  <span className="text-xs text-[#5a625d]">
+                  <span className="text-xs text-slate-400">
                     Artifacts uploaded and validated in candidate portfolio
                   </span>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-[#f6f2e9] text-[#0d1f18] font-bold text-xs">
+                <span className="px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#18283D]/30 text-[#8B6F5A] font-bold text-xs font-mono">
                   {candidate.verifiedEvidence.length} Artifacts
                 </span>
               </div>
@@ -163,24 +164,24 @@ export const CandidateProfileEmployerPage: React.FC = () => {
                 {candidate.verifiedEvidence.map((ev) => (
                   <div
                     key={ev.id}
-                    className="p-4 rounded-xl bg-[#fbf9f4] border border-[#ebe6dc] flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    className="p-4 rounded-xl bg-[#FAF7F2]/80 border border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-[#0d1f18]">
+                        <span className="text-xs font-bold text-[#18283D]">
                           {ev.title}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-[#f4f9f5] border border-[#d2e7dc] text-[10px] text-[#2e7d32] font-semibold">
+                        <span className="px-2 py-0.5 rounded bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[10px] text-[#8B6F5A] font-semibold font-mono">
                           Verified
                         </span>
                       </div>
-                      <div className="text-xs text-[#5a625d]">
-                        Associated Skill: <strong className="text-[#0d1f18]">{ev.skill}</strong> • {ev.type}
+                      <div className="text-xs text-slate-400">
+                        Associated Skill: <strong className="text-[#8B6F5A] font-mono">{ev.skill}</strong> • {ev.type}
                       </div>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <span className="text-[11px] text-[#737874] block">
+                      <span className="text-[11px] text-slate-500 font-mono block">
                         Validated {ev.date}
                       </span>
                     </div>
@@ -195,50 +196,50 @@ export const CandidateProfileEmployerPage: React.FC = () => {
           <div className="lg:col-span-4 space-y-6">
             
             {/* Roadmap Velocity Card */}
-            <div className="bg-white border border-[#e5e2dc] rounded-2xl p-6 shadow-xs space-y-4">
-              <span className="text-[10px] text-[#6b4ea6] uppercase tracking-widest font-bold block">
+            <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 shadow-xl space-y-4 backdrop-blur-sm">
+              <span className="text-[10px] text-[#8B6F5A] uppercase tracking-widest font-bold block">
                 Continuous Learning Velocity
               </span>
-              <h3 className="font-serif text-base font-bold text-[#0d1f18]">
+              <h3 className="text-base font-bold text-[#18283D]">
                 Career Roadmap Progress
               </h3>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#5a625d]">Sprint Completion:</span>
-                  <span className="font-mono font-bold text-[#0d1f18]">
+                  <span className="text-slate-400">Sprint Completion:</span>
+                  <span className="font-mono font-bold text-[#8B6F5A]">
                     {candidate.roadmapProgress.completedSprints} of {candidate.roadmapProgress.totalSprints} Sprints
                   </span>
                 </div>
-                <div className="w-full h-2.5 bg-[#ebe6dc] rounded-full overflow-hidden">
+                <div className="w-full h-2.5 bg-[#FAF7F2] rounded-full overflow-hidden border border-[#E5E7EB]">
                   <div
-                    className="h-full bg-[#2e7d32] rounded-full"
+                    className="h-full bg-teal-500 rounded-full"
                     style={{ width: `${candidate.roadmapProgress.progressPercent}%` }}
                   ></div>
                 </div>
               </div>
 
-              <div className="p-3 rounded-lg bg-[#fbf9f4] border border-[#ebe6dc] text-xs">
-                <span className="text-[10px] text-[#737874] uppercase tracking-wider font-semibold block">
+              <div className="p-3.5 rounded-xl bg-[#FAF7F2]/80 border border-[#E5E7EB] text-xs">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">
                   Active Sprint Milestone:
                 </span>
-                <span className="font-semibold text-[#0d1f18] mt-0.5 block">
+                <span className="font-semibold text-[#18283D] mt-0.5 block">
                   {candidate.roadmapProgress.currentMilestone}
                 </span>
               </div>
             </div>
 
             {/* Privacy Policy Guarantee */}
-            <div className="bg-[#f6f2e9] border border-[#e5e0d6] rounded-2xl p-6 shadow-xs space-y-3">
+            <div className="bg-[#FAF7F2]/60 border border-[#E5E7EB] rounded-2xl p-6 shadow-xl space-y-3 backdrop-blur-sm">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#6b4ea6] text-xl">
+                <span className="material-symbols-outlined text-[#8B6F5A] text-xl">
                   verified_user
                 </span>
-                <h4 className="font-serif text-sm font-bold text-[#0d1f18]">
+                <h4 className="text-sm font-bold text-[#18283D]">
                   ATLAS Candidate Privacy Standard
                 </h4>
               </div>
-              <p className="text-xs text-[#5a625d] leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Candidate contact coordinates are securely gated. Reaching out through ATLAS triggers a capability interview invitation sent to the candidate's verified address.
               </p>
             </div>

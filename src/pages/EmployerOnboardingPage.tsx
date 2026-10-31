@@ -52,25 +52,23 @@ export const EmployerOnboardingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100 selection:bg-[#D8C3A5]/40 selection:text-[#18283D]">
       {/* Header Bar */}
-      <header className="h-16 border-b border-[#e5e2dc] bg-[#fcf9f3]/95 px-6 lg:px-10 flex items-center justify-between">
+      <header className="h-16 border-b border-[#E5E7EB] bg-[#F3F4F6]/80 backdrop-blur-md px-6 lg:px-10 flex items-center justify-between sticky top-0 z-50">
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full border border-[#0d1f18] flex items-center justify-center relative bg-white shadow-xs">
-            <div className="w-4 h-4 rounded-full border border-dashed border-[#6b4ea6] flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0d1f18]"></div>
-            </div>
+          <div className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-[#18283D]/30 flex items-center justify-center font-bold text-[#18283D] text-sm shadow-sm">
+            A
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-headline-sm text-headline-sm text-[#0d1f18] tracking-tight font-medium">
+            <span className="font-extrabold text-[#18283D] tracking-tight">
               ATLAS
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#f4f0e6] border border-[#e2ddd3] text-[10px] uppercase font-bold text-[#6b4ea6] tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[10px] uppercase font-bold text-[#8B6F5A] tracking-wider">
               FOR EMPLOYERS
             </span>
           </div>
         </Link>
-        <Link to="/role-select" className="text-xs text-[#737874] hover:text-[#0d1f18]">
+        <Link to="/role-select" className="text-xs text-slate-400 hover:text-[#18283D] transition-colors">
           Switch Account Role
         </Link>
       </header>
@@ -84,48 +82,48 @@ export const EmployerOnboardingPage: React.FC = () => {
             <div
               className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                 step === 'profile'
-                  ? 'bg-[#0d1f18] text-white'
-                  : 'bg-[#d2e7dc] text-[#0d1f18]'
+                  ? 'bg-[#18283D] text-[#FAF7F2] shadow-sm'
+                  : 'bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#D8C3A5]'
               }`}
             >
               {step === 'verification' ? '✓' : '1'}
             </div>
-            <span className="text-xs font-semibold text-[#0d1f18]">Company Profile</span>
+            <span className="text-xs font-semibold text-[#18283D]">Company Profile</span>
           </div>
 
-          <div className="h-0.5 w-16 bg-[#e5e2dc]"></div>
+          <div className="h-0.5 w-16 bg-[#E5E7EB]"></div>
 
           <div className="flex items-center gap-2">
             <div
               className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                 step === 'verification'
-                  ? 'bg-[#0d1f18] text-white'
-                  : 'bg-[#ebe6dc] text-[#737874]'
+                  ? 'bg-[#18283D] text-[#FAF7F2] shadow-sm'
+                  : 'bg-[#E5E7EB] text-[#6B7280] border border-[#E5E7EB]'
               }`}
             >
               2
             </div>
-            <span className="text-xs font-semibold text-[#0d1f18]">Verification</span>
+            <span className="text-xs font-semibold text-[#6B7280]">Verification</span>
           </div>
         </div>
 
         {step === 'profile' ? (
           /* STEP 1: Company Profile Form */
-          <div className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-10 shadow-xs space-y-6">
-            <div className="space-y-1">
-              <span className="font-label-sm text-xs font-semibold uppercase tracking-widest text-[#6b4ea6]">
+          <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-10 shadow-xl space-y-6 backdrop-blur-sm">
+            <div className="space-y-1.5">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B6F5A]">
                 Employer Onboarding · Step 01
               </span>
-              <h1 className="font-headline-xl text-2xl sm:text-3xl font-bold text-[#0d1f18]">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#18283D]">
                 Create your company account.
               </h1>
-              <p className="text-xs sm:text-sm text-[#424845]">
+              <p className="text-xs sm:text-sm text-slate-400">
                 Establish your corporate profile to calibrate role requirements against ATLAS candidate capabilities.
               </p>
             </div>
 
             {errorMsg && (
-              <div className="p-3 rounded-lg bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] text-xs font-semibold">
+              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold backdrop-blur-sm">
                 {errorMsg}
               </div>
             )}
@@ -133,7 +131,7 @@ export const EmployerOnboardingPage: React.FC = () => {
             <form onSubmit={handleProfileSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Company Name *
                   </label>
                   <input
@@ -142,12 +140,12 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="e.g. Acme Analytics"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Company Website
                   </label>
                   <input
@@ -155,12 +153,12 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="https://company.com"
                     value={companyWebsite}
                     onChange={(e) => setCompanyWebsite(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Corporate Email *
                   </label>
                   <input
@@ -169,18 +167,18 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="talent@company.com"
                     value={companyEmail}
                     onChange={(e) => setCompanyEmail(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Industry
                   </label>
                   <select
                     value={industry}
                     onChange={(e) => setIndustry(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   >
                     <option value="Analytics & Decision Intelligence">Analytics & Decision Intelligence</option>
                     <option value="Enterprise Software & Cloud">Enterprise Software & Cloud</option>
@@ -192,13 +190,13 @@ export const EmployerOnboardingPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Company Size
                   </label>
                   <select
                     value={companySize}
                     onChange={(e) => setCompanySize(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   >
                     <option value="1–10 employees">1–10 employees (Seed)</option>
                     <option value="11–50 employees">11–50 employees (Early Stage)</option>
@@ -209,7 +207,7 @@ export const EmployerOnboardingPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Headquarters / Location
                   </label>
                   <input
@@ -217,12 +215,12 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="e.g. San Francisco, CA / Remote"
                     value={companyLocation}
                     onChange={(e) => setCompanyLocation(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                   />
                 </div>
 
                 <div className="sm:col-span-2 space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Company Logo Text or Initials
                   </label>
                   <input
@@ -231,12 +229,12 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="e.g. AA"
                     value={companyLogoText}
                     onChange={(e) => setCompanyLogoText(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30 font-mono"
                   />
                 </div>
 
                 <div className="sm:col-span-2 space-y-1.5">
-                  <label className="text-xs font-semibold text-[#0d1f18] block">
+                  <label className="text-xs font-semibold text-slate-300 block">
                     Company Description *
                   </label>
                   <textarea
@@ -245,18 +243,18 @@ export const EmployerOnboardingPage: React.FC = () => {
                     placeholder="Briefly describe your products, engineering culture, and technical stack..."
                     value={companyDescription}
                     onChange={(e) => setCompanyDescription(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-lg focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30 leading-relaxed"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-between border-t border-[#f4f0e6]">
-                <Link to="/role-select" className="text-xs text-[#737874] hover:underline">
+              <div className="pt-4 flex items-center justify-between border-t border-[#E5E7EB]">
+                <Link to="/role-select" className="text-xs text-slate-400 hover:text-[#18283D] transition-colors">
                   ← Back to Role Select
                 </Link>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold tracking-wide transition-colors shadow-xs"
+                  className="px-6 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all shadow-sm"
                 >
                   Create Company Profile →
                 </button>
@@ -265,60 +263,60 @@ export const EmployerOnboardingPage: React.FC = () => {
           </div>
         ) : (
           /* STEP 2: Company Verification State */
-          <div className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-10 shadow-xs space-y-6 text-center">
-            <div className="w-16 h-16 rounded-full bg-[#f4f9f5] border border-[#d2e7dc] text-[#2e7d32] flex items-center justify-center text-3xl font-bold mx-auto">
+          <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-10 shadow-xl space-y-6 text-center backdrop-blur-sm">
+            <div className="w-16 h-16 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[#8B6F5A] flex items-center justify-center text-3xl font-bold mx-auto shadow-md">
               ✓
             </div>
 
             <div className="space-y-2 max-w-lg mx-auto">
-              <span className="font-label-sm text-xs font-bold uppercase tracking-widest text-[#2e7d32]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#8B6F5A]">
                 Company Profile Created
               </span>
-              <h2 className="font-headline-xl text-2xl sm:text-3xl font-bold text-[#0d1f18]">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18283D]">
                 Complete verification to access employer matching.
               </h2>
-              <p className="text-xs sm:text-sm text-[#424845] leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 To protect candidate privacy and preserve capability matching integrity, company accounts complete verification before accessing active candidate pipelines.
               </p>
             </div>
 
             {/* Verification State Box */}
-            <div className="max-w-md mx-auto p-5 rounded-2xl bg-[#fbf9f4] border border-[#ebe6dc] text-left space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-[#e5e2dc]">
+            <div className="max-w-md mx-auto p-5 rounded-2xl bg-[#FAF7F2]/80 border border-[#E5E7EB] text-left space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                 <div>
-                  <div className="font-bold text-xs text-[#0d1f18]">
+                  <div className="font-bold text-xs text-[#18283D]">
                     {companyName || employerProfile?.companyName}
                   </div>
-                  <div className="text-[11px] text-[#737874]">
+                  <div className="text-[11px] text-slate-400">
                     {companyEmail || employerProfile?.companyEmail}
                   </div>
                 </div>
                 <span
                   className={`px-2.5 py-1 rounded-full text-[11px] font-bold ${
                     isEmployerVerified
-                      ? 'bg-[#d2e7dc] text-[#0d1f18] border border-[#b2d7c4]'
-                      : 'bg-[#fff9eb] text-[#b45309] border border-[#ffe099]'
+                      ? 'bg-[#D8C3A5]/25 text-[#8B6F5A] border border-[#D8C3A5]'
+                      : 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
                   }`}
                 >
                   {isEmployerVerified ? 'Verified ✓' : 'Pending Verification ⏳'}
                 </span>
               </div>
 
-              <div className="space-y-2 text-xs text-[#5a625d]">
+              <div className="space-y-2 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
-                  <span className={isEmployerVerified ? 'text-[#2e7d32] font-bold' : 'text-[#b45309]'}>
+                  <span className={isEmployerVerified ? 'text-[#8B6F5A] font-bold' : 'text-amber-400'}>
                     {isEmployerVerified ? '✓' : '○'}
                   </span>
                   <span>Domain validation: {companyWebsite || employerProfile?.companyWebsite || 'Verified'}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={isEmployerVerified ? 'text-[#2e7d32] font-bold' : 'text-[#b45309]'}>
+                  <span className={isEmployerVerified ? 'text-[#8B6F5A] font-bold' : 'text-amber-400'}>
                     {isEmployerVerified ? '✓' : '○'}
                   </span>
                   <span>Corporate email confirmation</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={isEmployerVerified ? 'text-[#2e7d32] font-bold' : 'text-[#b45309]'}>
+                  <span className={isEmployerVerified ? 'text-[#8B6F5A] font-bold' : 'text-amber-400'}>
                     {isEmployerVerified ? '✓' : '○'}
                   </span>
                   <span>ATLAS Capability Matching Authorization</span>
@@ -330,17 +328,17 @@ export const EmployerOnboardingPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCompleteVerification}
-                    className="w-full py-2.5 rounded-xl bg-[#6b4ea6] hover:bg-[#593d91] text-white text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
+                    className="w-full py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all flex items-center justify-center gap-1.5 shadow-sm"
                   >
                     <span className="material-symbols-outlined text-[16px]">verified</span>
                     <span>Simulate Verification (Prototype Demo)</span>
                   </button>
-                  <span className="text-[10px] text-[#737874] text-center block mt-1.5 italic">
+                  <span className="text-[10px] text-slate-500 text-center block mt-1.5 italic">
                     Prototype note: Simulates employer verification without external commercial checks.
                   </span>
                 </div>
               ) : (
-                <div className="p-3 rounded-lg bg-[#d2e7dc]/60 text-xs text-[#0d1f18] font-semibold text-center">
+                <div className="p-3 rounded-xl bg-[#D8C3A5]/25 border border-[#D8C3A5] text-xs text-[#8B6F5A] font-semibold text-center">
                   ✓ Verification successfully completed. Candidate matching is unlocked.
                 </div>
               )}
@@ -351,14 +349,14 @@ export const EmployerOnboardingPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setStep('profile')}
-                className="px-5 py-2.5 rounded-xl border border-[#d6d0c4] text-[#424845] text-xs font-semibold hover:bg-[#ede8de] transition-colors w-full sm:w-auto"
+                className="px-5 py-2.5 rounded-xl border border-[#E5E7EB] bg-[#FAF7F2] text-[#6B7280] text-xs font-semibold hover:bg-[#D8C3A5]/15 hover:border-[#8B6F5A]/50 hover:text-[#18283D] hover:-translate-y-0.5 hover:shadow-xs active:scale-[0.98] transition-all w-full sm:w-auto"
               >
                 Edit Profile Info
               </button>
               <button
                 type="button"
                 onClick={handleEnterWorkspace}
-                className="px-6 py-2.5 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold tracking-wide transition-colors w-full sm:w-auto shadow-xs"
+                className="px-6 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all w-full sm:w-auto shadow-sm"
               >
                 Enter Employer Workspace →
               </button>

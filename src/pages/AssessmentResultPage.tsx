@@ -8,14 +8,14 @@ import { EmptyState } from '../components/EmptyState';
 import { PageTransition, AnimatedNumber, AnimatedProgressBar, StaggerContainer } from '../components/motion/Motion';
 
 export const AssessmentResultPage: React.FC = () => {
-  const { state, skillGaps, largestGap, careerReadiness } = useAtlas();
+  const { state, skillGaps, careerReadiness } = useAtlas();
 
   // If user hasn't answered any questions, show empty state
   const hasAnswers = Object.keys(state.assessmentAnswers).length > 0 || Object.keys(state.codingAnswers || {}).length > 0;
 
   if (!hasAnswers && !state.assessmentCompleted) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+      <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563]">
         <Header />
         <main className="w-full pt-20 flex-1 px-4 py-12 flex items-center justify-center">
           <EmptyState
@@ -40,28 +40,28 @@ export const AssessmentResultPage: React.FC = () => {
   const codingSkippedCount = result?.codingSkippedCount ?? 0;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563] relative overflow-hidden">
       <Header />
 
-      <PageTransition className="w-full pt-16 flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <PageTransition className="w-full pt-20 flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#e5e2dc]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5E7EB]">
           <div className="space-y-2 max-w-2xl">
-            <span className="font-label-sm text-label-sm uppercase tracking-widest text-[#6b4ea6] font-bold">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#8B6F5A] font-bold px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] inline-block">
               Assessment Outcome // Hybrid Empirical Verification
             </span>
-            <h1 className="font-headline-xl text-headline-xl text-[#0d1f18] tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#18283D] tracking-tight">
               Assessment Results
             </h1>
-            <p className="font-body-lg text-body-lg text-[#424845]">
-              Here is your verified demonstrated competency calculated across conceptual theory and applied code-tracing challenges for {state.targetRole}.
+            <p className="text-sm sm:text-base text-[#6B7280]">
+              Verified demonstrated competency calculated across conceptual theory and applied code-tracing challenges for <span className="text-[#18283D] font-semibold">{state.targetRole}</span>.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
               to="/diagnosis"
-              className="btn-interactive inline-flex items-center gap-2 px-6 py-3 bg-[#0d1f18] text-white hover:bg-[#22382f] rounded font-title-md text-title-md transition-all shadow-md font-semibold"
+              className="btn-interactive inline-flex items-center gap-2 px-6 py-3.5 bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] rounded-xl text-sm transition-all shadow-sm font-bold"
             >
               <span>View my career diagnosis</span>
               <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -72,23 +72,23 @@ export const AssessmentResultPage: React.FC = () => {
         {/* Top Metric Cards: Overall + Theory + Coding */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Overall Assessment Score */}
-          <div className="card-interactive p-6 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider text-[#737874] font-bold">
+          <div className="card-interactive p-6 rounded-2xl glass-panel-elevated border border-[#E5E7EB] shadow-[0_20px_50px_rgba(24,40,61,0.08)] flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+              <span className="font-mono text-xs uppercase tracking-wider text-[#6B7280] font-bold">
                 Overall Assessment Score
               </span>
-              <span className="px-2 py-0.5 rounded bg-[#f1eee7] text-xs font-semibold text-[#0d1f18]">
+              <span className="px-2 py-0.5 rounded bg-[#E5E7EB] text-xs font-mono font-semibold text-[#8B6F5A]">
                 Target: 80%
               </span>
             </div>
 
             <div className="my-5 flex items-baseline gap-3">
-              <span className="font-metric-lg text-[46px] font-serif font-bold text-[#0d1f18] leading-none">
+              <span className="font-mono text-[46px] font-extrabold text-[#18283D] leading-none">
                 <AnimatedNumber value={overallDemonstrated} suffix="%" durationMs={700} />
               </span>
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-[#424845]">Hybrid Composite</span>
-                <span className="text-[11px] text-[#ba1a1a] font-semibold">
+                <span className="text-xs font-semibold text-[#18283D]">Composite Score</span>
+                <span className="text-[11px] font-mono text-rose-400 font-semibold">
                   Deficit: -{Math.max(80 - overallDemonstrated, 0)} pts
                 </span>
               </div>
@@ -97,89 +97,89 @@ export const AssessmentResultPage: React.FC = () => {
             <AnimatedProgressBar
               value={Math.min(overallDemonstrated, 100)}
               className="w-full h-2"
-              trackClassName="bg-[#e5e2dc] rounded-full overflow-hidden"
-              fillClassName="bg-[#0d1f18] rounded-full"
+              trackClassName="bg-[#FAF7F2] rounded-full overflow-hidden"
+              fillClassName="bg-violet-600 rounded-full shadow-sm"
               durationMs={700}
             />
           </div>
 
           {/* Card 2: Theory Performance */}
-          <div className="card-interactive p-6 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-              <div className="flex items-center gap-1.5 text-[#25005a] font-bold text-xs uppercase tracking-wider">
-                <span className="material-symbols-outlined text-[16px] text-[#6b4ea6]">psychology</span>
+          <div className="card-interactive p-6 rounded-2xl glass-panel-elevated border border-[#E5E7EB] shadow-[0_20px_50px_rgba(24,40,61,0.08)] flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+              <div className="flex items-center gap-1.5 text-[#8B6F5A] font-bold text-xs font-mono uppercase tracking-wider">
+                <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">psychology</span>
                 <span>Theory Performance</span>
               </div>
-              <span className="px-2 py-0.5 rounded bg-[#eaddff] text-[#25005a] font-label-sm text-[10px] font-bold uppercase">
+              <span className="px-2 py-0.5 rounded bg-[#D8C3A5]/25 border border-[#18283D]/30 text-[#8B6F5A] font-mono text-[10px] font-bold uppercase">
                 Conceptual
               </span>
             </div>
 
             <div className="my-5 flex items-baseline gap-3">
-              <span className="font-metric-lg text-[46px] font-serif font-bold text-[#6b4ea6] leading-none">
+              <span className="font-mono text-[46px] font-extrabold text-[#8B6F5A] leading-none">
                 <AnimatedNumber value={theoryScore} suffix="%" durationMs={700} />
               </span>
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-[#0d1f18]">{theoryCorrectCount} Verified</span>
-                <span className="text-[11px] text-[#737874]">Principles &amp; domain knowledge</span>
+                <span className="text-xs font-semibold text-[#18283D]">{theoryCorrectCount} Verified</span>
+                <span className="text-[11px] text-[#6B7280]">Principles &amp; domain knowledge</span>
               </div>
             </div>
 
             <AnimatedProgressBar
               value={Math.min(theoryScore, 100)}
               className="w-full h-2"
-              trackClassName="bg-[#e5e2dc] rounded-full overflow-hidden"
-              fillClassName="bg-[#6b4ea6] rounded-full"
+              trackClassName="bg-[#FAF7F2] rounded-full overflow-hidden"
+              fillClassName="bg-violet-600 rounded-full shadow-sm"
               durationMs={700}
             />
           </div>
 
           {/* Card 3: Coding Performance */}
-          <div className="card-interactive p-6 rounded-xl bg-white border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-              <div className="flex items-center gap-1.5 text-[#0d1f18] font-bold text-xs uppercase tracking-wider">
-                <span className="material-symbols-outlined text-[16px] text-[#0d1f18]">code</span>
+          <div className="card-interactive p-6 rounded-2xl glass-panel-elevated border border-[#E5E7EB] shadow-[0_20px_50px_rgba(24,40,61,0.08)] flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+              <div className="flex items-center gap-1.5 text-[#8B6F5A] font-bold text-xs font-mono uppercase tracking-wider">
+                <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">code</span>
                 <span>Coding Performance</span>
               </div>
-              <span className="px-2 py-0.5 rounded bg-[#ebe8e2] text-[#1c1c18] font-label-sm text-[10px] font-bold uppercase">
+              <span className="px-2 py-0.5 rounded bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[#8B6F5A] font-mono text-[10px] font-bold uppercase">
                 Applied
               </span>
             </div>
 
             <div className="my-5 flex items-baseline gap-3">
-              <span className="font-metric-lg text-[46px] font-serif font-bold text-[#0d1f18] leading-none">
+              <span className="font-mono text-[46px] font-extrabold text-[#8B6F5A] leading-none">
                 <AnimatedNumber value={codingScore} suffix="%" durationMs={700} />
               </span>
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-[#0d1f18]">
+                <span className="text-xs font-semibold text-[#18283D]">
                   {codingCorrectCount} Correct • {codingSkippedCount} Skipped
                 </span>
-                <span className="text-[11px] text-[#737874]">Code-tracing verification</span>
+                <span className="text-[11px] text-[#6B7280]">Code-tracing verification</span>
               </div>
             </div>
 
             <AnimatedProgressBar
               value={Math.min(codingScore, 100)}
               className="w-full h-2"
-              trackClassName="bg-[#e5e2dc] rounded-full overflow-hidden"
-              fillClassName="bg-[#22382f] rounded-full"
+              trackClassName="bg-[#FAF7F2] rounded-full overflow-hidden"
+              fillClassName="bg-teal-500 rounded-full shadow-sm"
               durationMs={700}
             />
           </div>
         </div>
 
         {/* Competency Breakdown & Signal Matrix */}
-        <div className="bg-white rounded-xl p-6 sm:p-8 border border-[#e5e2dc] shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#f1eee7]">
+        <div className="glass-panel-elevated rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] shadow-[0_20px_50px_rgba(24,40,61,0.08)] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#E5E7EB]">
             <div>
-              <h3 className="font-headline-sm text-headline-sm text-[#0d1f18]">
+              <h3 className="text-xl font-bold text-[#18283D] tracking-tight">
                 Competency Breakdown &amp; Evidence Signals
               </h3>
-              <p className="text-xs text-[#737874] mt-0.5">
+              <p className="text-xs text-[#6B7280] mt-0.5">
                 Evaluation results distinguished by conceptual theory and applied code-tracing demonstrations.
               </p>
             </div>
-            <span className="text-xs text-[#737874] font-medium self-start sm:self-auto">
+            <span className="text-xs font-mono text-[#6B7280] font-medium self-start sm:self-auto">
               Sorted by gap magnitude
             </span>
           </div>
@@ -191,17 +191,17 @@ export const AssessmentResultPage: React.FC = () => {
               const compStatus = result?.competencyStatus?.[item.skill] ?? (result?.competencyStatus?.[item.displayName] ?? (item.demonstrated >= item.roleThreshold ? 'demonstrated' : 'not_demonstrated'));
 
               return (
-                <div key={item.skill} className="card-interactive p-5 rounded-lg bg-[#fcf9f3] border border-[#e5e2dc] space-y-4">
+                <div key={item.skill} className="card-interactive p-5 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-4">
                   {/* Skill Header Bar */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className="font-title-md text-title-md text-[#0d1f18] font-bold">{item.displayName}</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                      <span className="text-base text-[#18283D] font-bold">{item.displayName}</span>
+                      <span className={`px-2.5 py-0.5 rounded-md font-mono text-[10px] font-bold uppercase ${
                         item.priority === 'HIGH PRIORITY'
-                          ? 'bg-[#ffdad6] text-[#ba1a1a]'
+                          ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
                           : item.priority === 'MEDIUM PRIORITY'
-                          ? 'bg-[#ffddb3] text-[#291800]'
-                          : 'bg-[#d2e7dc] text-[#0d1f18]'
+                          ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
+                          : 'bg-[#D8C3A5]/25 text-[#8B6F5A] border border-[#D8C3A5]'
                       }`}>
                         {item.priority}
                       </span>
@@ -210,15 +210,15 @@ export const AssessmentResultPage: React.FC = () => {
                     {/* Overall Competency Badge */}
                     <div className="flex items-center gap-2">
                       {compStatus === 'demonstrated' ? (
-                        <span className="px-2.5 py-1 rounded bg-[#d2e7dc] text-[#0d1f18] text-xs font-semibold flex items-center gap-1 border border-[#a5d6a7]">
+                        <span className="px-2.5 py-1 rounded-md bg-emerald-500/15 text-emerald-300 text-xs font-mono font-semibold flex items-center gap-1 border border-emerald-500/30">
                           <span className="font-bold">✓</span> Competency Demonstrated
                         </span>
                       ) : codingStatus === 'skipped' ? (
-                        <span className="px-2.5 py-1 rounded bg-[#ffeed9] text-[#703800] text-xs font-semibold flex items-center gap-1 border border-[#ffcc80]">
+                        <span className="px-2.5 py-1 rounded-md bg-amber-500/15 text-amber-300 text-xs font-mono font-semibold flex items-center gap-1 border border-amber-500/30">
                           <span>↷</span> Skipped — Competency Not Demonstrated
                         </span>
                       ) : (
-                        <span className="px-2.5 py-1 rounded bg-[#ffdad6] text-[#93000a] text-xs font-semibold flex items-center gap-1 border border-[#ffb4ab]">
+                        <span className="px-2.5 py-1 rounded-md bg-rose-500/15 text-rose-300 text-xs font-mono font-semibold flex items-center gap-1 border border-rose-500/30">
                           <span>✕</span> Not Demonstrated
                         </span>
                       )}
@@ -228,34 +228,34 @@ export const AssessmentResultPage: React.FC = () => {
                   {/* Dual Mode Sub-Badges (Theory vs Coding) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                     {/* Theory Signal */}
-                    <div className="p-2.5 rounded bg-white border border-[#e5e2dc] flex items-center justify-between">
+                    <div className="p-3 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="material-symbols-outlined text-[15px] text-[#6b4ea6]">psychology</span>
-                        <span className="text-[#424845] font-medium">Theory Evaluation:</span>
+                        <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">psychology</span>
+                        <span className="text-[#6B7280]">Theory Evaluation:</span>
                       </div>
-                      <span className={`text-xs font-semibold ${theoryStatus === 'demonstrated' ? 'text-[#0d1f18]' : 'text-[#ba1a1a]'}`}>
-                        {theoryStatus === 'demonstrated' ? '✓ Concept Demonstrated' : '✕ Skill Gap Signal'}
+                      <span className={`text-xs font-mono font-semibold ${theoryStatus === 'demonstrated' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                        {theoryStatus === 'demonstrated' ? '✓ Concept Demonstrated' : '✕ Gap Signal'}
                       </span>
                     </div>
 
                     {/* Coding Signal */}
-                    <div className="p-2.5 rounded bg-white border border-[#e5e2dc] flex items-center justify-between">
+                    <div className="p-3 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="material-symbols-outlined text-[15px] text-[#0d1f18]">code</span>
-                        <span className="text-[#424845] font-medium">Coding Challenge:</span>
+                        <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">code</span>
+                        <span className="text-[#6B7280]">Coding Challenge:</span>
                       </div>
-                      <span className={`text-xs font-semibold ${
+                      <span className={`text-xs font-mono font-semibold ${
                         codingStatus === 'demonstrated'
-                          ? 'text-[#0d1f18]'
+                          ? 'text-emerald-400'
                           : codingStatus === 'skipped'
-                          ? 'text-[#703800]'
-                          : 'text-[#ba1a1a]'
+                          ? 'text-amber-400'
+                          : 'text-rose-400'
                       }`}>
                         {codingStatus === 'demonstrated'
                           ? '✓ Competency Demonstrated'
                           : codingStatus === 'skipped'
                           ? '↷ Skipped (Gap Signal)'
-                          : '✕ Skill Gap Signal'}
+                          : '✕ Gap Signal'}
                       </span>
                     </div>
                   </div>
@@ -270,11 +270,11 @@ export const AssessmentResultPage: React.FC = () => {
                   />
 
                   {/* Strategic Context */}
-                  <div className="flex items-center justify-between text-xs text-[#737874] pt-1">
-                    <span>Baseline: <strong className="text-[#0d1f18]">{item.baseline}%</strong></span>
-                    <span>Demonstrated: <strong className="text-[#0d1f18]">{item.demonstrated}%</strong></span>
-                    <span>Role Benchmark: <strong className="text-[#0d1f18]">{item.roleThreshold}%</strong></span>
-                    <span className={`font-mono font-bold ${item.gap > 0 ? 'text-[#ba1a1a]' : 'text-[#4f6359]'}`}>
+                  <div className="flex items-center justify-between text-xs font-mono text-[#6B7280] pt-1">
+                    <span>Baseline: <strong className="text-[#18283D]">{item.baseline}%</strong></span>
+                    <span>Demonstrated: <strong className="text-[#18283D]">{item.demonstrated}%</strong></span>
+                    <span>Role Benchmark: <strong className="text-[#18283D]">{item.roleThreshold}%</strong></span>
+                    <span className={`font-bold ${item.gap > 0 ? 'text-rose-400' : 'text-[#8B6F5A]'}`}>
                       {item.gap > 0 ? `Δ -${item.gap} pts gap` : 'Target Met'}
                     </span>
                   </div>
@@ -284,10 +284,10 @@ export const AssessmentResultPage: React.FC = () => {
           </StaggerContainer>
 
           {/* Bottom Actions */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#f1eee7]">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E5E7EB]">
             <Link
               to="/assessment"
-              className="btn-interactive text-xs text-[#737874] hover:text-[#0d1f18] flex items-center gap-1 font-semibold"
+              className="btn-interactive text-xs font-mono text-[#6B7280] hover:text-[#18283D] flex items-center gap-1 font-semibold"
             >
               <span className="material-symbols-outlined text-[16px]">refresh</span>
               <span>Retake Assessment</span>
@@ -295,7 +295,7 @@ export const AssessmentResultPage: React.FC = () => {
 
             <Link
               to="/diagnosis"
-              className="btn-interactive w-full sm:w-auto px-8 py-3.5 bg-[#0d1f18] hover:bg-[#22382f] text-white rounded font-title-md text-title-md font-bold flex items-center justify-center gap-2 shadow-sm"
+              className="btn-interactive w-full sm:w-auto px-8 py-3.5 bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-sm"
             >
               <span>View my career diagnosis →</span>
             </Link>

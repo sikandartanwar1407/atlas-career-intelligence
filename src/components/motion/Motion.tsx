@@ -108,8 +108,8 @@ interface AnimatedProgressBarProps {
 export const AnimatedProgressBar: React.FC<AnimatedProgressBarProps> = ({
   value,
   className = 'w-full h-2',
-  trackClassName = 'bg-[#e5e2dc] rounded-full overflow-hidden',
-  fillClassName = 'bg-[#6b4ea6] rounded-full',
+  trackClassName = 'bg-[#E5E7EB] rounded-full overflow-hidden',
+  fillClassName = 'bg-[#18283D] rounded-full',
   durationMs = 600,
   delayMs = 60,
 }) => {

@@ -242,36 +242,36 @@ export const GitHubAnalyzerSection: React.FC = () => {
       : 0;
 
   return (
-    <section className="bg-white border border-[#e5e2dc] rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 overflow-hidden">
+    <section className="glass-panel border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 overflow-hidden">
       {/* Editorial Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-[#f1eee7]">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-[#E5E7EB]">
         <div className="space-y-1 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#f6f3ed] border border-[#e5e2dc] text-[10px] uppercase font-bold tracking-wider text-[#6b4ea6]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6b4ea6]"></span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[10px] uppercase font-mono font-bold tracking-wider text-[#8B6F5A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8B6F5A] animate-pulse"></span>
             <span>Automated Portfolio Synthesis · Real GitHub REST API</span>
           </div>
-          <h2 className="font-headline-sm text-2xl font-bold text-[#0d1f18]">
+          <h2 className="text-2xl font-bold text-[#18283D] tracking-tight">
             Turn your GitHub activity into career evidence.
           </h2>
-          <p className="text-xs sm:text-sm text-[#424845] leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#6B7280] leading-relaxed">
             ATLAS securely ingests public GitHub profiles and repositories via the GitHub REST API to derive verifiable evidence signals and observed technologies for your candidate dossier.
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 text-xs text-[#737874] bg-[#fcf9f3] px-3 py-1.5 rounded-lg border border-[#e5e2dc] shrink-0">
-          <span className="material-symbols-outlined text-[16px] text-[#2e7d32]">lock_open</span>
+        <div className="flex items-center gap-1.5 text-xs text-[#8B6F5A] bg-[#D8C3A5]/25 border border-[#D8C3A5] px-3 py-1.5 rounded-xl shrink-0 font-mono">
+          <span className="material-symbols-outlined text-[16px]">lock_open</span>
           <span>Public REST API · FastAPI Ingestion</span>
         </div>
       </div>
 
       {/* Input Controls Form */}
       <div className="space-y-3">
-        <label className="text-xs font-semibold text-[#0d1f18] uppercase tracking-wider block">
+        <label className="text-xs font-mono font-semibold text-[#6B7280] uppercase tracking-wider block">
           GitHub Username or Public Repository URL
         </label>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="relative flex-1">
-            <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[18px] text-[#737874]">
+            <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[18px] text-[#6B7280]">
               terminal
             </span>
             <input
@@ -280,7 +280,7 @@ export const GitHubAnalyzerSection: React.FC = () => {
               onChange={(e) => setInputVal(e.target.value)}
               placeholder="e.g. torvalds or facebook/react or https://github.com/username/project"
               disabled={phase !== 'idle' && phase !== 'results' && phase !== 'error'}
-              className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-[#fbf9f4] border border-[#d6d0c4] rounded-xl text-[#0d1f18] focus:outline-none focus:border-[#6b4ea6] transition-colors"
+              className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-[#6B7280] focus:outline-none focus:border-[#18283D] transition-colors font-mono"
             />
           </div>
 
@@ -289,7 +289,7 @@ export const GitHubAnalyzerSection: React.FC = () => {
               type="button"
               onClick={() => handleRunAnalysis('profile')}
               disabled={phase === 'preparing' || phase === 'fetching' || phase === 'analyzing' || phase === 'mapping'}
-              className="btn-interactive px-4 py-2.5 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold shadow-xs flex items-center gap-1.5 disabled:opacity-60"
+              className="px-4 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold uppercase tracking-wider shadow-sm flex items-center gap-1.5 disabled:opacity-50 transition-all cursor-pointer"
             >
               <span>Analyze GitHub profile</span>
               <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
@@ -299,7 +299,7 @@ export const GitHubAnalyzerSection: React.FC = () => {
               type="button"
               onClick={() => handleRunAnalysis('repo')}
               disabled={phase === 'preparing' || phase === 'fetching' || phase === 'analyzing' || phase === 'mapping'}
-              className="btn-interactive px-3.5 py-2.5 rounded-xl bg-[#f6f3ed] hover:bg-[#ebe8e2] text-[#0d1f18] border border-[#e5e2dc] text-xs font-semibold shadow-2xs flex items-center gap-1.5 disabled:opacity-60"
+              className="px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] hover:bg-[#D8C3A5]/15 hover:border-[#8B6F5A]/50 hover:text-[#18283D] hover:-translate-y-0.5 hover:shadow-xs active:scale-[0.98] text-[#18283D] border border-[#E5E7EB] text-xs font-semibold shadow-xs flex items-center gap-1.5 disabled:opacity-50 transition-all cursor-pointer"
             >
               <span>Analyze repository</span>
             </button>
@@ -309,15 +309,15 @@ export const GitHubAnalyzerSection: React.FC = () => {
 
       {/* Sequential Analysis Progress Sequence */}
       {(phase === 'preparing' || phase === 'fetching' || phase === 'analyzing' || phase === 'mapping') && (
-        <FadeIn className="p-5 rounded-2xl bg-[#fbf9f4] border border-[#ebe6dc] space-y-4">
+        <FadeIn className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#18283D]/30 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#6b4ea6] animate-pulse"></span>
-              <span className="text-xs font-bold text-[#0d1f18] uppercase tracking-wide">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#8B6F5A] animate-pulse"></span>
+              <span className="text-xs font-mono font-bold text-[#18283D] uppercase tracking-wide">
                 Active Analysis State: {PHASES.find((p) => p.id === phase)?.label}...
               </span>
             </div>
-            <span className="text-xs font-mono font-semibold text-[#6b4ea6]">
+            <span className="text-xs font-mono font-semibold text-[#8B6F5A]">
               Phase {currentStepNum} of 5
             </span>
           </div>
@@ -331,16 +331,16 @@ export const GitHubAnalyzerSection: React.FC = () => {
               return (
                 <div
                   key={p.id}
-                  className={`p-2 rounded-lg text-center text-[11px] font-semibold transition-all ${
+                  className={`p-2.5 rounded-xl text-center text-[11px] font-mono font-semibold transition-all ${
                     isActive
-                      ? 'bg-[#6b4ea6] text-white shadow-xs'
+                      ? 'bg-[#18283D] text-[#FAF7F2] shadow-sm'
                       : isDone
-                      ? 'bg-[#d2e7dc] text-[#0d1f18]'
-                      : 'bg-[#f1eee7] text-[#737874]'
+                      ? 'bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#D8C3A5]'
+                      : 'bg-[#E5E7EB] text-[#6B7280] border border-[#E5E7EB]'
                   }`}
                 >
                   <div className="text-[10px] uppercase opacity-80 mb-0.5">
-                    {isDone ? '✓ Done' : isActive ? '● In Progress' : `Step 0${p.step}`}
+                    {isDone ? '✓ Done' : isActive ? '● Active' : `Step 0${p.step}`}
                   </div>
                   <div className="truncate">{p.label}</div>
                 </div>
@@ -351,8 +351,8 @@ export const GitHubAnalyzerSection: React.FC = () => {
           <AnimatedProgressBar
             value={(currentStepNum / 5) * 100}
             className="w-full h-1.5"
-            trackClassName="bg-[#e5e2dc] rounded-full overflow-hidden"
-            fillClassName="bg-[#6b4ea6] rounded-full"
+            trackClassName="bg-[#E5E7EB] rounded-full overflow-hidden"
+            fillClassName="bg-[#18283D] rounded-full"
             durationMs={240}
           />
         </FadeIn>
@@ -360,15 +360,15 @@ export const GitHubAnalyzerSection: React.FC = () => {
 
       {/* Error state */}
       {phase === 'error' && errorMessage && (
-        <FadeIn className="p-4 rounded-xl bg-[#ffdad6]/40 border border-[#ffdad6] text-[#ba1a1a] text-xs font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <FadeIn className="p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-700 text-xs font-semibold flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="material-symbols-outlined text-[18px] shrink-0">warning</span>
+            <span className="material-symbols-outlined text-[18px] shrink-0 text-rose-600">warning</span>
             <span>{errorMessage}</span>
             {errorMessage.includes('sign in') && (
               <Link
                 to="/login"
                 state={{ from: '/evidence' }}
-                className="inline-flex items-center gap-1 font-bold underline hover:text-[#0d1f18] ml-1 transition-colors"
+                className="inline-flex items-center gap-1 font-bold underline hover:text-[#18283D] ml-1 transition-colors"
               >
                 <span>Sign in to ATLAS</span>
                 <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
@@ -378,7 +378,7 @@ export const GitHubAnalyzerSection: React.FC = () => {
           <button
             type="button"
             onClick={() => setPhase('idle')}
-            className="px-3 py-1 rounded bg-white border border-[#ffdad6] text-xs hover:bg-[#ffdad6] self-start sm:self-auto shrink-0"
+            className="px-3 py-1 rounded-lg bg-[#FAF7F2] border border-rose-500/30 text-xs text-rose-700 hover:bg-rose-500/20 self-start sm:self-auto shrink-0 transition-colors"
           >
             Dismiss
           </button>
@@ -389,32 +389,32 @@ export const GitHubAnalyzerSection: React.FC = () => {
       {phase === 'results' && result && (
         <FadeIn className="space-y-6 pt-2">
           {/* User Dossier Summary Card */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#fcf9f3] border border-[#e5e2dc] flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#FAF7F2] border border-[#E5E7EB] flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <img
                 src={result.user.avatar_url}
                 alt={result.user.login}
-                className="w-14 h-14 rounded-full border border-[#d6d0c4] shadow-xs object-cover"
+                className="w-14 h-14 rounded-2xl border border-[#E5E7EB] shadow-md object-cover"
               />
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-base text-[#0d1f18]">
+                  <h3 className="font-bold text-base text-[#18283D]">
                     {result.user.name || result.user.login}
                   </h3>
                   <a
                     href={result.user.html_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs text-[#6b4ea6] hover:underline flex items-center gap-0.5"
+                    className="text-xs text-[#8B6F5A] hover:underline flex items-center gap-0.5 font-mono"
                   >
                     <span>@{result.user.login}</span>
                     <span className="material-symbols-outlined text-[13px]">north_east</span>
                   </a>
                 </div>
-                <p className="text-xs text-[#5a625d] max-w-md line-clamp-2">
+                <p className="text-xs text-[#6B7280] max-w-md line-clamp-2">
                   {result.user.bio || 'Public GitHub Developer Profile'}
                 </p>
-                <div className="flex items-center gap-3 text-[11px] text-[#737874] pt-1">
+                <div className="flex items-center gap-3 text-[11px] font-mono text-[#6B7280] pt-1">
                   <span>{result.user.public_repos} Public Repositories</span>
                   <span>•</span>
                   <span>{result.user.followers} Followers</span>
@@ -422,20 +422,20 @@ export const GitHubAnalyzerSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 border-t md:border-t-0 md:border-l border-[#e5e2dc] pt-4 md:pt-0 md:pl-6 shrink-0">
+            <div className="flex flex-wrap items-center gap-4 border-t md:border-t-0 md:border-l border-[#E5E7EB] pt-4 md:pt-0 md:pl-6 shrink-0">
               <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-bold text-[#737874] block">
+                <span className="text-[10px] font-mono uppercase font-bold text-[#6B7280] block">
                   Evidence Signal Count
                 </span>
-                <span className="text-xl font-mono font-extrabold text-[#2e7d32]">
+                <span className="text-2xl font-mono font-bold text-[#8B6F5A]">
                   +<AnimatedNumber value={result.evidenceReadinessBoost} />%
                 </span>
               </div>
               <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-bold text-[#737874] block">
+                <span className="text-[10px] font-mono uppercase font-bold text-[#6B7280] block">
                   Extracted Project Signals
                 </span>
-                <span className="text-xl font-mono font-extrabold text-[#0d1f18]">
+                <span className="text-2xl font-mono font-bold text-[#18283D]">
                   <AnimatedNumber value={result.extractedEvidence.length} /> Artifacts
                 </span>
               </div>
@@ -444,8 +444,8 @@ export const GitHubAnalyzerSection: React.FC = () => {
 
           {/* Primary Languages & Detected Competencies */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-white border border-[#e5e2dc] space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[#737874] block">
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-2">
+              <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#6B7280] block">
                 Observed Technologies (Codebase Bytes)
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -453,19 +453,19 @@ export const GitHubAnalyzerSection: React.FC = () => {
                   result.primaryLanguages.map((l) => (
                     <span
                       key={l.name}
-                      className="px-2.5 py-1 rounded-full bg-[#f6f2e9] text-[11px] font-semibold text-[#0d1f18] border border-[#e5e0d6]"
+                      className="px-2.5 py-1 rounded-lg bg-[#E5E7EB] text-[11px] font-mono font-semibold text-[#18283D] border border-[#E5E7EB]"
                     >
                       {l.name} ({l.percentage}%)
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-[#737874]">No specific language breakdown available.</span>
+                  <span className="text-xs text-[#6B7280]">No specific language breakdown available.</span>
                 )}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#e5e2dc] space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[#737874] block">
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-2">
+              <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-[#6B7280] block">
                 Observed Skill &amp; Tool Signals ({roleDefinition.name})
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -473,13 +473,13 @@ export const GitHubAnalyzerSection: React.FC = () => {
                   result.demonstratedSkillsDetected.map((s) => (
                     <span
                       key={s}
-                      className="px-2.5 py-1 rounded-full bg-[#eaddff] text-[11px] font-semibold text-[#25005a]"
+                      className="px-2.5 py-1 rounded-lg bg-[#D8C3A5]/30 text-[11px] font-mono font-semibold text-[#8B6F5A] border border-[#D8C3A5]"
                     >
                       ✓ {s}
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-[#737874]">General repository implementation signals.</span>
+                  <span className="text-xs text-[#6B7280]">General repository implementation signals.</span>
                 )}
               </div>
             </div>
@@ -487,7 +487,7 @@ export const GitHubAnalyzerSection: React.FC = () => {
 
           {/* Extracted Artifacts List */}
           <div className="space-y-3">
-            <span className="text-xs font-bold text-[#0d1f18] uppercase tracking-wider block">
+            <span className="text-xs font-mono font-bold text-[#8B6F5A] uppercase tracking-wider block">
               Observable Project Signals Ingested Into Evidence Telemetry:
             </span>
 
@@ -498,27 +498,27 @@ export const GitHubAnalyzerSection: React.FC = () => {
                 return (
                   <div
                     key={art.id}
-                    className="card-interactive bg-white border border-[#e5e2dc] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    className="glass-panel border-[#E5E7EB] rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#8B6F5A]/60 hover:shadow-xl hover:-translate-y-1 hover:bg-[#D8C3A5]/5 transition-all"
                   >
                     <div className="space-y-1.5 max-w-xl">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-sm text-[#0d1f18]">{art.title}</span>
-                        <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-[#d2e7dc] text-[#0d1f18]">
+                        <span className="font-bold text-sm text-[#18283D]">{art.title}</span>
+                        <span className="px-2 py-0.5 rounded text-[10px] uppercase font-mono font-bold bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#D8C3A5]">
                           {art.skill}
                         </span>
-                        <span className="text-[11px] font-mono text-[#737874]">
+                        <span className="text-[11px] font-mono text-[#6B7280]">
                           {art.metrics}
                         </span>
                       </div>
-                      <p className="text-xs text-[#5a625d] line-clamp-2">{art.description}</p>
-                      <div className="text-[11px] text-[#737874] flex items-center gap-2">
-                        <span className="font-mono text-[10px]">{art.shaHash}</span>
+                      <p className="text-xs text-[#6B7280] line-clamp-2">{art.description}</p>
+                      <div className="text-[11px] font-mono text-[#6B7280] flex items-center gap-2">
+                        <span>{art.shaHash}</span>
                         <span>•</span>
                         <a
                           href={art.link}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#6b4ea6] hover:underline"
+                          className="text-[#8B6F5A] hover:underline"
                         >
                           View Repository ↗
                         </a>
@@ -529,10 +529,10 @@ export const GitHubAnalyzerSection: React.FC = () => {
                       type="button"
                       onClick={() => handleAddArtifact(art)}
                       disabled={isAdded}
-                      className={`btn-interactive px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition-colors ${
+                      className={`px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition-all ${
                         isAdded
-                          ? 'bg-[#d2e7dc] text-[#0d1f18] cursor-default'
-                          : 'bg-[#0d1f18] hover:bg-[#22382f] text-white shadow-2xs'
+                          ? 'bg-[#D8C3A5]/30 border border-[#D8C3A5] text-[#8B6F5A] cursor-default'
+                          : 'bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] shadow-sm cursor-pointer'
                       }`}
                     >
                       {isAdded ? '✓ Added to Locker' : '+ Add to Evidence Locker'}

@@ -163,20 +163,20 @@ export const CareerMapPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563]">
       <Header />
 
-      <PageTransition className="w-full pt-16 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <PageTransition className="w-full pt-24 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         {/* Top Header */}
-        <section className="flex flex-col gap-4 pb-6 border-b border-[#e5e2dc]">
+        <section className="flex flex-col gap-4 pb-6 border-b border-[#E5E7EB]">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#f1eee7] text-[#424845] font-label-sm text-label-sm uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#6b4ea6]"></span>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[#8B6F5A] font-mono text-[11px] uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8B6F5A] animate-pulse"></span>
                 STRATEGIC NAVIGATION ARCHITECTURE // TRAJECTORY VECTOR
               </span>
-              <span className="text-[#c2c8c3] hidden sm:inline">•</span>
-              <span className="font-label-sm text-label-sm text-[#737874] uppercase">
+              <span className="text-[#6B7280] hidden sm:inline">•</span>
+              <span className="text-[11px] font-mono text-[#6B7280] uppercase">
                 ROLE HORIZON: {state.targetRole}
               </span>
             </div>
@@ -184,7 +184,7 @@ export const CareerMapPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <Link
                 to="/onboarding"
-                className="px-3.5 py-1.5 rounded bg-white border border-[#e5e2dc] hover:bg-[#f6f3ed] text-[#0d1f18] font-title-md text-xs font-semibold"
+                className="px-4 py-2 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] hover:bg-[#D8C3A5]/15 hover:border-[#8B6F5A]/50 hover:text-[#18283D] hover:-translate-y-0.5 hover:shadow-xs active:scale-[0.98] text-[#18283D] text-xs font-semibold uppercase tracking-wider transition-all"
               >
                 Change Target Role
               </Link>
@@ -192,153 +192,153 @@ export const CareerMapPage: React.FC = () => {
           </div>
 
           <div className="max-w-4xl space-y-2">
-            <h1 className="font-headline-xl text-headline-xl text-[#0d1f18] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#18283D] tracking-tight">
               See where your career can go.
             </h1>
-            <p className="font-body-lg text-body-lg text-[#424845]">
+            <p className="text-base text-[#6B7280]">
               A strategic navigation engine mapping hierarchical promotions, cross-functional lateral pivots, and verified capability clearance gates across the data ecosystem.
             </p>
           </div>
         </section>
 
         {/* 5-Step Visual Journey Flow Banner */}
-        <section className="p-6 rounded-xl bg-white border border-[#e5e2dc] shadow-sm space-y-4">
+        <section className="p-6 rounded-2xl glass-panel border-[#E5E7EB] shadow-xl space-y-4">
           <div className="flex items-center justify-between">
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-[#737874] font-bold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[#6B7280] font-bold">
               The Connected Career Journey
             </span>
-            <span className="text-xs text-[#6b4ea6] font-semibold">Live System Data</span>
+            <span className="text-xs font-mono text-[#8B6F5A] font-semibold">Live System Data</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-center">
             {/* 1. CURRENT POSITION */}
-            <div className="p-4 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] space-y-1">
-              <span className="font-mono text-xs font-bold text-[#737874] block">01</span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0d1f18] block">Current Position</span>
-              <span className="font-title-md text-sm font-semibold text-[#0d1f18] block truncate">Junior {state.targetRole}</span>
-              <span className="text-[11px] text-[#737874]">{state.profile.experienceLevel} Baseline</span>
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-1">
+              <span className="font-mono text-xs font-bold text-[#6B7280] block">01</span>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold block">Current Position</span>
+              <span className="text-sm font-semibold text-[#18283D] block truncate">Junior {state.targetRole}</span>
+              <span className="text-[11px] font-mono text-[#6B7280]">{state.profile.experienceLevel} Baseline</span>
             </div>
 
             {/* 2. SKILL DEVELOPMENT */}
-            <div className="p-4 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] space-y-1">
-              <span className="font-mono text-xs font-bold text-[#6b4ea6] block">02</span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0d1f18] block">Skill Development</span>
-              <span className="font-title-md text-sm font-semibold text-[#0d1f18] block truncate">
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-1">
+              <span className="font-mono text-xs font-bold text-[#8B6F5A] block">02</span>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold block">Skill Development</span>
+              <span className="text-sm font-semibold text-[#18283D] block truncate">
                 {state.availability}h / wk Allocation
               </span>
-              <span className="text-[11px] text-[#6b4ea6] font-semibold">{skillGaps.length} Vectors Tracked</span>
+              <span className="text-[11px] font-mono text-[#8B6F5A] font-semibold">{skillGaps.length} Vectors Tracked</span>
             </div>
 
             {/* 3. EVIDENCE */}
-            <div className="p-4 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] space-y-1">
-              <span className="font-mono text-xs font-bold text-[#0d1f18] block">03</span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0d1f18] block">Evidence</span>
-              <span className="font-title-md text-sm font-semibold text-[#0d1f18] block truncate">
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-1">
+              <span className="font-mono text-xs font-bold text-[#8B6F5A] block">03</span>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold block">Evidence</span>
+              <span className="text-sm font-semibold text-[#18283D] block truncate">
                 {state.evidence.length} Locker Artifacts
               </span>
-              <span className="text-[11px] text-[#4f6359] font-semibold">{verifiedEvidenceCount} Verified</span>
+              <span className="text-[11px] font-mono text-[#8B6F5A] font-semibold">{verifiedEvidenceCount} Verified</span>
             </div>
 
             {/* 4. REASSESSMENT */}
-            <div className="p-4 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc] space-y-1">
-              <span className="font-mono text-xs font-bold text-[#6b4ea6] block">04</span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0d1f18] block">Reassessment</span>
-              <span className="font-title-md text-sm font-semibold text-[#0d1f18] block truncate">
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] space-y-1">
+              <span className="font-mono text-xs font-bold text-[#8B6F5A] block">04</span>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold block">Reassessment</span>
+              <span className="text-sm font-semibold text-[#18283D] block truncate font-mono">
                 {careerReadiness}% Current Score
               </span>
-              <span className="text-[11px] text-[#737874]">Deficit: -{Math.max(80 - careerReadiness, 0)} pts</span>
+              <span className="text-[11px] font-mono text-[#6B7280]">Deficit: -{Math.max(80 - careerReadiness, 0)} pts</span>
             </div>
 
             {/* 5. TARGET ROLE */}
-            <div className="p-4 rounded-lg bg-[#eaddff]/40 border border-[#6b4ea6] space-y-1">
-              <span className="font-mono text-xs font-bold text-[#6b4ea6] block">05</span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#25005a] block">Target Role</span>
-              <span className="font-title-md text-sm font-bold text-[#0d1f18] block truncate">{state.targetRole}</span>
-              <span className="text-[11px] text-[#6b4ea6] font-bold">80% Clearance Gate</span>
+            <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#8B6F5A]/50 space-y-1 shadow-sm">
+              <span className="font-mono text-xs font-bold text-[#8B6F5A] block">05</span>
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold block">Target Role</span>
+              <span className="text-sm font-bold text-[#18283D] block truncate">{state.targetRole}</span>
+              <span className="text-[11px] font-mono text-[#8B6F5A] font-bold">80% Clearance Gate</span>
             </div>
           </div>
         </section>
 
         {/* 4 Telemetry Overview Metric Cards */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-          <div className="bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
+          <div className="glass-panel border-[#E5E7EB] p-5 rounded-2xl shadow-lg flex flex-col justify-between">
             <div>
-              <div className="flex justify-between text-xs text-[#737874] uppercase font-bold">
+              <div className="flex justify-between text-xs text-[#6B7280] font-mono uppercase font-bold">
                 <span>01 // Current Node</span>
-                <span className="text-[#4f6359]">Active</span>
+                <span className="text-[#8B6F5A]">Active</span>
               </div>
-              <h3 className="font-title-md text-title-md text-[#0d1f18] font-bold mt-1">Junior {state.targetRole}</h3>
-              <p className="text-xs text-[#737874]">IC2 • Core Analytical Engine</p>
+              <h3 className="text-base font-bold text-[#18283D] mt-1">Junior {state.targetRole}</h3>
+              <p className="text-xs text-[#6B7280] font-mono">IC2 • Core Analytical Engine</p>
             </div>
-            <div className="mt-4 pt-2 border-t border-[#f1eee7] flex items-baseline justify-between">
+            <div className="mt-4 pt-2 border-t border-[#E5E7EB] flex items-baseline justify-between font-mono">
               <div>
-                <span className="text-[10px] text-[#737874] uppercase block">Current Readiness</span>
-                <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">{careerReadiness}%</span>
+                <span className="text-[10px] text-[#6B7280] uppercase block">Current Readiness</span>
+                <span className="text-2xl font-bold text-[#18283D]">{careerReadiness}%</span>
               </div>
-              <span className="text-xs text-[#6b4ea6] font-semibold">Goal: 80%</span>
+              <span className="text-xs text-[#8B6F5A] font-semibold">Goal: 80%</span>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-lg border border-[#6b4ea6] shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <div className="glass-panel border-[#E5E7EB] p-5 rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden bg-[#FAF7F2]">
             <div>
-              <div className="flex justify-between text-xs text-[#737874] uppercase font-bold">
+              <div className="flex justify-between text-xs text-[#6B7280] font-mono uppercase font-bold">
                 <span>02 // Target Milestone</span>
-                <span className="text-[#6b4ea6]">Recommended</span>
+                <span className="text-[#8B6F5A]">Recommended</span>
               </div>
-              <h3 className="font-title-md text-title-md text-[#0d1f18] font-bold mt-1">Senior {state.targetRole}</h3>
-              <p className="text-xs text-[#737874]">IC4 • Advanced Domain Authority</p>
+              <h3 className="text-base font-bold text-[#18283D] mt-1">Senior {state.targetRole}</h3>
+              <p className="text-xs text-[#6B7280] font-mono">IC4 • Advanced Domain Authority</p>
             </div>
-            <div className="mt-4 pt-2 border-t border-[#f1eee7] flex items-baseline justify-between">
+            <div className="mt-4 pt-2 border-t border-[#E5E7EB] flex items-baseline justify-between font-mono">
               <div>
-                <span className="text-[10px] text-[#737874] uppercase block">Trajectory Readiness</span>
-                <span className="font-metric-lg text-metric-lg text-[#6b4ea6] font-bold">58%</span>
+                <span className="text-[10px] text-[#6B7280] uppercase block">Trajectory Readiness</span>
+                <span className="text-2xl font-bold text-[#8B6F5A]">58%</span>
               </div>
-              <span className="text-xs text-[#ba1a1a] font-semibold">Deficit: -22 pts</span>
+              <span className="text-xs text-rose-400 font-semibold">Deficit: -22 pts</span>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
+          <div className="glass-panel border-[#E5E7EB] p-5 rounded-2xl shadow-lg flex flex-col justify-between">
             <div>
-              <div className="flex justify-between text-xs text-[#737874] uppercase font-bold">
+              <div className="flex justify-between text-xs text-[#6B7280] font-mono uppercase font-bold">
                 <span>03 // Adjacency Surface</span>
-                <span className="text-[#6b4ea6]">3 Latent Routes</span>
+                <span className="text-[#8B6F5A]">3 Latent Routes</span>
               </div>
-              <h3 className="font-title-md text-title-md text-[#0d1f18] font-bold mt-1">Lateral Vectors</h3>
-              <p className="text-xs text-[#737874]">BI Analyst (81%) • Product (72%)</p>
+              <h3 className="text-base font-bold text-[#18283D] mt-1">Lateral Vectors</h3>
+              <p className="text-xs text-[#6B7280] font-mono">BI Analyst (81%) • Product (72%)</p>
             </div>
-            <div className="mt-4 pt-2 border-t border-[#f1eee7]">
-              <div className="w-full bg-[#e5e2dc] rounded-full h-1.5 overflow-hidden">
-                <div className="bg-[#6b4ea6] h-full rounded-full" style={{ width: '81%' }}></div>
+            <div className="mt-4 pt-2 border-t border-[#E5E7EB]">
+              <div className="w-full bg-[#E5E7EB] rounded-full h-1.5 overflow-hidden">
+                <div className="bg-violet-600 h-full rounded-full" style={{ width: '81%' }}></div>
               </div>
-              <div className="flex justify-between text-[10px] text-[#737874] mt-1">
+              <div className="flex justify-between text-[10px] font-mono text-[#6B7280] mt-1">
                 <span>81% Max Affinity</span>
-                <span className="text-[#4f6359] font-semibold">Low Pivot Friction</span>
+                <span className="text-[#8B6F5A] font-semibold">Low Pivot Friction</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-lg border border-[#e5e2dc] shadow-sm flex flex-col justify-between">
+          <div className="glass-panel border-[#E5E7EB] p-5 rounded-2xl shadow-lg flex flex-col justify-between">
             <div>
-              <div className="flex justify-between text-xs text-[#737874] uppercase font-bold">
+              <div className="flex justify-between text-xs text-[#6B7280] font-mono uppercase font-bold">
                 <span>04 // Economic Arbitrage</span>
-                <span className="text-[#4f6359]">+68% Delta</span>
+                <span className="text-[#8B6F5A]">+68% Delta</span>
               </div>
-              <h3 className="font-title-md text-title-md text-[#0d1f18] font-bold mt-1">Compensation Upside</h3>
-              <p className="text-xs text-[#737874]">Entry $72k → Senior $122k median</p>
+              <h3 className="text-base font-bold text-[#18283D] mt-1">Compensation Upside</h3>
+              <p className="text-xs text-[#6B7280] font-mono">Entry $72k → Senior $122k median</p>
             </div>
-            <div className="mt-4 pt-2 border-t border-[#f1eee7] flex items-baseline justify-between">
+            <div className="mt-4 pt-2 border-t border-[#E5E7EB] flex items-baseline justify-between font-mono">
               <div>
-                <span className="text-[10px] text-[#737874] uppercase block">Median Base Shift</span>
-                <span className="font-metric-lg text-metric-lg text-[#0d1f18] font-bold">+$50,000</span>
+                <span className="text-[10px] text-[#6B7280] uppercase block">Median Base Shift</span>
+                <span className="text-2xl font-bold text-[#18283D]">+$50,000</span>
               </div>
-              <span className="text-xs text-[#4f6359] font-bold">4.2x ROI</span>
+              <span className="text-xs text-[#8B6F5A] font-bold">4.2x ROI</span>
             </div>
           </div>
         </section>
 
         {/* View Mode Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-lg bg-[#f6f3ed] border border-[#e5e2dc]">
-          <div className="flex flex-wrap items-center gap-1">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl glass-panel border-[#E5E7EB] bg-[#FAF7F2]/80">
+          <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: 'all', label: 'All Trajectories' },
               { id: 'vertical', label: 'Vertical Ladder' },
@@ -349,10 +349,10 @@ export const CareerMapPage: React.FC = () => {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveViewMode(tab.id as any)}
-                className={`px-3 py-1.5 rounded text-xs font-semibold uppercase tracking-wider transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-180 cursor-pointer ${
                   activeViewMode === tab.id
-                    ? 'bg-white text-[#0d1f18] shadow-xs'
-                    : 'text-[#737874] hover:text-[#0d1f18]'
+                    ? 'bg-[#18283D] text-[#FAF7F2] font-semibold border border-[#18283D] shadow-xs'
+                    : 'text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:border-[#D8C3A5]/40 hover:-translate-y-0.5 border border-transparent'
                 }`}
               >
                 {tab.label}
@@ -360,7 +360,7 @@ export const CareerMapPage: React.FC = () => {
             ))}
           </div>
 
-          <span className="text-xs text-[#737874]">Click any role below to inspect deep-dive requirements</span>
+          <span className="text-xs font-mono text-[#6B7280]">Click any role below to inspect deep-dive requirements</span>
         </div>
 
         {/* Asymmetric Workbench: 8 Cols Visual Progression Tree + 4 Cols Deep Dive Dossier */}
@@ -369,51 +369,51 @@ export const CareerMapPage: React.FC = () => {
           <div className="lg:col-span-8 space-y-6">
             {/* Vertical Tree */}
             {(activeViewMode === 'all' || activeViewMode === 'vertical' || activeViewMode === 'compensation') && (
-              <div className="bg-white rounded-xl p-6 sm:p-8 border border-[#e5e2dc] shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-                  <h3 className="font-headline-sm text-headline-sm text-[#0d1f18]">
+              <div className="glass-panel border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+                  <h3 className="text-lg font-bold text-[#18283D]">
                     Vertical Advancement Ladder
                   </h3>
-                  <span className="text-xs text-[#737874]">Primary Technical Promotion Track</span>
+                  <span className="text-xs font-mono text-[#6B7280]">Primary Technical Promotion Track</span>
                 </div>
 
                 <div className="space-y-4">
                   {/* Node 1: Current Data Analyst */}
                   <div
                     onClick={() => setSelectedRoleId('data-analyst')}
-                    className={`p-5 rounded-lg border-2 cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
                       selectedRoleId === 'data-analyst'
-                        ? 'bg-[#d2e7dc]/30 border-[#4f6359] shadow-sm'
-                        : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                        ? 'border-[#18283D] bg-[#D8C3A5]/20 shadow-md -translate-y-0.5'
+                        : 'border-[#E5E7EB] bg-[#FAF7F2] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#d2e7dc] text-[#0d1f18] flex items-center justify-center font-bold text-xs">
+                        <div className="w-8 h-8 rounded-xl bg-[#D8C3A5]/30 border border-[#D8C3A5] text-[#8B6F5A] flex items-center justify-center font-bold text-xs font-mono">
                           1
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-[#737874] uppercase">Level IC2</span>
-                            <span className="px-2 py-0.2 rounded bg-[#d2e7dc] text-[#0d1f18] text-[10px] font-bold">
+                            <span className="text-[10px] font-mono font-bold text-[#6B7280] uppercase">Level IC2</span>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#D8C3A5]">
                               Current Baseline
                             </span>
                           </div>
-                          <h4 className="font-title-lg text-title-lg text-[#0d1f18] font-bold">Data Analyst</h4>
+                          <h4 className="text-base font-bold text-[#18283D]">Data Analyst</h4>
                         </div>
                       </div>
 
-                      <div className="text-right text-xs">
-                        <span className="text-[#737874] block">Market Range</span>
-                        <span className="font-bold text-[#0d1f18]">$68,000 – $85,000</span>
+                      <div className="text-right text-xs font-mono">
+                        <span className="text-[#6B7280] block">Market Range</span>
+                        <span className="font-bold text-[#18283D]">$68,000 – $85,000</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Vertical Transition Connector */}
-                  <div className="flex items-center gap-4 px-6 text-xs text-[#737874]">
-                    <div className="w-0.5 h-8 bg-[#6b4ea6]"></div>
-                    <span className="p-1 px-2.5 rounded bg-[#f6f3ed] border border-[#e5e2dc]">
+                  <div className="flex items-center gap-4 px-6 text-xs text-[#6B7280] font-mono">
+                    <div className="w-0.5 h-8 bg-violet-600"></div>
+                    <span className="p-1 px-3 rounded-lg bg-[#FAF7F2] border border-[#E5E7EB] text-[11px]">
                       Promotion Gate: 80% Demonstrated Readiness &amp; Dimensional Modeling Mastery
                     </span>
                   </div>
@@ -421,39 +421,39 @@ export const CareerMapPage: React.FC = () => {
                   {/* Node 2: Senior Data Analyst (Recommended) */}
                   <div
                     onClick={() => setSelectedRoleId('senior-data-analyst')}
-                    className={`p-5 rounded-lg border-2 cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
                       selectedRoleId === 'senior-data-analyst'
-                        ? 'bg-[#eaddff]/30 border-[#6b4ea6] shadow-md ring-2 ring-[#6b4ea6]/20'
-                        : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                        ? 'border-[#18283D] bg-[#D8C3A5]/20 shadow-md -translate-y-0.5'
+                        : 'border-[#E5E7EB] bg-[#FAF7F2] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#6b4ea6] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-violet-600 text-white flex items-center justify-center font-bold text-xs font-mono shadow-sm">
                           2
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-[#737874] uppercase">Level IC4</span>
-                            <span className="px-2 py-0.2 rounded bg-[#6b4ea6] text-white text-[10px] font-bold">
+                            <span className="text-[10px] font-mono font-bold text-[#6B7280] uppercase">Level IC4</span>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#18283D]/30">
                               Recommended Next Step
                             </span>
                           </div>
-                          <h4 className="font-title-lg text-title-lg text-[#0d1f18] font-bold">Senior Data Analyst</h4>
+                          <h4 className="text-base font-bold text-[#18283D]">Senior Data Analyst</h4>
                         </div>
                       </div>
 
-                      <div className="text-right text-xs">
-                        <span className="text-[#737874] block">Market Range</span>
-                        <span className="font-bold text-[#0d1f18]">$110,000 – $135,000</span>
+                      <div className="text-right text-xs font-mono">
+                        <span className="text-[#6B7280] block">Market Range</span>
+                        <span className="font-bold text-[#8B6F5A]">$110,000 – $135,000</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Vertical Transition Connector */}
-                  <div className="flex items-center gap-4 px-6 text-xs text-[#737874]">
-                    <div className="w-0.5 h-8 bg-[#e5e2dc]"></div>
-                    <span className="p-1 px-2.5 rounded bg-[#f6f3ed] border border-[#e5e2dc]">
+                  <div className="flex items-center gap-4 px-6 text-xs text-[#6B7280] font-mono">
+                    <div className="w-0.5 h-8 bg-[#E5E7EB]"></div>
+                    <span className="p-1 px-3 rounded-lg bg-[#FAF7F2] border border-[#E5E7EB] text-[11px]">
                       Leadership Gate: Cross-Departmental Attribution &amp; Team Mentorship
                     </span>
                   </div>
@@ -461,26 +461,26 @@ export const CareerMapPage: React.FC = () => {
                   {/* Node 3: Analytics Lead */}
                   <div
                     onClick={() => setSelectedRoleId('analytics-lead')}
-                    className={`p-5 rounded-lg border cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
                       selectedRoleId === 'analytics-lead'
-                        ? 'bg-[#f6f3ed] border-[#0d1f18] shadow-sm'
-                        : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                        ? 'border-[#18283D] bg-[#D8C3A5]/20 shadow-md -translate-y-0.5'
+                        : 'border-[#E5E7EB] bg-[#FAF7F2] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#e5e2dc] text-[#737874] flex items-center justify-center font-bold text-xs">
+                        <div className="w-8 h-8 rounded-xl bg-[#E5E7EB] border border-[#E5E7EB] text-[#6B7280] flex items-center justify-center font-bold text-xs font-mono">
                           3
                         </div>
                         <div>
-                          <span className="text-xs font-bold text-[#737874] uppercase">Level IC5</span>
-                          <h4 className="font-title-lg text-title-lg text-[#0d1f18] font-bold">Analytics Lead</h4>
+                          <span className="text-[10px] font-mono font-bold text-[#6B7280] uppercase">Level IC5</span>
+                          <h4 className="text-base font-bold text-[#18283D]">Analytics Lead</h4>
                         </div>
                       </div>
 
-                      <div className="text-right text-xs">
-                        <span className="text-[#737874] block">Market Range</span>
-                        <span className="font-bold text-[#0d1f18]">$140,000 – $175,000</span>
+                      <div className="text-right text-xs font-mono">
+                        <span className="text-[#6B7280] block">Market Range</span>
+                        <span className="font-bold text-[#18283D]">$140,000 – $175,000</span>
                       </div>
                     </div>
                   </div>
@@ -490,51 +490,51 @@ export const CareerMapPage: React.FC = () => {
 
             {/* Lateral Branches Section */}
             {(activeViewMode === 'all' || activeViewMode === 'lateral') && (
-              <div className="bg-white rounded-xl p-6 sm:p-8 border border-[#e5e2dc] shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
+              <div className="glass-panel border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
                   <div>
-                    <h3 className="font-headline-sm text-headline-sm text-[#0d1f18]">
+                    <h3 className="text-lg font-bold text-[#18283D]">
                       Viable Lateral Branches
                     </h3>
-                    <p className="text-xs text-[#737874]">Alternative horizontal career paths sharing core competency overlap</p>
+                    <p className="text-xs text-[#6B7280]">Alternative horizontal career paths sharing core competency overlap</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div
                     onClick={() => setSelectedRoleId('bi-analyst')}
-                    className={`p-5 rounded-lg border cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
                       selectedRoleId === 'bi-analyst'
-                        ? 'bg-[#eaddff]/30 border-[#6b4ea6]'
-                        : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                        ? 'border-[#18283D] bg-[#D8C3A5]/20 shadow-md -translate-y-0.5'
+                        : 'border-[#E5E7EB] bg-[#FAF7F2] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-[#4f6359] bg-[#d2e7dc] px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono font-bold text-[#8B6F5A] bg-[#D8C3A5]/30 border border-[#D8C3A5] px-2 py-0.5 rounded">
                         81% Competency Match
                       </span>
-                      <span className="text-xs font-semibold text-[#737874]">$104k avg</span>
+                      <span className="text-xs font-mono font-semibold text-[#6B7280]">$104k avg</span>
                     </div>
-                    <h4 className="font-title-md text-title-md text-[#0d1f18] font-bold">BI Analyst</h4>
-                    <p className="text-xs text-[#424845] mt-1">Deepening semantic layer, Enterprise reporting governance, and dashboarding.</p>
+                    <h4 className="text-base font-bold text-[#18283D]">BI Analyst</h4>
+                    <p className="text-xs text-[#6B7280] mt-1 leading-relaxed">Deepening semantic layer, Enterprise reporting governance, and dashboarding.</p>
                   </div>
 
                   <div
                     onClick={() => setSelectedRoleId('product-analyst')}
-                    className={`p-5 rounded-lg border cursor-pointer transition-all ${
+                    className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
                       selectedRoleId === 'product-analyst'
-                        ? 'bg-[#eaddff]/30 border-[#6b4ea6]'
-                        : 'bg-[#fcf9f3] border-[#e5e2dc] hover:bg-[#f6f3ed]'
+                        ? 'border-[#18283D] bg-[#D8C3A5]/20 shadow-md -translate-y-0.5'
+                        : 'border-[#E5E7EB] bg-[#FAF7F2] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-[#6b4ea6] bg-[#eaddff] px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono font-bold text-[#8B6F5A] bg-[#D8C3A5]/30 border border-[#18283D]/30 px-2 py-0.5 rounded">
                         72% Competency Match
                       </span>
-                      <span className="text-xs font-semibold text-[#737874]">$112k avg</span>
+                      <span className="text-xs font-mono font-semibold text-[#6B7280]">$112k avg</span>
                     </div>
-                    <h4 className="font-title-md text-title-md text-[#0d1f18] font-bold">Product Analyst</h4>
-                    <p className="text-xs text-[#424845] mt-1">User event analytics, funnel optimization, cohort retention, and A/B test design.</p>
+                    <h4 className="text-base font-bold text-[#18283D]">Product Analyst</h4>
+                    <p className="text-xs text-[#6B7280] mt-1 leading-relaxed">User event analytics, funnel optimization, cohort retention, and A/B test design.</p>
                   </div>
                 </div>
               </div>
@@ -542,36 +542,36 @@ export const CareerMapPage: React.FC = () => {
           </div>
 
           {/* RIGHT 4 COLUMNS: SELECTED ROLE DEEP-DIVE DOSSIER */}
-          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-20">
-            <div className="bg-white rounded-xl p-6 sm:p-7 border-2 border-[#6b4ea6]/40 shadow-md space-y-6">
-              <div className="flex items-center justify-between pb-3 border-b border-[#f1eee7]">
-                <span className="font-label-sm text-label-sm uppercase tracking-wider text-[#6b4ea6] font-bold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#6b4ea6]"></span>
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+            <div className="glass-panel-elevated border-[#8B6F5A]/40 rounded-2xl p-6 sm:p-7 shadow-2xl space-y-6">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8B6F5A] font-bold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#8B6F5A] animate-pulse"></span>
                   ACTIVE DOSSIER PREVIEW
                 </span>
-                <span className="text-xs text-[#737874]">{selectedRole.level}</span>
+                <span className="text-xs font-mono text-[#6B7280]">{selectedRole.level}</span>
               </div>
 
               <div>
-                <span className="px-2 py-0.5 rounded bg-[#eaddff] text-[#25005a] text-[10px] font-bold uppercase">
+                <span className="px-2.5 py-0.5 rounded-lg bg-[#D8C3A5]/30 border border-[#18283D]/30 text-[#8B6F5A] text-[10px] font-mono font-bold uppercase">
                   {selectedRole.badge}
                 </span>
-                <h3 className="font-headline-sm text-headline-sm text-[#0d1f18] font-bold mt-1">
+                <h3 className="text-xl font-bold text-[#18283D] mt-2 tracking-tight">
                   {selectedRole.title}
                 </h3>
-                <p className="text-xs text-[#424845] mt-1 leading-relaxed">
+                <p className="text-xs text-[#6B7280] mt-1.5 leading-relaxed">
                   {selectedRole.description}
                 </p>
-                <div className="text-xs text-[#737874] mt-2">
-                  Market Benchmark: <strong className="text-[#0d1f18]">{selectedRole.benchmarkSalary}</strong>
+                <div className="text-xs font-mono text-[#6B7280] mt-2">
+                  Market Benchmark: <strong className="text-[#18283D]">{selectedRole.benchmarkSalary}</strong>
                 </div>
               </div>
 
               {/* Competency Clearance Matrix */}
               <div className="space-y-3 pt-2">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#0d1f18] uppercase">1. Competency Clearance Matrix</span>
-                  <span className="font-bold text-[#6b4ea6]">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-[#18283D] uppercase text-[11px]">1. Competency Clearance Matrix</span>
+                  <span className="font-bold text-[#8B6F5A]">
                     <AnimatedNumber value={selectedRole.readinessScore} suffix="% Match" durationMs={500} />
                   </span>
                 </div>
@@ -579,15 +579,15 @@ export const CareerMapPage: React.FC = () => {
                 <div className="space-y-2.5">
                   {selectedRole.skills.map((s) => (
                     <div key={s.name} className="space-y-1 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-[#424845]">{s.name}</span>
-                        <span className="font-mono">
-                          {s.current}% / {s.target}% <span className={s.gap < 0 ? 'text-[#ba1a1a]' : 'text-[#4f6359]'}>({s.gap})</span>
+                      <div className="flex justify-between font-mono">
+                        <span className="text-[#6B7280]">{s.name}</span>
+                        <span>
+                          {s.current}% / {s.target}% <span className={s.gap < 0 ? 'text-rose-400' : 'text-[#8B6F5A]'}>({s.gap})</span>
                         </span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#e5e2dc] rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-[#E5E7EB] rounded-full overflow-hidden">
                         <div
-                          className={`h-full rounded-full ${s.current >= 70 ? 'bg-[#0d1f18]' : 'bg-[#6b4ea6]'}`}
+                          className={`h-full rounded-full ${s.current >= 70 ? 'bg-teal-500' : 'bg-violet-600'}`}
                           style={{ width: `${Math.min(s.current, 100)}%` }}
                         />
                       </div>
@@ -597,19 +597,19 @@ export const CareerMapPage: React.FC = () => {
               </div>
 
               {/* Evidence Locker Gate */}
-              <div className="space-y-2.5 pt-2 border-t border-[#f1eee7]">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#0d1f18] uppercase">2. Evidence Locker Gate</span>
-                  <span className="text-[#737874]">{selectedRole.evidenceRequirements.filter((r) => r.done).length} of {selectedRole.evidenceRequirements.length} Verified</span>
+              <div className="space-y-2.5 pt-2 border-t border-[#E5E7EB]">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="font-bold text-[#18283D] uppercase text-[11px]">2. Evidence Locker Gate</span>
+                  <span className="text-[#6B7280]">{selectedRole.evidenceRequirements.filter((r) => r.done).length} of {selectedRole.evidenceRequirements.length} Verified</span>
                 </div>
 
                 <div className="space-y-2 text-xs">
                   {selectedRole.evidenceRequirements.map((req, rIdx) => (
-                    <div key={rIdx} className="p-2.5 rounded bg-[#f6f3ed] border border-[#e5e2dc] flex items-start gap-2">
-                      <span className={`material-symbols-outlined text-[16px] shrink-0 mt-0.5 ${req.done ? 'text-[#4f6359]' : 'text-[#737874]'}`}>
+                    <div key={rIdx} className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] flex items-start gap-2">
+                      <span className={`material-symbols-outlined text-[16px] shrink-0 mt-0.5 ${req.done ? 'text-[#8B6F5A]' : 'text-[#6B7280]'}`}>
                         {req.done ? 'check_circle' : 'radio_button_unchecked'}
                       </span>
-                      <span className={`leading-snug ${req.done ? 'text-[#0d1f18] font-semibold' : 'text-[#737874]'}`}>
+                      <span className={`leading-snug ${req.done ? 'text-[#18283D] font-medium' : 'text-[#6B7280]'}`}>
                         {req.text}
                       </span>
                     </div>
@@ -622,7 +622,7 @@ export const CareerMapPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleSetTarget(selectedRole.title.replace(' (Current)', '').replace(' (Lateral Pivot)', ''))}
-                  className="btn-interactive w-full py-3 px-4 rounded bg-[#0d1f18] hover:bg-[#22382f] text-white font-title-md text-title-md font-semibold transition-all shadow-sm flex items-center justify-center gap-2"
+                  className="w-full py-3 px-4 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>{targetSetSuccess ? 'Target Re-anchored!' : 'Set as Active Target Trajectory'}</span>
                   <span className="material-symbols-outlined text-[16px]">arrow_forward</span>

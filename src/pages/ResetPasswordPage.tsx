@@ -106,22 +106,22 @@ export const ResetPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fcf9f3]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563] relative overflow-hidden">
       {/* Clean Brand Header */}
-      <header className="h-16 border-b border-[#e5e2dc] bg-[#fcf9f3]/95 px-6 lg:px-10 flex items-center justify-between">
+      <header className="h-16 border-b border-[#E5E7EB] bg-[#F3F4F6]/90 backdrop-blur-xl px-6 lg:px-10 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full border border-[#0d1f18] flex items-center justify-center relative bg-white shadow-xs">
-            <div className="w-4 h-4 rounded-full border border-dashed border-[#6b4ea6] flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0d1f18]"></div>
+          <div className="w-8 h-8 rounded-xl bg-[#FAF7F2] border border-[#18283D]/30 shadow-sm flex items-center justify-center transition-colors group-hover:border-[#18283D]/50">
+            <div className="w-3.5 h-3.5 rounded-full border border-[#18283D]/80 flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#8B6F5A]"></div>
             </div>
           </div>
-          <span className="font-headline-sm text-headline-sm text-[#0d1f18] tracking-tight font-medium">
+          <span className="font-sans text-lg text-[#18283D] font-extrabold tracking-tight">
             ATLAS
           </span>
         </Link>
         <Link
           to="/login"
-          className="text-xs font-semibold uppercase tracking-wider text-[#424845] hover:text-[#0d1f18]"
+          className="text-xs font-semibold uppercase tracking-wider text-[#6B7280] hover:text-[#18283D] transition-colors"
         >
           Sign In →
         </Link>
@@ -132,28 +132,28 @@ export const ResetPasswordPage: React.FC = () => {
         <PageTransition className="space-y-6">
           {/* Header Description */}
           <div className="text-center space-y-2">
-            <span className="font-label-sm text-[11px] font-semibold uppercase tracking-widest text-[#6b4ea6] inline-block">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#8B6F5A] inline-block px-3 py-1 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5]">
               Security · Account Recovery
             </span>
-            <h1 className="font-headline-xl text-3xl font-bold text-[#0d1f18] tracking-tight">
+            <h1 className="text-3xl font-extrabold text-[#18283D] tracking-tight">
               Reset your password
             </h1>
-            <p className="text-xs sm:text-sm text-[#424845]">
+            <p className="text-xs sm:text-sm text-[#6B7280]">
               Create a new secure password for your ATLAS workspace account.
             </p>
           </div>
 
           {/* Success Card */}
           {success ? (
-            <div className="bg-white border border-[#e5e2dc] rounded-2xl p-7 shadow-sm text-center space-y-5">
-              <div className="w-12 h-12 rounded-full bg-[#2e7d32]/10 border border-[#2e7d32]/20 text-[#2e7d32] flex items-center justify-center mx-auto text-2xl">
+            <div className="glass-panel-elevated rounded-2xl p-7 shadow-xl border border-[#E5E7EB] text-center space-y-5">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-sm">
                 ✓
               </div>
               <div className="space-y-1">
-                <h2 className="font-serif text-xl font-bold text-[#0d1f18]">
+                <h2 className="text-xl font-bold text-[#18283D]">
                   Password updated successfully!
                 </h2>
-                <p className="text-xs text-[#5a625d] leading-relaxed">
+                <p className="text-xs text-[#6B7280] leading-relaxed">
                   Your password has been changed. You can now sign in to your ATLAS workspace with your new credentials.
                 </p>
               </div>
@@ -161,7 +161,7 @@ export const ResetPasswordPage: React.FC = () => {
               <div className="pt-2">
                 <Link
                   to="/login"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all shadow-sm btn-interactive"
                 >
                   <span>Continue to Sign in</span>
                   <span className="text-sm">→</span>
@@ -172,10 +172,10 @@ export const ResetPasswordPage: React.FC = () => {
             /* Active Recovery Password Form */
             <form
               onSubmit={handleUpdatePassword}
-              className="bg-white border border-[#e5e2dc] rounded-2xl p-7 sm:p-8 shadow-sm space-y-5"
+              className="glass-panel-elevated rounded-2xl p-7 sm:p-8 shadow-xl border border-[#E5E7EB] space-y-5"
             >
               {formError && (
-                <div className="p-3 rounded-lg bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] text-xs font-semibold">
+                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold leading-relaxed">
                   {formError}
                 </div>
               )}
@@ -184,7 +184,7 @@ export const ResetPasswordPage: React.FC = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="new-password"
-                  className="block text-xs font-bold uppercase tracking-wider text-[#0d1f18]"
+                  className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#4B5563]"
                 >
                   New Password
                 </label>
@@ -195,14 +195,14 @@ export const ResetPasswordPage: React.FC = () => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Enter at least 6 characters"
-                    className="w-full px-4 py-2.5 rounded-lg border border-[#e5e2dc] bg-[#fcf9f3] text-sm text-[#0d1f18] focus:outline-none focus:border-[#6b4ea6]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#E5E7EB] bg-[#FAF7F2] text-sm text-[#18283D] placeholder-[#6B7280] focus:outline-none focus:border-[#18283D] focus:ring-1 focus:ring-[#18283D]/30 transition-all"
                     autoComplete="new-password"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-2.5 text-xs text-[#737874] hover:text-[#0d1f18]"
+                    className="absolute right-3 top-2.5 text-xs text-[#6B7280] hover:text-[#18283D]"
                   >
                     {showPassword ? 'Hide' : 'Show'}
                   </button>
@@ -213,7 +213,7 @@ export const ResetPasswordPage: React.FC = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="confirm-password"
-                  className="block text-xs font-bold uppercase tracking-wider text-[#0d1f18]"
+                  className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#4B5563]"
                 >
                   Confirm New Password
                 </label>
@@ -223,7 +223,7 @@ export const ResetPasswordPage: React.FC = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter your new password"
-                  className="w-full px-4 py-2.5 rounded-lg border border-[#e5e2dc] bg-[#fcf9f3] text-sm text-[#0d1f18] focus:outline-none focus:border-[#6b4ea6]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E5E7EB] bg-[#FAF7F2] text-sm text-[#18283D] placeholder-[#6B7280] focus:outline-none focus:border-[#18283D] focus:ring-1 focus:ring-[#18283D]/30 transition-all"
                   autoComplete="new-password"
                   required
                 />
@@ -231,11 +231,11 @@ export const ResetPasswordPage: React.FC = () => {
 
               {/* Match Verification Indicator */}
               {confirmPassword.length > 0 && (
-                <div className="text-[11px] font-medium flex items-center gap-1.5">
+                <div className="text-[11px] font-mono flex items-center gap-1.5">
                   {newPassword === confirmPassword ? (
-                    <span className="text-[#2e7d32]">✓ Passwords match</span>
+                    <span className="text-emerald-400">✓ Passwords match</span>
                   ) : (
-                    <span className="text-[#ba1a1a]">✕ Passwords do not match</span>
+                    <span className="text-rose-400">✕ Passwords do not match</span>
                   )}
                 </div>
               )}
@@ -244,7 +244,7 @@ export const ResetPasswordPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] disabled:bg-[#737874] text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                className="w-full py-3 px-4 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent disabled:opacity-50 text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer btn-interactive"
               >
                 {submitting ? (
                   <span>Updating Password...</span>
@@ -259,7 +259,7 @@ export const ResetPasswordPage: React.FC = () => {
               <div className="pt-2 text-center">
                 <Link
                   to="/login"
-                  className="text-xs text-[#737874] hover:text-[#0d1f18] underline font-medium"
+                  className="text-xs text-[#6B7280] hover:text-[#18283D] transition-colors"
                 >
                   Return to Sign in
                 </Link>
@@ -267,33 +267,33 @@ export const ResetPasswordPage: React.FC = () => {
             </form>
           ) : (
             /* Missing / Expired Session Fallback */
-            <div className="bg-white border border-[#e5e2dc] rounded-2xl p-7 shadow-sm space-y-5">
+            <div className="glass-panel-elevated rounded-2xl p-7 shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#E5E7EB] space-y-5">
               <div className="space-y-2 text-center">
-                <div className="w-10 h-10 rounded-full bg-[#f6f2e9] text-[#6b4ea6] flex items-center justify-center mx-auto text-lg font-bold">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mx-auto text-xl font-bold shadow-sm">
                   !
                 </div>
-                <h2 className="font-serif text-lg font-bold text-[#0d1f18]">
+                <h2 className="text-lg font-bold text-[#18283D]">
                   {sessionError ? 'Recovery Link Expired' : 'No Recovery Session Detected'}
                 </h2>
-                <p className="text-xs text-[#5a625d] leading-relaxed">
+                <p className="text-xs text-[#6B7280] leading-relaxed">
                   {sessionError ||
                     'To reset your password, please open the link sent to your email or request a new recovery link below.'}
                 </p>
               </div>
 
               {requestSuccess ? (
-                <div className="p-4 rounded-xl bg-[#2e7d32]/10 border border-[#2e7d32]/20 text-center space-y-2">
-                  <span className="text-xs font-bold text-[#2e7d32] block">
+                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2">
+                  <span className="text-xs font-bold text-emerald-300 block">
                     Recovery link sent!
                   </span>
-                  <p className="text-xs text-[#1e4620]">
+                  <p className="text-xs text-[#4B5563]">
                     Please check your inbox for instructions to reset your password.
                   </p>
                 </div>
               ) : showRequestForm ? (
                 <form onSubmit={handleRequestNewLink} className="space-y-4 pt-2">
                   {requestError && (
-                    <div className="p-2.5 rounded-lg bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] text-xs font-semibold">
+                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">
                       {requestError}
                     </div>
                   )}
@@ -301,7 +301,7 @@ export const ResetPasswordPage: React.FC = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="recovery-email"
-                      className="block text-xs font-bold uppercase tracking-wider text-[#0d1f18]"
+                      className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#4B5563]"
                     >
                       Your Account Email
                     </label>
@@ -311,7 +311,7 @@ export const ResetPasswordPage: React.FC = () => {
                       value={requestEmail}
                       onChange={(e) => setRequestEmail(e.target.value)}
                       placeholder="e.g. your_email@example.com"
-                      className="w-full px-4 py-2.5 rounded-lg border border-[#e5e2dc] bg-[#fcf9f3] text-sm text-[#0d1f18] focus:outline-none focus:border-[#6b4ea6]"
+                      className="w-full px-4 py-2.5 rounded-xl border border-[#E5E7EB] bg-[#FAF7F2] text-sm text-[#18283D] placeholder-[#6B7280] focus:outline-none focus:border-[#18283D] focus:ring-1 focus:ring-[#18283D]/30 transition-all"
                       required
                     />
                   </div>
@@ -319,7 +319,7 @@ export const ResetPasswordPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={requestLoading}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                   >
                     {requestLoading ? 'Sending...' : 'Send Recovery Email →'}
                   </button>
@@ -329,17 +329,17 @@ export const ResetPasswordPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowRequestForm(true)}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0d1f18] hover:bg-[#22382f] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#FAF7F2] hover:bg-[#D8C3A5]/15 hover:border-[#8B6F5A]/50 hover:text-[#18283D] hover:-translate-y-0.5 hover:shadow-xs active:scale-[0.98] border border-[#E5E7EB] text-[#18283D] text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
                   >
                     Request New Recovery Link
                   </button>
                 </div>
               )}
 
-              <div className="pt-2 text-center border-t border-[#f1eee7]">
+              <div className="pt-2 text-center border-t border-[#E5E7EB]">
                 <Link
                   to="/"
-                  className="text-xs text-[#737874] hover:text-[#0d1f18] font-medium"
+                  className="text-xs text-[#6B7280] hover:text-[#18283D] transition-colors"
                 >
                   ← Return to ATLAS Homepage
                 </Link>
