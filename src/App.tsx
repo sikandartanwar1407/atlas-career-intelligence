@@ -18,6 +18,7 @@ import { CareerMapPage } from './pages/CareerMapPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { OpportunitiesPage } from './pages/OpportunitiesPage';
 import { OpportunityDetailPage } from './pages/OpportunityDetailPage';
+import { ResumeMatcherPage } from './pages/ResumeMatcherPage';
 
 // Dedicated Employer Workspace Pages
 import { EmployerOnboardingPage } from './pages/EmployerOnboardingPage';
@@ -62,6 +63,7 @@ export default function App() {
             <Route path="/assessment" element={<AssessmentPage />} />
             <Route path="/assessment/result" element={<AssessmentResultPage />} />
             <Route path="/diagnosis" element={<DiagnosisPage />} />
+            <Route path="/resume-matcher" element={<ResumeMatcherPage />} />
             <Route path="/skill-gaps" element={<SkillGapsPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/career-roadmap" element={<CareerRoadmapPage />} />

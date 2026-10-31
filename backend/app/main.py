@@ -13,13 +13,14 @@ from app.routers.visibility import router as visibility_router
 from app.routers.employer import router as employer_router
 from app.routers.opportunities import router as opportunities_router
 from app.routers.applications import router as applications_router
+from app.routers.matching_ai import router as matching_ai_router
 
 settings = get_settings()
 
 app = FastAPI(
     title="ATLAS API",
-    description="Backend API service for ATLAS Career Architecture Platform",
-    version="1.0.0",
+    description="Backend API service for ATLAS (Adaptive Technology for Learning and Advancement System)",
+    version="1.1.0",
 )
 
 # CORS Configuration (Origins: 3000, 3001, 3002, 3003, 5173)
@@ -45,10 +46,13 @@ app.include_router(visibility_router, prefix="/api")
 app.include_router(employer_router, prefix="/api")
 app.include_router(opportunities_router, prefix="/api")
 app.include_router(applications_router, prefix="/api")
+app.include_router(matching_ai_router, prefix="/api")
 
 
 @app.get("/", summary="Root Endpoint")
 def root():
     return {
         "message": "ATLAS API is running",
+        "system": "Adaptive Technology for Learning and Advancement System",
+        "version": "1.1.0",
     }

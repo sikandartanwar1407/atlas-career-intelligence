@@ -37,11 +37,7 @@ export const PublicHeader: React.FC = () => {
         <div className="h-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           {/* Brand Logo */}
           <Link to="/" className="flex items-center gap-3 focus:outline-none shrink-0 group">
-            <div className="w-9 h-9 rounded-xl bg-[#FAF7F2] border border-[#18283D]/30 shadow-sm flex items-center justify-center transition-colors group-hover:border-[#18283D]/50">
-              <div className="w-4 h-4 rounded-full border border-[#18283D]/80 flex items-center justify-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#8B6F5A]"></div>
-              </div>
-            </div>
+            <img src="/logo.png" alt="ATLAS Logo" className="w-9 h-9 rounded-lg object-contain shadow-xs transition-transform group-hover:scale-105" />
             <div className="flex flex-col">
               <span className="font-sans text-xl text-[#18283D] font-extrabold tracking-tight">
                 ATLAS
