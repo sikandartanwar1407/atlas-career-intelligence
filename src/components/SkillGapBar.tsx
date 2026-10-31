@@ -20,18 +20,18 @@ export const SkillGapBar: React.FC<SkillGapBarProps> = ({
   const reducedMotion = useReducedMotion();
 
   // Determine color according to priority
-  let fillColor = 'bg-violet-600';
-  let deficitColor = 'bg-violet-500/20 border-l border-r border-violet-400/30';
-  let textDeltaColor = 'text-violet-400';
+  let fillColor = 'bg-[#18283D]';
+  let deficitColor = 'bg-[#18283D]/15 border-l border-r border-[#18283D]/30';
+  let textDeltaColor = 'text-[#8B6F5A]';
 
   if (priority === 'HIGH PRIORITY') {
     fillColor = 'bg-rose-600';
     deficitColor = 'bg-rose-500/20 border-l border-r border-rose-400/30';
-    textDeltaColor = 'text-rose-400';
+    textDeltaColor = 'text-rose-600';
   } else if (priority === 'LOW PRIORITY') {
-    fillColor = 'bg-teal-500';
-    deficitColor = 'bg-teal-500/20 border-l border-r border-teal-400/30';
-    textDeltaColor = 'text-teal-400';
+    fillColor = 'bg-[#8B6F5A]';
+    deficitColor = 'bg-[#8B6F5A]/20 border-l border-r border-[#8B6F5A]/30';
+    textDeltaColor = 'text-[#8B6F5A]';
   }
 
   const currentPercent = Math.min(Math.max(current, 0), 100);
@@ -53,7 +53,7 @@ export const SkillGapBar: React.FC<SkillGapBarProps> = ({
 
   return (
     <div className="flex flex-col gap-1.5 w-full">
-      <div className="relative w-full h-3 bg-[#0D1224] border border-white/5 rounded-full overflow-visible flex items-center">
+      <div className="relative w-full h-3 bg-[#E5E7EB] border border-[#E5E7EB] rounded-full overflow-visible flex items-center">
         {/* Current score fill */}
         <div
           className={`h-full ${fillColor} rounded-full transition-all duration-700 ease-out`}
@@ -77,20 +77,20 @@ export const SkillGapBar: React.FC<SkillGapBarProps> = ({
           style={{ left: `${thresholdPercent}%` }}
           title={`Target Benchmark: ${threshold}%`}
         >
-          <div className="w-1.5 h-5 bg-white rounded-full shadow-sm" />
-          <div className="hidden sm:block absolute -top-6 px-1.5 py-0.5 bg-[#172039] border border-white/20 text-white rounded text-[10px] font-mono font-bold whitespace-nowrap shadow-md">
+          <div className="w-1.5 h-5 bg-[#18283D] rounded-full shadow-sm" />
+          <div className="hidden sm:block absolute -top-6 px-1.5 py-0.5 bg-[#18283D] border border-[#18283D] text-[#FAF7F2] rounded text-[10px] font-mono font-bold whitespace-nowrap shadow-md">
             {threshold}%
           </div>
         </div>
       </div>
 
       {showLabels && (
-        <div className="flex justify-between items-center text-[11px] font-mono text-[#94A3B8] mt-0.5">
-          <span>Current: <strong className="text-white">{currentPercent}%</strong></span>
+        <div className="flex justify-between items-center text-[11px] font-mono text-[#6B7280] mt-0.5">
+          <span>Current: <strong className="text-[#18283D]">{currentPercent}%</strong></span>
           <span className={`font-semibold ${textDeltaColor}`}>
             {gap > 0 ? `Deficit: -${gap} pts` : 'Target Met'}
           </span>
-          <span>Target: <strong className="text-[#38BDF8]">{thresholdPercent}%</strong></span>
+          <span>Target: <strong className="text-[#8B6F5A]">{thresholdPercent}%</strong></span>
         </div>
       )}
     </div>

@@ -76,32 +76,32 @@ export const EmployerMatchesPage: React.FC = () => {
   }, [candidates, sortBy, filterRole]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080B16] text-slate-100 selection:bg-violet-500/30 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100 selection:bg-[#D8C3A5]/40 selection:text-[#18283D]">
       <EmployerHeader />
 
       <main className="w-full pt-20 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <Link to="/employer" className="hover:text-violet-400 transition-colors flex items-center gap-1">
+          <Link to="/employer" className="hover:text-[#8B6F5A] transition-colors flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             <span>Employer Portal</span>
           </Link>
           <span>/</span>
-          <span className="text-white font-medium">Candidate Match Pipeline</span>
+          <span className="text-[#18283D] font-medium">Candidate Match Pipeline</span>
         </div>
 
         {/* Opportunity Context Header */}
-        <section className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm">
+        <section className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></span>
-                <span className="text-xs uppercase tracking-widest text-violet-400 font-bold">
+                <span className="text-xs uppercase tracking-widest text-[#8B6F5A] font-bold">
                   Evaluated Talent Pipeline
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl text-white font-extrabold tracking-tight">
+              <h1 className="text-2xl sm:text-3xl text-[#18283D] font-extrabold tracking-tight">
                 {opportunity?.jobTitle || 'Role Match Pipeline'}
               </h1>
               <div className="text-xs text-slate-400 flex items-center gap-2">
@@ -114,8 +114,8 @@ export const EmployerMatchesPage: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
-              <div className="px-5 py-3 rounded-xl bg-[#0D1224]/80 border border-white/10 text-right backdrop-blur-sm">
-                <span className="font-mono text-2xl font-bold text-violet-400 block">
+              <div className="px-5 py-3 rounded-xl bg-[#FAF7F2]/80 border border-[#E5E7EB] text-right backdrop-blur-sm">
+                <span className="font-mono text-2xl font-bold text-[#8B6F5A] block">
                   {candidates.length} Candidates
                 </span>
                 <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">
@@ -127,17 +127,17 @@ export const EmployerMatchesPage: React.FC = () => {
         </section>
 
         {/* Sort and Filter Control Bar */}
-        <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#11182B]/80 p-3 rounded-xl border border-white/10 backdrop-blur-sm">
+        <section className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#FAF7F2]/80 p-3 rounded-xl border border-[#E5E7EB] backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <span className="text-xs font-semibold text-slate-300">Sort by:</span>
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => setSortBy('match')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-180 cursor-pointer ${
                   sortBy === 'match'
-                    ? 'bg-violet-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#18283D] text-[#FAF7F2] font-semibold border border-[#18283D] shadow-xs'
+                    : 'text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:border-[#D8C3A5]/40 hover:-translate-y-0.5 border border-transparent'
                 }`}
               >
                 Overall Match
@@ -145,10 +145,10 @@ export const EmployerMatchesPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSortBy('evidence')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-180 cursor-pointer ${
                   sortBy === 'evidence'
-                    ? 'bg-violet-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#18283D] text-[#FAF7F2] font-semibold border border-[#18283D] shadow-xs'
+                    : 'text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:border-[#D8C3A5]/40 hover:-translate-y-0.5 border border-transparent'
                 }`}
               >
                 Evidence Proofs
@@ -156,10 +156,10 @@ export const EmployerMatchesPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSortBy('skills')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-180 cursor-pointer ${
                   sortBy === 'skills'
-                    ? 'bg-violet-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#18283D] text-[#FAF7F2] font-semibold border border-[#18283D] shadow-xs'
+                    : 'text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:border-[#D8C3A5]/40 hover:-translate-y-0.5 border border-transparent'
                 }`}
               >
                 Skill Breadth
@@ -172,7 +172,7 @@ export const EmployerMatchesPage: React.FC = () => {
             <select
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
-              className="px-3 py-1.5 text-xs bg-[#0D1224] border border-white/10 rounded-lg text-white focus:outline-none focus:border-violet-500/50"
+              className="px-3 py-1.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-lg text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50"
             >
               <option value="all">All Goals</option>
               <option value="Data Analyst">Data Analyst</option>
@@ -187,14 +187,14 @@ export const EmployerMatchesPage: React.FC = () => {
             return (
               <article
                 key={cand.id}
-                className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 shadow-xl hover:border-violet-500/40 transition-all flex flex-col justify-between space-y-4 backdrop-blur-sm group"
+                className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 shadow-xl hover:border-[#8B6F5A]/60 hover:shadow-2xl hover:-translate-y-1 hover:bg-[#D8C3A5]/5 transition-all duration-200 ease-out flex flex-col justify-between space-y-4 backdrop-blur-sm group"
               >
                 <div className="space-y-4">
                   {/* Card Header: Match % badge + Anonymized Candidate Name */}
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/30 font-mono text-xs font-bold text-violet-300">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#D8C3A5]/25 border border-[#18283D]/30 font-mono text-xs font-bold text-[#8B6F5A]">
                           {cand.overallMatch}% MATCH
                         </span>
                         <span className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">
@@ -202,13 +202,13 @@ export const EmployerMatchesPage: React.FC = () => {
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors pt-1">
+                      <h3 className="text-xl font-bold text-[#18283D] group-hover:text-[#8B6F5A] transition-colors pt-1">
                         {cand.name}
                       </h3>
 
                       <div className="text-xs text-slate-400">
                         Target Trajectory:{' '}
-                        <strong className="text-teal-400">{cand.targetRole}</strong>
+                        <strong className="text-[#8B6F5A]">{cand.targetRole}</strong>
                       </div>
                     </div>
 
@@ -218,7 +218,7 @@ export const EmployerMatchesPage: React.FC = () => {
                   </div>
 
                   {/* Key Strong Skills */}
-                  <div className="space-y-1.5 pt-3 border-t border-white/10">
+                  <div className="space-y-1.5 pt-3 border-t border-[#E5E7EB]">
                     <span className="text-[11px] uppercase tracking-wider text-slate-300 font-bold block">
                       Strong Demonstrated Skills:
                     </span>
@@ -226,7 +226,7 @@ export const EmployerMatchesPage: React.FC = () => {
                       {cand.keySkills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2.5 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/20 text-[11px] font-medium text-teal-300 font-mono"
+                          className="px-2.5 py-0.5 rounded-md bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[11px] font-medium text-[#8B6F5A] font-mono"
                         >
                           ✓ {skill}
                         </span>
@@ -236,17 +236,17 @@ export const EmployerMatchesPage: React.FC = () => {
 
                   {/* Verified Evidence count & Primary development gap */}
                   <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                    <div className="p-3 rounded-xl bg-[#0D1224]/80 border border-white/10">
+                    <div className="p-3 rounded-xl bg-[#FAF7F2]/80 border border-[#E5E7EB]">
                       <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block mb-0.5">
                         Verified Evidence
                       </span>
-                      <span className="font-bold text-white text-xs flex items-center gap-1.5">
-                        <span className="text-teal-400">🛡️</span> {cand.evidenceCount} verified projects
+                      <span className="font-bold text-[#18283D] text-xs flex items-center gap-1.5">
+                        <span className="text-[#8B6F5A]">🛡️</span> {cand.evidenceCount} verified projects
                       </span>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/20">
-                      <span className="text-[10px] text-violet-400 uppercase tracking-wider font-semibold block mb-0.5">
+                    <div className="p-3 rounded-xl bg-[#D8C3A5]/25 border border-[#D8C3A5]">
+                      <span className="text-[10px] text-[#8B6F5A] uppercase tracking-wider font-semibold block mb-0.5">
                         Primary Gap
                       </span>
                       <span className="font-medium text-violet-200 text-xs truncate block font-mono">
@@ -257,14 +257,14 @@ export const EmployerMatchesPage: React.FC = () => {
                 </div>
 
                 {/* Card Action */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-4 border-t border-[#E5E7EB] flex items-center justify-between">
                   <span className="text-[11px] text-slate-500 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
                     <span>Discoverable: Active</span>
                   </span>
                   <Link
                     to={`/employer/candidates/${cand.id}`}
-                    className="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold tracking-wide transition-all flex items-center gap-1 shadow-sm active:scale-[0.98]"
+                    className="px-4 py-2 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all flex items-center gap-1 shadow-sm"
                   >
                     <span>View candidate</span>
                     <span>→</span>
@@ -276,8 +276,8 @@ export const EmployerMatchesPage: React.FC = () => {
         </section>
 
         {/* Privacy Note */}
-        <section className="p-4 rounded-xl bg-[#11182B]/60 border border-white/10 text-xs text-slate-400 flex items-center gap-3 backdrop-blur-sm">
-          <span className="material-symbols-outlined text-violet-400 text-xl shrink-0">
+        <section className="p-4 rounded-xl bg-[#FAF7F2]/60 border border-[#E5E7EB] text-xs text-slate-400 flex items-center gap-3 backdrop-blur-sm">
+          <span className="material-symbols-outlined text-[#8B6F5A] text-xl shrink-0">
             privacy_tip
           </span>
           <p>

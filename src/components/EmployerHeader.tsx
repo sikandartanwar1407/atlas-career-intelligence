@@ -47,22 +47,22 @@ export const EmployerHeader: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#080B16]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F2]/90 backdrop-blur-xl border-b border-[#E5E7EB] shadow-[0_4px_20px_rgba(24,40,61,0.06)]">
       <div className="h-16 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         
         {/* Left: ATLAS FOR EMPLOYERS Logo */}
         <div className="flex items-center gap-3 shrink-0">
           <Link to="/employer" className="flex items-center gap-2.5 focus:outline-none group">
-            <div className="w-8 h-8 rounded-xl bg-[#11182B] border border-teal-500/30 shadow-sm flex items-center justify-center transition-colors group-hover:border-teal-500/50">
-              <div className="w-3.5 h-3.5 rounded-full border border-teal-400 flex items-center justify-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+            <div className="w-8 h-8 rounded-xl bg-[#FAF7F2] border border-[#8B6F5A]/40 shadow-sm flex items-center justify-center transition-colors group-hover:border-[#8B6F5A]/60">
+              <div className="w-3.5 h-3.5 rounded-full border border-[#8B6F5A] flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#D8C3A5]"></div>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-sans text-lg text-white font-extrabold tracking-tight">
+              <span className="font-sans text-lg text-[#18283D] font-extrabold tracking-tight">
                 ATLAS
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-[10px] font-mono text-teal-300 font-bold uppercase tracking-wider">
+              <span className="px-2 py-0.5 rounded-full bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[10px] font-mono text-[#8B6F5A] font-bold uppercase tracking-wider">
                 Employer
               </span>
             </div>
@@ -84,10 +84,10 @@ export const EmployerHeader: React.FC = () => {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-180 ${
                   isActive
-                    ? 'bg-teal-500/15 text-teal-300 font-semibold border border-teal-500/40'
-                    : 'text-[#94A3B8] hover:text-white hover:bg-white/[0.04] border border-transparent'
+                    ? 'bg-[#18283D] text-[#FAF7F2] font-semibold border border-[#18283D] shadow-xs'
+                    : 'text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:border-[#D8C3A5]/40 hover:-translate-y-0.5 border border-transparent'
                 }`}
               >
                 {item.label}
@@ -101,17 +101,17 @@ export const EmployerHeader: React.FC = () => {
           
           {/* Company Verification Badge */}
           {isEmployerVerified ? (
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono font-medium text-emerald-400 shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono font-medium text-emerald-600 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               <span>Verified Entity</span>
             </div>
           ) : (
             <Link
               to="/employer/onboarding"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-medium text-amber-300 hover:bg-amber-500/20 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-medium text-amber-700 hover:bg-amber-500/20 transition-colors"
               title="Click to complete employer verification"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               <span>Verification Pending</span>
             </Link>
           )}
@@ -119,7 +119,7 @@ export const EmployerHeader: React.FC = () => {
           {/* Quick Post CTA */}
           <Link
             to="/employer/opportunities/new"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-bold shadow-sm transition-all btn-interactive"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 text-[#FAF7F2] text-xs font-bold shadow-sm transition-all duration-180 border border-transparent btn-interactive"
           >
             <span className="material-symbols-outlined text-[16px]">add</span>
             <span className="hidden sm:inline">Post Opportunity</span>
@@ -131,33 +131,33 @@ export const EmployerHeader: React.FC = () => {
             <button
               type="button"
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center gap-2 p-1 pl-1.5 pr-2 rounded-xl bg-[#11182B] border border-white/10 hover:border-teal-500/40 hover:bg-[#172039] transition-all group focus:outline-none"
+              className="flex items-center gap-2 p-1 pl-1.5 pr-2 rounded-xl bg-[#FAF7F2] border border-[#E5E7EB] hover:border-[#8B6F5A]/60 hover:shadow-md hover:-translate-y-0.5 hover:bg-[#D8C3A5]/10 transition-all group focus:outline-none"
               aria-label="Employer account menu"
             >
-              <div className="w-7 h-7 rounded-lg bg-teal-500 text-slate-950 flex items-center justify-center text-xs font-bold shadow-sm">
+              <div className="w-7 h-7 rounded-lg bg-[#8B6F5A] text-[#FAF7F2] flex items-center justify-center text-xs font-bold shadow-sm">
                 {getCompanyInitials(employerProfile?.companyName)}
               </div>
-              <span className="text-xs font-medium text-white hidden md:inline max-w-[120px] truncate">
+              <span className="text-xs font-medium text-[#18283D] hidden md:inline max-w-[120px] truncate">
                 {employerProfile?.companyName || 'Employer'}
               </span>
-              <span className="material-symbols-outlined text-[16px] text-[#94A3B8] group-hover:text-white transition-colors">
+              <span className="material-symbols-outlined text-[16px] text-[#6B7280] group-hover:text-[#18283D] transition-colors">
                 {profileDropdownOpen ? 'expand_less' : 'expand_more'}
               </span>
             </button>
 
             {/* Profile Menu Dropdown */}
             {profileDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-[#0D1224] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] py-2 z-50 text-xs animate-scale-in origin-top-right backdrop-blur-2xl">
-                <div className="px-4 py-3 border-b border-white/[0.08]">
-                  <div className="font-semibold text-sm text-white truncate">
+              <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-[#FAF7F2] border border-[#E5E7EB] shadow-[0_20px_50px_rgba(24,40,61,0.12)] py-2 z-50 text-xs animate-scale-in origin-top-right backdrop-blur-2xl">
+                <div className="px-4 py-3 border-b border-[#E5E7EB]">
+                  <div className="font-semibold text-sm text-[#18283D] truncate">
                     {employerProfile?.companyName || 'Organization Profile'}
                   </div>
-                  <div className="text-[11px] text-[#94A3B8] truncate mt-0.5">
+                  <div className="text-[11px] text-[#6B7280] truncate mt-0.5">
                     {employerProfile?.companyEmail || employerProfile?.companyWebsite || 'ATLAS Employer Portal'}
                   </div>
-                  <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/30 text-[10px] font-mono text-teal-300">
+                  <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[10px] font-mono text-[#8B6F5A]">
                     <span>Status:</span>
-                    <span className="text-white capitalize">{employerProfile?.verificationStatus || 'Verified'}</span>
+                    <span className="text-[#18283D] capitalize">{employerProfile?.verificationStatus || 'Verified'}</span>
                   </div>
                 </div>
 
@@ -165,27 +165,27 @@ export const EmployerHeader: React.FC = () => {
                   <Link
                     to="/employer/profile"
                     onClick={() => setProfileDropdownOpen(false)}
-                    className="flex items-center gap-2.5 px-4 py-2 text-[#CBD5E1] hover:text-white hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center gap-2.5 px-4 py-2 text-[#4B5563] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-[16px] text-teal-400">business</span>
+                    <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">business</span>
                     <span>Company Profile & Branding</span>
                   </Link>
 
                   <Link
                     to="/employer/opportunities"
                     onClick={() => setProfileDropdownOpen(false)}
-                    className="flex items-center gap-2.5 px-4 py-2 text-[#CBD5E1] hover:text-white hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center gap-2.5 px-4 py-2 text-[#4B5563] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-[16px] text-cyan-400">work</span>
+                    <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">work</span>
                     <span>Manage Opportunities</span>
                   </Link>
 
                   <Link
                     to="/employer/candidates"
                     onClick={() => setProfileDropdownOpen(false)}
-                    className="flex items-center gap-2.5 px-4 py-2 text-[#CBD5E1] hover:text-white hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center gap-2.5 px-4 py-2 text-[#4B5563] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-[16px] text-violet-400">group</span>
+                    <span className="material-symbols-outlined text-[16px] text-[#8B6F5A]">group</span>
                     <span>Search Verified Candidates</span>
                   </Link>
 
@@ -196,19 +196,19 @@ export const EmployerHeader: React.FC = () => {
                         verifyEmployerAccount();
                         setProfileDropdownOpen(false);
                       }}
-                      className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-emerald-400 hover:bg-emerald-500/10 transition-colors font-medium"
+                      className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-emerald-600 hover:bg-emerald-500/10 transition-colors font-medium"
                     >
                       <span className="material-symbols-outlined text-[16px]">verified</span>
                       <span>Instant Verify Company</span>
                     </button>
                   )}
 
-                  <div className="border-t border-white/[0.06] my-1"></div>
+                  <div className="border-t border-[#E5E7EB] my-1"></div>
 
                   <button
                     type="button"
                     onClick={handleSwitchToCandidate}
-                    className="w-full text-left flex items-center justify-between px-4 py-2 text-violet-300 hover:text-violet-200 hover:bg-violet-500/10 transition-colors font-medium"
+                    className="w-full text-left flex items-center justify-between px-4 py-2 text-[#8B6F5A] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 transition-colors font-medium"
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="material-symbols-outlined text-[16px]">person</span>
@@ -220,7 +220,7 @@ export const EmployerHeader: React.FC = () => {
                   <Link
                     to="/role-select"
                     onClick={() => setProfileDropdownOpen(false)}
-                    className="flex items-center gap-2.5 px-4 py-2 text-[#94A3B8] hover:text-white hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center gap-2.5 px-4 py-2 text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 transition-colors"
                   >
                     <span className="material-symbols-outlined text-[16px]">swap_horiz</span>
                     <span>Role Selection</span>
@@ -234,7 +234,7 @@ export const EmployerHeader: React.FC = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/[0.06] transition-colors border border-white/5"
+            className="md:hidden p-2 rounded-xl text-[#6B7280] hover:text-[#18283D] hover:bg-[#D8C3A5]/20 hover:-translate-y-0.5 transition-all border border-[#E5E7EB]"
             aria-label="Toggle navigation menu"
           >
             <span className="material-symbols-outlined text-2xl">
@@ -246,13 +246,13 @@ export const EmployerHeader: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0D1224] border-b border-white/10 px-6 py-4 space-y-3 animate-fade-in-down shadow-2xl">
-          <div className="p-3 rounded-xl bg-[#11182B] border border-white/10 flex items-center justify-between">
+        <div className="md:hidden bg-[#FAF7F2] border-b border-[#E5E7EB] px-6 py-4 space-y-3 animate-fade-in-down shadow-2xl">
+          <div className="p-3 rounded-xl bg-[#F3F4F6] border border-[#E5E7EB] flex items-center justify-between">
             <div>
-              <span className="text-[10px] text-[#94A3B8] uppercase font-mono tracking-wider block">Company</span>
-              <span className="font-semibold text-xs text-white">{employerProfile?.companyName || 'Employer'}</span>
+              <span className="text-[10px] text-[#6B7280] uppercase font-mono tracking-wider block">Company</span>
+              <span className="font-semibold text-xs text-[#18283D]">{employerProfile?.companyName || 'Employer'}</span>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#D8C3A5]/30 text-[#8B6F5A]">
               {isEmployerVerified ? 'Verified' : 'Pending'}
             </span>
           </div>
@@ -266,8 +266,8 @@ export const EmployerHeader: React.FC = () => {
                 className={({ isActive }) =>
                   `p-2.5 rounded-xl text-center text-xs transition-all ${
                     isActive
-                      ? 'bg-teal-500 text-slate-950 font-bold shadow-sm'
-                      : 'bg-[#11182B] border border-white/5 text-[#CBD5E1] hover:text-white'
+                      ? 'bg-[#18283D] text-[#FAF7F2] font-bold shadow-sm'
+                      : 'bg-[#FAF7F2] border border-[#E5E7EB] text-[#4B5563] hover:text-[#18283D]'
                   }`
                 }
               >
@@ -276,18 +276,18 @@ export const EmployerHeader: React.FC = () => {
             ))}
           </div>
 
-          <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs">
+          <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-between text-xs">
             <button
               type="button"
               onClick={handleSwitchToCandidate}
-              className="font-medium text-violet-400 hover:text-violet-300"
+              className="font-medium text-[#8B6F5A] hover:text-[#18283D]"
             >
               Candidate View →
             </button>
             <Link
               to="/employer/opportunities/new"
               onClick={() => setMobileMenuOpen(false)}
-              className="font-bold text-teal-400 hover:text-teal-300"
+              className="font-bold text-[#8B6F5A] hover:text-[#18283D]"
             >
               + Post Role
             </Link>

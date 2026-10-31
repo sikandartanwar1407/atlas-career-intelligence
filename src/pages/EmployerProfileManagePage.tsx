@@ -32,30 +32,30 @@ export const EmployerProfileManagePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080B16] text-slate-100 selection:bg-violet-500/30 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100 selection:bg-[#D8C3A5]/40 selection:text-[#18283D]">
       <EmployerHeader />
 
       <main className="w-full pt-20 flex-1 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <Link to="/employer" className="hover:text-violet-400 transition-colors flex items-center gap-1">
+          <Link to="/employer" className="hover:text-[#8B6F5A] transition-colors flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             <span>Employer Dashboard</span>
           </Link>
           <span>/</span>
-          <span className="text-white font-medium">Company Profile</span>
+          <span className="text-[#18283D] font-medium">Company Profile</span>
         </div>
 
         {/* Header */}
-        <section className="space-y-2 pb-6 border-b border-white/10">
+        <section className="space-y-2 pb-6 border-b border-[#E5E7EB]">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></span>
-            <span className="text-xs uppercase tracking-widest text-violet-400 font-bold">
+            <span className="text-xs uppercase tracking-widest text-[#8B6F5A] font-bold">
               ATLAS FOR EMPLOYERS · Corporate Profile
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#18283D] tracking-tight">
             Company Profile & Verification
           </h1>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
@@ -71,16 +71,16 @@ export const EmployerProfileManagePage: React.FC = () => {
         )}
 
         {/* Verification Status Card */}
-        <section className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-sm">
+        <section className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-sm">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-white">
+              <span className="text-xs font-bold text-[#18283D]">
                 Corporate Verification Status:
               </span>
               <span
                 className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${
                   isEmployerVerified
-                    ? 'bg-teal-500/10 text-teal-300 border border-teal-500/30'
+                    ? 'bg-[#D8C3A5]/25 text-[#8B6F5A] border border-[#D8C3A5]'
                     : 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
                 }`}
               >
@@ -98,7 +98,7 @@ export const EmployerProfileManagePage: React.FC = () => {
             <button
               type="button"
               onClick={verifyEmployerAccount}
-              className="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold tracking-wide transition-all shrink-0 shadow-sm active:scale-[0.98]"
+              className="px-4 py-2 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all shrink-0 shadow-sm"
             >
               Simulate Verification (Demo)
             </button>
@@ -106,9 +106,9 @@ export const EmployerProfileManagePage: React.FC = () => {
         </section>
 
         {/* Profile Edit Form */}
-        <form onSubmit={handleSubmit} className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <span className="material-symbols-outlined text-violet-400 text-xl">
+        <form onSubmit={handleSubmit} className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
+          <h2 className="text-lg font-bold text-[#18283D] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[#8B6F5A] text-xl">
               business
             </span>
             <span>Corporate Details</span>
@@ -124,7 +124,7 @@ export const EmployerProfileManagePage: React.FC = () => {
                 required
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               />
             </div>
 
@@ -136,7 +136,7 @@ export const EmployerProfileManagePage: React.FC = () => {
                 type="url"
                 value={companyWebsite}
                 onChange={(e) => setCompanyWebsite(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               />
             </div>
 
@@ -149,7 +149,7 @@ export const EmployerProfileManagePage: React.FC = () => {
                 required
                 value={companyEmail}
                 onChange={(e) => setCompanyEmail(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               />
             </div>
 
@@ -161,7 +161,7 @@ export const EmployerProfileManagePage: React.FC = () => {
                 type="text"
                 value={industry}
                 onChange={(e) => setIndustry(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               />
             </div>
 
@@ -172,7 +172,7 @@ export const EmployerProfileManagePage: React.FC = () => {
               <select
                 value={companySize}
                 onChange={(e) => setCompanySize(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               >
                 <option value="1–10 employees">1–10 employees</option>
                 <option value="11–50 employees">11–50 employees</option>
@@ -190,7 +190,7 @@ export const EmployerProfileManagePage: React.FC = () => {
                 type="text"
                 value={companyLocation}
                 onChange={(e) => setCompanyLocation(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
               />
             </div>
 
@@ -202,15 +202,15 @@ export const EmployerProfileManagePage: React.FC = () => {
                 rows={4}
                 value={companyDescription}
                 onChange={(e) => setCompanyDescription(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 leading-relaxed"
+                className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30 leading-relaxed"
               />
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/10 flex justify-end">
+          <div className="pt-4 border-t border-[#E5E7EB] flex justify-end">
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-[0.98]"
+              className="px-6 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all shadow-sm"
             >
               Save Profile Changes
             </button>

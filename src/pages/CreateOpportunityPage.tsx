@@ -104,30 +104,30 @@ export const CreateOpportunityPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080B16] text-slate-100 selection:bg-violet-500/30 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-slate-100 selection:bg-[#D8C3A5]/40 selection:text-[#18283D]">
       <EmployerHeader />
 
       <main className="w-full pt-20 flex-1 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <Link to="/employer" className="hover:text-violet-400 transition-colors flex items-center gap-1">
+          <Link to="/employer" className="hover:text-[#8B6F5A] transition-colors flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">arrow_back</span>
             <span>Employer Portal</span>
           </Link>
           <span>/</span>
-          <span className="text-white font-medium">Create Opportunity</span>
+          <span className="text-[#18283D] font-medium">Create Opportunity</span>
         </div>
 
         {/* Page Heading */}
-        <section className="space-y-2 pb-6 border-b border-white/10">
+        <section className="space-y-2 pb-6 border-b border-[#E5E7EB]">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></span>
-            <span className="text-xs uppercase tracking-widest text-violet-400 font-bold">
+            <span className="text-xs uppercase tracking-widest text-[#8B6F5A] font-bold">
               Capability Calibration
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#18283D] tracking-tight">
             Post an opportunity.
           </h1>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
@@ -145,9 +145,9 @@ export const CreateOpportunityPage: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-8">
           
           {/* Section 1: Role Overview */}
-          <div className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 text-xs flex items-center justify-center font-mono font-bold">
+          <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
+            <h2 className="text-lg font-bold text-[#18283D] flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#18283D]/30 text-xs flex items-center justify-center font-mono font-bold">
                 1
               </span>
               <span>Role Identity & Context</span>
@@ -164,7 +164,7 @@ export const CreateOpportunityPage: React.FC = () => {
                   placeholder="e.g. Junior Data Analyst"
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export const CreateOpportunityPage: React.FC = () => {
                   placeholder="e.g. Acme Analytics"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 />
               </div>
 
@@ -189,7 +189,7 @@ export const CreateOpportunityPage: React.FC = () => {
                 <select
                   value={targetRoleCategory}
                   onChange={(e) => setTargetRoleCategory(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 >
                   <option value="Data Analyst">Data Analyst</option>
                   <option value="Business Analyst">Business Analyst</option>
@@ -212,7 +212,7 @@ export const CreateOpportunityPage: React.FC = () => {
                   placeholder="e.g. Remote or San Francisco, CA (Hybrid)"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 />
               </div>
 
@@ -223,7 +223,7 @@ export const CreateOpportunityPage: React.FC = () => {
                 <select
                   value={employmentType}
                   onChange={(e) => setEmploymentType(e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 >
                   <option value="Full-time">Full-time</option>
                   <option value="Part-time">Part-time</option>
@@ -239,7 +239,7 @@ export const CreateOpportunityPage: React.FC = () => {
                 <select
                   value={experienceLevel}
                   onChange={(e) => setExperienceLevel(e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 >
                   <option value="Fresher">Fresher (0-1 yrs)</option>
                   <option value="Student">Student</option>
@@ -258,7 +258,7 @@ export const CreateOpportunityPage: React.FC = () => {
                   placeholder="e.g. $70,000 – $85,000"
                   value={salaryRange}
                   onChange={(e) => setSalaryRange(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30"
                 />
               </div>
 
@@ -272,17 +272,17 @@ export const CreateOpportunityPage: React.FC = () => {
                   placeholder="Describe key responsibilities, project scope, and daily engineering or analysis workflows..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs bg-[#0D1224] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/30 leading-relaxed"
+                  className="w-full px-3.5 py-2.5 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-xl text-[#18283D] placeholder-slate-500 focus:outline-none focus:border-[#8B6F5A]/50 focus:ring-1 focus:ring-[#18283D]/30 leading-relaxed"
                 />
               </div>
             </div>
           </div>
 
           {/* Section 2: Capability & Skill Threshold Calibration */}
-          <div className="bg-[#11182B]/80 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
+          <div className="bg-[#FAF7F2]/80 border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6 backdrop-blur-sm">
             <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 border border-violet-500/30 text-xs flex items-center justify-center font-mono font-bold">
+              <h2 className="text-lg font-bold text-[#18283D] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#18283D]/30 text-xs flex items-center justify-center font-mono font-bold">
                   2
                 </span>
                 <span>Capability Requirements & Minimum Thresholds</span>
@@ -293,7 +293,7 @@ export const CreateOpportunityPage: React.FC = () => {
             </div>
 
             {/* Add Skill Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 rounded-xl bg-[#0D1224]/80 border border-white/10">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 rounded-xl bg-[#FAF7F2]/80 border border-[#E5E7EB]">
               <div className="flex-1">
                 <label className="text-[11px] text-slate-400 uppercase tracking-wider block font-semibold mb-1">
                   Add from ATLAS Skill Catalogue:
@@ -301,7 +301,7 @@ export const CreateOpportunityPage: React.FC = () => {
                 <select
                   value={selectedCatalogueSkill}
                   onChange={(e) => setSelectedCatalogueSkill(e.target.value)}
-                  className="w-full px-3 py-2 text-xs bg-[#11182B] border border-white/10 rounded-lg text-white focus:outline-none focus:border-violet-500/50"
+                  className="w-full px-3 py-2 text-xs bg-[#FAF7F2] border border-[#E5E7EB] rounded-lg text-[#18283D] focus:outline-none focus:border-[#8B6F5A]/50"
                 >
                   {DEFAULT_SKILL_CATALOGUE.map((skill) => (
                     <option key={skill} value={skill}>
@@ -314,7 +314,7 @@ export const CreateOpportunityPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleAddRequirement}
-                className="self-end px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold transition-all shrink-0 active:scale-[0.98] shadow-sm"
+                className="self-end px-4 py-2 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold transition-all shrink-0 shadow-sm"
               >
                 + Add Skill
               </button>
@@ -325,22 +325,22 @@ export const CreateOpportunityPage: React.FC = () => {
               {requirements.map((req) => (
                 <div
                   key={req.skill}
-                  className="p-4 rounded-xl bg-[#0D1224]/60 border border-white/10 space-y-3"
+                  className="p-4 rounded-xl bg-[#FAF7F2]/60 border border-[#E5E7EB] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="font-bold text-xs text-white sm:text-sm font-mono">
+                      <span className="font-bold text-xs text-[#18283D] sm:text-sm font-mono">
                         {req.skill}
                       </span>
                       {/* Required vs Preferred Toggle */}
-                      <div className="flex items-center gap-1 bg-white/5 p-0.5 rounded-lg text-[10px] font-semibold border border-white/10">
+                      <div className="flex items-center gap-1 bg-[#E5E7EB] p-0.5 rounded-lg text-[10px] font-semibold border border-[#E5E7EB]">
                         <button
                           type="button"
                           onClick={() => handleUpdateRequirement(req.skill, { type: 'required' })}
                           className={`px-2 py-0.5 rounded-md transition-colors ${
                             req.type === 'required'
-                              ? 'bg-violet-600 text-white shadow-2xs'
-                              : 'text-slate-400 hover:text-white'
+                              ? 'bg-[#18283D] text-[#FAF7F2] shadow-2xs'
+                              : 'text-[#6B7280] hover:text-[#18283D]'
                           }`}
                         >
                           Required
@@ -350,8 +350,8 @@ export const CreateOpportunityPage: React.FC = () => {
                           onClick={() => handleUpdateRequirement(req.skill, { type: 'preferred' })}
                           className={`px-2 py-0.5 rounded-md transition-colors ${
                             req.type === 'preferred'
-                              ? 'bg-indigo-600 text-white shadow-2xs'
-                              : 'text-slate-400 hover:text-white'
+                              ? 'bg-[#8B6F5A] text-[#FAF7F2] shadow-2xs'
+                              : 'text-[#6B7280] hover:text-[#18283D]'
                           }`}
                         >
                           Preferred
@@ -374,7 +374,7 @@ export const CreateOpportunityPage: React.FC = () => {
                       <span className="text-slate-400 text-[11px]">
                         Minimum Expected Level:
                       </span>
-                      <span className="font-mono font-bold text-teal-400">
+                      <span className="font-mono font-bold text-[#8B6F5A]">
                         {req.minLevel}%
                       </span>
                     </div>
@@ -406,14 +406,14 @@ export const CreateOpportunityPage: React.FC = () => {
           <div className="flex items-center justify-between pt-2">
             <Link
               to="/employer"
-              className="px-5 py-2.5 rounded-xl border border-white/10 text-slate-300 text-xs font-semibold hover:bg-white/5 transition-colors"
+              className="px-5 py-2.5 rounded-xl border border-[#E5E7EB] bg-[#FAF7F2] text-[#6B7280] text-xs font-semibold hover:bg-[#D8C3A5]/15 hover:border-[#8B6F5A]/50 hover:text-[#18283D] hover:-translate-y-0.5 hover:shadow-xs active:scale-[0.98] transition-all"
             >
               Cancel
             </Link>
 
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-[0.98]"
+              className="px-6 py-2.5 rounded-xl bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] border border-transparent text-[#FAF7F2] text-xs font-semibold tracking-wide transition-all shadow-sm"
             >
               Publish Opportunity & Calibrate Matches →
             </button>

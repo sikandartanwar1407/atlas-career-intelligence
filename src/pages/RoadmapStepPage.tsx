@@ -15,7 +15,7 @@ export const RoadmapStepPage: React.FC = () => {
 
   if (!step) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#080B16] text-[#F1F5F9]">
+      <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563]">
         <Header />
         <main className="w-full pt-28 flex-1 px-4 py-12 flex items-center justify-center">
           <EmptyState
@@ -42,7 +42,7 @@ export const RoadmapStepPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080B16] text-[#F1F5F9]">
+    <div className="min-h-screen flex flex-col bg-[#F3F4F6] text-[#4B5563]">
       <Header />
 
       <PageTransition className="w-full pt-24 flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -50,22 +50,22 @@ export const RoadmapStepPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/career-roadmap"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#94A3B8] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#6B7280] hover:text-[#18283D] transition-colors"
           >
             <span className="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Back to full personal roadmap</span>
           </Link>
-          <span className="text-xs font-mono text-[#64748B]">Step {step.stepNumber} of {state.roadmapSteps.length}</span>
+          <span className="text-xs font-mono text-[#6B7280]">Step {step.stepNumber} of {state.roadmapSteps.length}</span>
         </div>
 
         {/* Step Header Card */}
-        <div className="p-6 sm:p-8 rounded-2xl glass-panel border-white/10 shadow-xl space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+        <div className="p-6 sm:p-8 rounded-2xl glass-panel border-[#E5E7EB] shadow-xl space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#E5E7EB]">
             <div className="flex items-center gap-2.5">
               <span className="w-7 h-7 rounded-lg bg-violet-600 text-white flex items-center justify-center text-xs font-bold font-mono shadow-sm">
                 0{step.stepNumber}
               </span>
-              <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#A78BFA]">
+              <span className="text-[11px] font-mono uppercase tracking-wider font-bold text-[#8B6F5A]">
                 Milestone 0{step.stepNumber}
               </span>
               <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
@@ -73,42 +73,42 @@ export const RoadmapStepPage: React.FC = () => {
                   ? 'bg-rose-500/15 border border-rose-500/30 text-rose-300'
                   : step.priority === 'MEDIUM PRIORITY'
                   ? 'bg-amber-500/15 border border-amber-500/30 text-amber-300'
-                  : 'bg-teal-500/15 border border-teal-500/30 text-[#2DD4BF]'
+                  : 'bg-[#D8C3A5]/25 border border-[#D8C3A5] text-[#8B6F5A]'
               }`}>
                 {step.priority}
               </span>
               {step.completed && (
-                <span className="px-2 py-0.5 rounded-lg bg-teal-500/20 text-[#2DD4BF] border border-teal-500/30 text-[10px] font-mono font-bold uppercase">
+                <span className="px-2 py-0.5 rounded-lg bg-[#D8C3A5]/30 text-[#8B6F5A] border border-[#D8C3A5] text-[10px] font-mono font-bold uppercase">
                   Completed
                 </span>
               )}
             </div>
 
             <div className="flex items-center gap-4 text-xs font-mono">
-              <span className="text-[#64748B]">Allocated: <strong className="text-white">{step.allocatedHours} hrs / wk</strong></span>
-              <span className="text-[#64748B]">Duration: <strong className="text-white">{step.estimatedDurationWeeks}</strong></span>
+              <span className="text-[#6B7280]">Allocated: <strong className="text-[#18283D]">{step.allocatedHours} hrs / wk</strong></span>
+              <span className="text-[#6B7280]">Duration: <strong className="text-[#18283D]">{step.estimatedDurationWeeks}</strong></span>
               <span className="text-rose-400 font-bold">Deficit: -{step.gap} pts</span>
             </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#18283D] tracking-tight">
             {step.title}
           </h1>
 
-          <p className="text-sm text-[#94A3B8] leading-relaxed">
+          <p className="text-sm text-[#6B7280] leading-relaxed">
             {step.description}
           </p>
 
           {/* Progress Bar of Actions */}
           <div className="pt-2 space-y-1.5">
             <div className="flex justify-between items-center text-xs font-mono">
-              <span className="text-[#94A3B8]">{completedCount} of {totalCount} actions completed</span>
-              <span className="text-[#A78BFA] font-bold">{progressPercent}%</span>
+              <span className="text-[#6B7280]">{completedCount} of {totalCount} actions completed</span>
+              <span className="text-[#8B6F5A] font-bold">{progressPercent}%</span>
             </div>
             <AnimatedProgressBar
               value={progressPercent}
               className="w-full h-2"
-              trackClassName="bg-[#0D1224] rounded-full overflow-hidden border border-white/5"
+              trackClassName="bg-[#FAF7F2] rounded-full overflow-hidden border border-[#E5E7EB]"
               fillClassName="bg-violet-600 rounded-full"
               durationMs={400}
             />
@@ -116,17 +116,17 @@ export const RoadmapStepPage: React.FC = () => {
         </div>
 
         {/* Action Plan Checklist */}
-        <div className="glass-panel border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="glass-panel border-[#E5E7EB] rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
             <div>
-              <h2 className="text-lg font-bold text-white">
+              <h2 className="text-lg font-bold text-[#18283D]">
                 Action Plan &amp; Learning Tasks
               </h2>
-              <p className="text-xs text-[#94A3B8] mt-0.5">
+              <p className="text-xs text-[#6B7280] mt-0.5">
                 Mark each action complete as you execute. When all actions are complete, mark the entire step complete.
               </p>
             </div>
-            <span className="text-xs font-mono text-[#A78BFA]">{completedCount} / {totalCount} Done</span>
+            <span className="text-xs font-mono text-[#8B6F5A]">{completedCount} / {totalCount} Done</span>
           </div>
 
           <div className="space-y-4">
@@ -137,17 +137,17 @@ export const RoadmapStepPage: React.FC = () => {
                 <div
                   key={action.id}
                   onClick={() => toggleRoadmapAction(step.id, action.id)}
-                  className={`p-5 rounded-xl border cursor-pointer flex items-start gap-4 transition-all ${
+                  className={`p-5 rounded-xl border-2 cursor-pointer flex items-start gap-4 transition-all duration-200 ease-out ${
                     isChecked
-                      ? 'bg-teal-950/20 border-teal-500/30'
-                      : 'bg-[#0D1224]/80 border-white/10 hover:border-violet-500/40 hover:bg-[#11182B]'
+                      ? 'bg-[#D8C3A5]/25 border-[#18283D] shadow-sm -translate-y-0.5'
+                      : 'bg-[#FAF7F2] border-[#E5E7EB] hover:border-[#8B6F5A]/60 hover:bg-[#D8C3A5]/10 hover:-translate-y-0.5 hover:shadow-md'
                   }`}
                 >
                   <div
                     className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5 border transition-all duration-150 ${
                       isChecked
-                        ? 'bg-teal-500 border-teal-500 text-[#080B16] font-bold'
-                        : 'bg-[#172039] border-white/20 text-transparent'
+                        ? 'bg-[#18283D] border-[#18283D] text-[#FAF7F2] font-bold'
+                        : 'bg-[#E5E7EB] border-[#E5E7EB] text-transparent'
                     }`}
                   >
                     <span className="material-symbols-outlined text-[16px]">check</span>
@@ -156,23 +156,23 @@ export const RoadmapStepPage: React.FC = () => {
                   <div className="flex-1 space-y-1">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs text-[#64748B]">0{aIdx + 1}</span>
+                        <span className="font-mono text-xs text-[#6B7280]">0{aIdx + 1}</span>
                         <h3 className={`text-sm font-semibold transition-colors duration-150 ${
-                          isChecked ? 'line-through text-[#64748B]' : 'text-white'
+                          isChecked ? 'line-through text-[#6B7280]' : 'text-[#18283D]'
                         }`}>
                           {action.title}
                         </h3>
                       </div>
 
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="px-2 py-0.5 rounded-lg bg-[#172039] border border-white/10 text-[10px] font-mono font-semibold text-[#A78BFA]">
+                        <span className="px-2 py-0.5 rounded-lg bg-[#E5E7EB] border border-[#E5E7EB] text-[10px] font-mono font-semibold text-[#8B6F5A]">
                           {action.type}
                         </span>
-                        <span className="text-[#64748B] font-mono text-xs">{action.estimatedMinutes} min</span>
+                        <span className="text-[#6B7280] font-mono text-xs">{action.estimatedMinutes} min</span>
                       </div>
                     </div>
 
-                    <p className={`text-xs leading-relaxed transition-colors duration-150 ${isChecked ? 'text-[#64748B]' : 'text-[#94A3B8]'}`}>
+                    <p className={`text-xs leading-relaxed transition-colors duration-150 ${isChecked ? 'text-[#6B7280]' : 'text-[#6B7280]'}`}>
                       {action.description}
                     </p>
                   </div>
@@ -182,10 +182,10 @@ export const RoadmapStepPage: React.FC = () => {
           </div>
 
           {/* Step Completion Action */}
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-6 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link
               to="/career-roadmap"
-              className="text-xs font-mono text-[#94A3B8] hover:text-white transition-colors"
+              className="text-xs font-mono text-[#6B7280] hover:text-[#18283D] transition-colors"
             >
               ← Return to Roadmap
             </Link>
@@ -196,8 +196,8 @@ export const RoadmapStepPage: React.FC = () => {
               disabled={!allActionsDone && !step.completed}
               className={`w-full sm:w-auto px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 ${
                 allActionsDone || step.completed
-                  ? 'bg-teal-500 hover:bg-teal-400 text-[#080B16] cursor-pointer shadow-sm'
-                  : 'bg-[#172039] text-[#64748B] border border-white/5 cursor-not-allowed'
+                  ? 'bg-[#18283D] hover:bg-[#223752] hover:border-[#D8C3A5]/60 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] text-[#FAF7F2] cursor-pointer shadow-sm border border-transparent'
+                  : 'bg-[#E5E7EB] text-[#6B7280] border border-[#E5E7EB] cursor-not-allowed'
               }`}
             >
               <span>{step.completed ? 'Step Completed (Return to Roadmap)' : 'Mark Step Complete →'}</span>
