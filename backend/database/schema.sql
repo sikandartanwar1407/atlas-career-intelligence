@@ -394,6 +394,40 @@ CREATE INDEX IF NOT EXISTS idx_job_applications_opportunity_id ON job_applicatio
 CREATE INDEX IF NOT EXISTS idx_job_applications_candidate_id ON job_applications(candidate_id);
 
 -- ==============================================================================
+-- 15. CANDIDATE RESUMES & EXTRACTED COMPETENCIES (ML / NLP)
+-- ==============================================================================
+
+CREATE TABLE IF NOT EXISTS candidate_resumes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    candidate_id UUID NOT NULL REFERENCES candidate_profiles(id) ON DELETE CASCADE,
+    file_name TEXT NOT NULL,
+    extracted_text TEXT NOT NULL,
+    parsed_skills TEXT[] NOT NULL DEFAULT '{}',
+    skills_by_category JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_candidate_resumes_candidate_id ON candidate_resumes(candidate_id);
+
+-- ==============================================================================
+-- 16. RESUME VS. JOB DESCRIPTION COMPARISONS (SEMANTIC MATCHING)
+-- ==============================================================================
+
+CREATE TABLE IF NOT EXISTS resume_job_comparisons (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    candidate_id UUID NOT NULL REFERENCES candidate_profiles(id) ON DELETE CASCADE,
+    job_title TEXT NOT NULL,
+    job_description_raw TEXT NOT NULL,
+    match_percentage INT NOT NULL CHECK (match_percentage >= 0 AND match_percentage <= 100),
+    engine_used TEXT NOT NULL DEFAULT 'Sentence-BERT',
+    direct_matches TEXT[] NOT NULL DEFAULT '{}',
+    missing_competencies JSONB NOT NULL DEFAULT '[]'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_resume_job_comparisons_candidate_id ON resume_job_comparisons(candidate_id);
+
+-- ==============================================================================
 -- SCHEMA SUMMARY & ARCHITECTURAL DOCUMENTATION
 -- ==============================================================================
 /*

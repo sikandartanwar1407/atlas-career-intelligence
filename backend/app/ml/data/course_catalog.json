@@ -1,0 +1,174 @@
+{
+  "version": "1.0.0",
+  "catalog": [
+    {
+      "id": "crs-sql-01",
+      "skill": "SQL",
+      "title": "Advanced SQL for Data Engineering & Analytics",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 10,
+      "description": "Master complex joins, window functions, CTEs, indexing strategies, and query plan optimization for high-scale database systems.",
+      "deliverable_project": "Enterprise Sales Data Warehouse & Multi-Dimensional Analytics Model",
+      "tags": ["sql", "databases", "analytics", "data modeling", "postgresql"]
+    },
+    {
+      "id": "crs-py-01",
+      "skill": "Python",
+      "title": "Production Python Architecture & Concurrency",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 12,
+      "description": "Clean modular code, asynchronous programming with asyncio, type annotations, unit testing with pytest, and packaging standards.",
+      "deliverable_project": "Asynchronous Web Scraper & Real-Time Event Pipeline",
+      "tags": ["python", "asyncio", "testing", "backend", "scripting"]
+    },
+    {
+      "id": "crs-react-01",
+      "skill": "React",
+      "title": "Modern Full-Stack React 19 & Next.js Patterns",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Advanced",
+      "duration_hours": 14,
+      "description": "Server components, state machines, custom hooks, performance profiling, and Tailwind styling for responsive enterprise interfaces.",
+      "deliverable_project": "Collaborative Real-Time Workspace Canvas with Optimistic UI",
+      "tags": ["react", "typescript", "frontend", "nextjs", "javascript"]
+    },
+    {
+      "id": "crs-fastapi-01",
+      "skill": "FastAPI",
+      "title": "High-Performance REST APIs with FastAPI & Pydantic",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 8,
+      "description": "Build asynchronous RESTful microservices with dependency injection, OpenAPI documentation, JWT authentication, and Docker containerization.",
+      "deliverable_project": "Scalable Authentication & Asset Management Microservice API",
+      "tags": ["fastapi", "python", "rest apis", "backend", "docker"]
+    },
+    {
+      "id": "crs-docker-01",
+      "skill": "Docker",
+      "title": "Containerization & Microservices Deployment with Docker",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Foundation",
+      "duration_hours": 6,
+      "description": "Multi-stage builds, volume management, container networking, docker-compose orchestration, and production security hardening.",
+      "deliverable_project": "Multi-Service Containerized Web Stack with Reverse Proxy and Health Checks",
+      "tags": ["docker", "devops", "cloud", "containers", "ci/cd"]
+    },
+    {
+      "id": "crs-k8s-01",
+      "skill": "Kubernetes",
+      "title": "Kubernetes Cluster Administration & Production Orchestration",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Advanced",
+      "duration_hours": 16,
+      "description": "Deployments, StatefulSets, Ingress controllers, Helm charts, autoscaling (HPA), and observability with Prometheus.",
+      "deliverable_project": "Zero-Downtime Microservices Deployment Pipeline on Managed Kubernetes",
+      "tags": ["kubernetes", "k8s", "devops", "cloud", "docker"]
+    },
+    {
+      "id": "crs-aws-01",
+      "skill": "AWS",
+      "title": "AWS Cloud Solutions Architecture & Serverless",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 14,
+      "description": "Architecture on AWS: S3, Lambda, API Gateway, DynamoDB, ECS, VPC networking, IAM security, and CloudFormation infrastructure.",
+      "deliverable_project": "Serverless Document Processing and Notification System on AWS",
+      "tags": ["aws", "cloud", "serverless", "devops", "backend"]
+    },
+    {
+      "id": "crs-ml-01",
+      "skill": "Machine Learning",
+      "title": "Applied Machine Learning & MLOps Pipeline Design",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 15,
+      "description": "End-to-end ML workflows: feature engineering, cross-validation, hyperparameter tuning, model serving with FastAPI, and drift monitoring.",
+      "deliverable_project": "Production-Grade Customer Churn Prediction Engine with Model Registry",
+      "tags": ["machine learning", "python", "scikit-learn", "data science", "mlops"]
+    },
+    {
+      "id": "crs-dl-01",
+      "skill": "Deep Learning",
+      "title": "Deep Learning with PyTorch & Transformer Architectures",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Advanced",
+      "duration_hours": 18,
+      "description": "Custom neural network layers, GPU acceleration, backpropagation autograd, transfer learning with Hugging Face, and attention heads.",
+      "deliverable_project": "Fine-Tuned Multimodal Sentiment and Entity Analysis Pipeline",
+      "tags": ["deep learning", "pytorch", "neural networks", "transformers", "nlp"]
+    },
+    {
+      "id": "crs-nlp-01",
+      "skill": "Natural Language Processing",
+      "title": "Modern NLP: From Word Embeddings to LLMs & RAG",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Advanced",
+      "duration_hours": 12,
+      "description": "Tokenization, bi-encoder sentence transformers, vector search with Chroma/FAISS, prompt chaining, and Retrieval-Augmented Generation.",
+      "deliverable_project": "Domain-Specific Knowledge Base QA Bot with Vector Semantic Retrieval",
+      "tags": ["natural language processing", "nlp", "llm", "transformers", "embeddings"]
+    },
+    {
+      "id": "crs-dsa-01",
+      "skill": "Data Structures & Algorithms",
+      "title": "Algorithmic Problem Solving & System Scalability",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Foundation",
+      "duration_hours": 16,
+      "description": "Graph algorithms (BFS/DFS, Dijkstra), Dynamic Programming, Tree traversals, hash maps, heaps, and asymptotic complexity analysis.",
+      "deliverable_project": "High-Efficiency Route Optimization Engine with Benchmarked Graph Algorithms",
+      "tags": ["data structures & algorithms", "dsa", "algorithms", "problem solving", "java", "c++", "python"]
+    },
+    {
+      "id": "crs-sys-01",
+      "skill": "System Design",
+      "title": "Large-Scale Distributed Systems Architecture",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Advanced",
+      "duration_hours": 12,
+      "description": "Load balancers, consistent hashing, caching strategies with Redis, database sharding, CAP theorem trade-offs, and message queues (Kafka).",
+      "deliverable_project": "Distributed Rate-Limiter and Notification Fanout Architecture",
+      "tags": ["system design", "distributed systems", "backend", "architecture", "microservices"]
+    },
+    {
+      "id": "crs-bi-01",
+      "skill": "Power BI",
+      "title": "Enterprise Business Intelligence & DAX Modeling",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 10,
+      "description": "Star schema modeling, advanced DAX measures, row-level security, executive KPI dashboards, and automated report refreshes.",
+      "deliverable_project": "Executive SaaS Revenue Operations Dashboard with Churn & LTV Telemetry",
+      "tags": ["power bi", "analytics", "business intelligence", "sql", "dashboard"]
+    },
+    {
+      "id": "crs-uiux-01",
+      "skill": "UI/UX Design",
+      "title": "User-Centered Product Design & Design Systems in Figma",
+      "provider": "ATLAS Labs",
+      "type": "Course",
+      "difficulty": "Intermediate",
+      "duration_hours": 12,
+      "description": "Design thinking, wireframing, component-driven design systems, usability testing, micro-interactions, and accessibility standards.",
+      "deliverable_project": "End-to-End Mobile Banking Experience Design with Defensible User Research",
+      "tags": ["ui/ux design", "figma", "product design", "wireframing", "design"]
+    }
+  ]
+}
+

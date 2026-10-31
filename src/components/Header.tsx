@@ -26,6 +26,7 @@ export const Header: React.FC = () => {
   // Application sections
   const navLinks = [
     { to: '/diagnosis', label: 'Overview', icon: 'dashboard' },
+    { to: '/resume-matcher', label: 'AI Matcher', icon: 'psychology' },
     { to: '/skill-gaps', label: 'Skill Gaps', icon: 'tune' },
     { to: '/resources', label: 'Resources', icon: 'auto_stories' },
     { to: '/career-roadmap', label: 'Roadmap', icon: 'timeline' },

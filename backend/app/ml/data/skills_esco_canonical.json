@@ -1,0 +1,229 @@
+{
+  "version": "1.0.0",
+  "source": "ESCO & O*NET Harmonized Tech Taxonomy",
+  "skills": [
+    {
+      "canonical": "Python",
+      "category": "Programming Languages",
+      "aliases": ["python", "python3", "py", "python programming"],
+      "related": ["Django", "FastAPI", "Pandas", "Data Science", "Machine Learning"]
+    },
+    {
+      "canonical": "JavaScript",
+      "category": "Programming Languages",
+      "aliases": ["javascript", "js", "ecmascript", "es6", "vanilla js"],
+      "related": ["TypeScript", "Node.js", "React", "Frontend Development"]
+    },
+    {
+      "canonical": "TypeScript",
+      "category": "Programming Languages",
+      "aliases": ["typescript", "ts"],
+      "related": ["JavaScript", "React", "Angular", "Node.js"]
+    },
+    {
+      "canonical": "Java",
+      "category": "Programming Languages",
+      "aliases": ["java", "java8", "java11", "java17", "core java"],
+      "related": ["Spring Boot", "JVM", "Microservices", "Backend Development"]
+    },
+    {
+      "canonical": "C++",
+      "category": "Programming Languages",
+      "aliases": ["c++", "cpp", "c/c++"],
+      "related": ["C", "Object-Oriented Programming", "Embedded Systems", "Data Structures"]
+    },
+    {
+      "canonical": "Go",
+      "category": "Programming Languages",
+      "aliases": ["go", "golang"],
+      "related": ["Microservices", "Docker", "Kubernetes", "Cloud Computing"]
+    },
+    {
+      "canonical": "Rust",
+      "category": "Programming Languages",
+      "aliases": ["rust", "rustlang"],
+      "related": ["Systems Programming", "WebAssembly", "Concurrency"]
+    },
+    {
+      "canonical": "SQL",
+      "category": "Databases",
+      "aliases": ["sql", "structured query language", "ansi sql", "relational sql"],
+      "related": ["PostgreSQL", "MySQL", "Database Querying", "Data Modeling"]
+    },
+    {
+      "canonical": "React",
+      "category": "Frameworks",
+      "aliases": ["react", "react.js", "reactjs", "react framework"],
+      "related": ["Next.js", "TypeScript", "Redux", "Frontend Development", "HTML/CSS"]
+    },
+    {
+      "canonical": "Node.js",
+      "category": "Frameworks",
+      "aliases": ["node.js", "node", "nodejs"],
+      "related": ["Express", "Backend Development", "JavaScript", "REST APIs"]
+    },
+    {
+      "canonical": "FastAPI",
+      "category": "Frameworks",
+      "aliases": ["fastapi", "fast-api"],
+      "related": ["Python", "Pydantic", "REST APIs", "Backend Development", "Uvicorn"]
+    },
+    {
+      "canonical": "Django",
+      "category": "Frameworks",
+      "aliases": ["django", "django framework", "drf", "django rest framework"],
+      "related": ["Python", "PostgreSQL", "REST APIs", "Backend Development"]
+    },
+    {
+      "canonical": "Spring Boot",
+      "category": "Frameworks",
+      "aliases": ["spring boot", "spring", "spring framework", "springboot"],
+      "related": ["Java", "Microservices", "Hibernate", "REST APIs"]
+    },
+    {
+      "canonical": "PostgreSQL",
+      "category": "Databases",
+      "aliases": ["postgresql", "postgres", "psql", "pg", "postgres db"],
+      "related": ["SQL", "Relational Databases", "Database Optimization", "RDBMS"]
+    },
+    {
+      "canonical": "MySQL",
+      "category": "Databases",
+      "aliases": ["mysql", "mariadb"],
+      "related": ["SQL", "Relational Databases", "Backend Development"]
+    },
+    {
+      "canonical": "MongoDB",
+      "category": "Databases",
+      "aliases": ["mongodb", "mongo", "nosql", "documentdb"],
+      "related": ["NoSQL", "Mongoose", "Database Design"]
+    },
+    {
+      "canonical": "Redis",
+      "category": "Databases",
+      "aliases": ["redis", "in-memory cache", "key-value store"],
+      "related": ["Caching", "Distributed Systems", "Performance Optimization"]
+    },
+    {
+      "canonical": "Docker",
+      "category": "DevOps & Cloud",
+      "aliases": ["docker", "docker containers", "dockerfile", "containerization"],
+      "related": ["Kubernetes", "CI/CD", "DevOps", "Microservices"]
+    },
+    {
+      "canonical": "Kubernetes",
+      "category": "DevOps & Cloud",
+      "aliases": ["kubernetes", "k8s", "container orchestration"],
+      "related": ["Docker", "Cloud Computing", "Helm", "Microservices"]
+    },
+    {
+      "canonical": "AWS",
+      "category": "DevOps & Cloud",
+      "aliases": ["aws", "amazon web services", "ec2", "s3", "lambda"],
+      "related": ["Cloud Computing", "Serverless", "DevOps", "Infrastructure as Code"]
+    },
+    {
+      "canonical": "CI/CD",
+      "category": "DevOps & Cloud",
+      "aliases": ["ci/cd", "continuous integration", "github actions", "gitlab ci", "jenkins"],
+      "related": ["DevOps", "Git", "Automated Testing", "Docker"]
+    },
+    {
+      "canonical": "Git",
+      "category": "Engineering Tools",
+      "aliases": ["git", "github", "gitlab", "version control"],
+      "related": ["CI/CD", "Collaboration", "Code Review"]
+    },
+    {
+      "canonical": "Machine Learning",
+      "category": "AI & Data Science",
+      "aliases": ["machine learning", "ml", "statistical learning", "predictive modeling"],
+      "related": ["Python", "Scikit-learn", "Deep Learning", "Data Analysis"]
+    },
+    {
+      "canonical": "Deep Learning",
+      "category": "AI & Data Science",
+      "aliases": ["deep learning", "neural networks", "dl", "ann", "cnn", "rnn"],
+      "related": ["PyTorch", "TensorFlow", "Transformers", "Computer Vision", "NLP"]
+    },
+    {
+      "canonical": "PyTorch",
+      "category": "AI & Data Science",
+      "aliases": ["pytorch", "torch"],
+      "related": ["Deep Learning", "Machine Learning", "Python", "GPU Computing"]
+    },
+    {
+      "canonical": "TensorFlow",
+      "category": "AI & Data Science",
+      "aliases": ["tensorflow", "tf", "keras"],
+      "related": ["Deep Learning", "Machine Learning", "Python"]
+    },
+    {
+      "canonical": "Natural Language Processing",
+      "category": "AI & Data Science",
+      "aliases": ["natural language processing", "nlp", "text mining", "linguistic analysis"],
+      "related": ["Transformers", "BERT", "LLMs", "Information Retrieval"]
+    },
+    {
+      "canonical": "Large Language Models",
+      "category": "AI & Data Science",
+      "aliases": ["llm", "large language models", "prompt engineering", "langchain", "rag"],
+      "related": ["NLP", "Generative AI", "Transformers", "Python"]
+    },
+    {
+      "canonical": "Pandas",
+      "category": "Data Engineering & Analytics",
+      "aliases": ["pandas", "dataframe manipulation", "data cleaning"],
+      "related": ["Python", "Data Analysis", "NumPy", "Data Wrangling"]
+    },
+    {
+      "canonical": "Power BI",
+      "category": "Data Engineering & Analytics",
+      "aliases": ["power bi", "powerbi", "dax", "power query", "microsoft bi"],
+      "related": ["Data Visualization", "Business Intelligence", "SQL", "Dashboard Design"]
+    },
+    {
+      "canonical": "Tableau",
+      "category": "Data Engineering & Analytics",
+      "aliases": ["tableau", "tableau desktop"],
+      "related": ["Data Visualization", "Business Intelligence", "Analytics"]
+    },
+    {
+      "canonical": "System Design",
+      "category": "Software Architecture",
+      "aliases": ["system design", "distributed systems", "scalable architecture", "high availability"],
+      "related": ["Microservices", "APIs", "Database Optimization", "Load Balancing"]
+    },
+    {
+      "canonical": "REST APIs",
+      "category": "Software Architecture",
+      "aliases": ["rest", "rest api", "restful api", "rest apis", "web services"],
+      "related": ["Backend Development", "FastAPI", "Express", "HTTP", "JSON"]
+    },
+    {
+      "canonical": "Data Structures & Algorithms",
+      "category": "Core Computer Science",
+      "aliases": ["dsa", "data structures", "algorithms", "problem solving", "algorithmic complexity"],
+      "related": ["Dynamic Programming", "Trees", "Graphs", "Sorting"]
+    },
+    {
+      "canonical": "Cybersecurity",
+      "category": "Security",
+      "aliases": ["cybersecurity", "information security", "infosec", "network security", "penetration testing"],
+      "related": ["Threat Modeling", "SIEM", "Cryptography", "Vulnerability Assessment"]
+    },
+    {
+      "canonical": "UI/UX Design",
+      "category": "Design & Product",
+      "aliases": ["ui/ux", "ui design", "ux design", "user experience", "figma"],
+      "related": ["Wireframing", "Prototyping", "User Research", "Frontend Development"]
+    },
+    {
+      "canonical": "Product Management",
+      "category": "Design & Product",
+      "aliases": ["product management", "pm", "product roadmap", "user stories", "agile"],
+      "related": ["User Research", "Metrics & KPIs", "Scrum", "Business Strategy"]
+    }
+  ]
+}
+
