@@ -53,11 +53,7 @@ export const EmployerHeader: React.FC = () => {
         {/* Left: ATLAS FOR EMPLOYERS Logo */}
         <div className="flex items-center gap-3 shrink-0">
           <Link to="/employer" className="flex items-center gap-2.5 focus:outline-none group">
-            <div className="w-8 h-8 rounded-xl bg-[#FAF7F2] border border-[#8B6F5A]/40 shadow-sm flex items-center justify-center transition-colors group-hover:border-[#8B6F5A]/60">
-              <div className="w-3.5 h-3.5 rounded-full border border-[#8B6F5A] flex items-center justify-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#D8C3A5]"></div>
-              </div>
-            </div>
+            <img src="/logo.png" alt="ATLAS Logo" className="w-8 h-8 rounded-lg object-contain shadow-xs transition-transform group-hover:scale-105" />
             <div className="flex items-center gap-2">
               <span className="font-sans text-lg text-[#18283D] font-extrabold tracking-tight">
                 ATLAS
